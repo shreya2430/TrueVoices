@@ -4,25 +4,19 @@
 
 ## Table of Contents
 
-- [Features](#features)
-- [User Stories](#user-stories)
-  - [Testimonial Collection](#testimonial-collection)
-  - [Testimonial Management](#testimonial-management)
-  - [Website Integration](#website-integration)
-  - [Analytics and Reporting](#analytics-and-reporting)
-  - [Customization](#customization)
-  - [User Authentication](#user-authentication)
-- [Object Model](#object-model)
-- [REST API Resources](#rest-api-resources)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Development Workflow](#development-workflow)
-  - [Branching Strategy](#branching-strategy)
-  - [Creating and Pushing a Branch](#creating-and-pushing-a-branch)
-  - [Restoring Deleted Files](#restoring-deleted-files)
-- [Contributing](#contributing)
-- [License](#license)
+- [TrueVoice Project](#truevoice-project)
+  - [PROJECT DESCRIPTION](#project-description)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [User Stories](#user-stories)
+    - [Testimonial Collection](#testimonial-collection)
+    - [Testimonial Management](#testimonial-management)
+    - [Website Integration](#website-integration)
+    - [Analytics and Reporting](#analytics-and-reporting)
+    - [Customization](#customization)
+    - [User Authentication](#user-authentication)
+    - [Object Model Diagram](#object-model-diagram)
+    - [Explanation of Relationships and Attributes](#explanation-of-relationships-and-attributes)
 
 ## Features
 
@@ -81,118 +75,123 @@
 ### Object Model Diagram
 
 ```mermaid
-erDiagram
-    User {
-        string name
-        string email
-        string password
-        string profilePic
-        date createdAt
-        date updatedAt
-        Credit credit
-    }
+---
+title: TrueVoice
+---
+classDiagram
 
-    Credit {
-        int text
-        int video
-    }
+  class Credit {
+    + int text
+    + int video
+  }
 
-    Spaces {
-        string spacename
-        string spaceLogo
-        string headerTitle
-        string customMessage
-        List listQuestion
-        Inputs inputs
-        int starRating
-        SpaceType spaceType
-        Themes theme
-        ThankYouPage thankYouPage
-        ExtraSettings extraSettings
-        EmailSettings emailSettings
-        date createdAt
-        date updatedAt
-    }
+  class User {
+    + string name
+    + string email
+    - string password
+    + string profilepic
+    - date createdAt
+    - date updatedAt
+    + Credit credit
+  }
 
-    EmailSettings {
-        string emailFrom
-        string emailTo
-        string subject
-        string message
-    }
+  class Spaces {
+    + string spacename
+    + srting spaceLogo
+    + string headerTitle
+    + string customMessage
+    + List<string> listQuestion
+    + Inputs inputs
+    + int starRating
+    + SpaceType spaceType
+    + Themes themes
+    + ThankYouPage thankYouPage
+    + ExtraSettings extraSettings
+    + EmailSettings emailSettings
+    - date createdAt
+    - date updatedAt
+  }
 
-    ExtraSettings {
-        int maxVideoDuration
-        int maxCharForTheTestimonial
-        string videoBtnText
-        string textButtonText
-        bool consentDisplay
-        string consentStatement
-    }
+  class EmailSettings {
+    + string emailFrom
+    + string emailTo
+    + string subject
+    + string message
+  }
 
-    Inputs {
-        Field name
-        Field email
-        Field companyAndTitle
-        Field socialLinks
-        Field address
-    }
+  class ExtraSettings {
+    + int maxVideoDuration
+    + int maxCharForTheTestimonial
+    + string videoBtnText
+    + string textButtonText
+    + bool consentDisplay
+    + string consentStatement
+  }
 
-    Field {
-        bool required
-        bool enabled
-    }
+  class Inputs {
+    + boolean name_required
+    + boolean name_enabled
+    + boolean email_required
+    + boolean email_enabled
+    + boolean companyAndTitle_required
+    + boolean companyAndTitle_enabled
+    + boolean socialLinks_required
+    + boolean socialLinks_enabled
+    + boolean address_required
+    + boolean address_enabled
+  }
 
-    ThankYouPage {
-        string image
-        string title
-        string message
-    }
+  class ThankYouPage {
+    + string image
+    + string title
+    + string message
+  }
 
-    Testimonial {
-        string name
-        string companyAndTitle
-        string socialLinks
-        string address
-        TestimonialType testimonialType
-        string content
-        string profilePic
-        date createdAt
-        date updatedAt
-    }
+  class Themes {
+    <<enumeration>>
+    + Light
+    + Dark
+  }
 
-    EmbeddedWall {
-        string frameStyle
-        List<Testimonial> displayTestimonials
-    }
+  class SpaceType {
+    <<enumeration>>
+    + Text
+    + Video
+    + TextAndVideo
+  }
 
-      Themes {
-        Light
-        Dark
-    }
+  class Testimonial {
+    + string name
+    + string companyAndTitle
+    + string socialLinks
+    + string address
+    + TestimonialType testimonialType
+    + string content
+    + string profilePic
+    + bool favourite
+    - date createdAt
+    - date updatedAt
+  }
 
+  class TestimonialType {
+    <<enumeration>>
+    + Text
+    + Video
+  }
 
+  User "1" o-- "1..n" Spaces : creates
+  User "1" *-- "1" Credit : has
 
-    enumeration SpaceType {
-        "Text"
-        "Video"
-        "TextAndVideo"
-    }
+  Spaces "1" *-- "1" Inputs : has
+  Spaces "1" *-- "1" ThankYouPage : has
+  Spaces "1" *-- "1" ExtraSettings : has
+  Spaces "1" *-- "1" EmailSettings : has
+  Spaces "1" --> "1" SpaceType
+  Spaces "1" --> "1" Themes
+  Spaces "1" *-- "1..n" Testimonial : has
 
-    enumeration TestimonialType {
-        "Text"
-        "Video"
-    }
-
-    User ||--o{ Spaces : "owns"
-    User ||--o{ Credit : "has"
-    Spaces ||--o{ Testimonial : "collects"
-    Spaces ||--o{ EmbeddedWall : "displays"
-    Spaces ||--o{ EmailSettings : "has"
-    Spaces ||--o{ ExtraSettings : "configures"
-    Spaces ||--o{ ThankYouPage : "customizes"
-    Spaces ||--o{ Themes : "uses"
-    Inputs ||--o{ Field : "includes"
+  Testimonial "1" --> "1" TestimonialType
+```
 
 ### Explanation of Relationships and Attributes
 
