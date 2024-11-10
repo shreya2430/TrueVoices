@@ -78,7 +78,239 @@
 2. **Password Reset** - As a user, I want to reset my password if forgotten.
 3. **Update Profile** - As a user, I want to update my account information.
 
+### Object Model Diagram
 
+```mermaid
+erDiagram
+    User {
+        string name
+        string email
+        string password
+        string profilePic
+        date createdAt
+        date updatedAt
+        Credit credit
+    }
+
+    Credit {
+        int text
+        int video
+    }
+
+    Spaces {
+        string spacename
+        string spaceLogo
+        string headerTitle
+        string customMessage
+        List listQuestion
+        Inputs inputs
+        int starRating
+        SpaceType spaceType
+        Themes theme
+        ThankYouPage thankYouPage
+        ExtraSettings extraSettings
+        EmailSettings emailSettings
+        date createdAt
+        date updatedAt
+    }
+
+    EmailSettings {
+        string emailFrom
+        string emailTo
+        string subject
+        string message
+    }
+
+    ExtraSettings {
+        int maxVideoDuration
+        int maxCharForTheTestimonial
+        string videoBtnText
+        string textButtonText
+        bool consentDisplay
+        string consentStatement
+    }
+
+    Inputs {
+        Field name
+        Field email
+        Field companyAndTitle
+        Field socialLinks
+        Field address
+    }
+
+    Field {
+        bool required
+        bool enabled
+    }
+
+    ThankYouPage {
+        string image
+        string title
+        string message
+    }
+
+    Testimonial {
+        string name
+        string companyAndTitle
+        string socialLinks
+        string address
+        TestimonialType testimonialType
+        string content
+        string profilePic
+        date createdAt
+        date updatedAt
+    }
+
+    EmbeddedWall {
+        string frameStyle
+        List<Testimonial> displayTestimonials
+    }
+
+      Themes {
+        Light
+        Dark
+    }
+
+
+
+    enumeration SpaceType {
+        "Text"
+        "Video"
+        "TextAndVideo"
+    }
+
+    enumeration TestimonialType {
+        "Text"
+        "Video"
+    }
+
+    User ||--o{ Spaces : "owns"
+    User ||--o{ Credit : "has"
+    Spaces ||--o{ Testimonial : "collects"
+    Spaces ||--o{ EmbeddedWall : "displays"
+    Spaces ||--o{ EmailSettings : "has"
+    Spaces ||--o{ ExtraSettings : "configures"
+    Spaces ||--o{ ThankYouPage : "customizes"
+    Spaces ||--o{ Themes : "uses"
+    Inputs ||--o{ Field : "includes"
+
+### Explanation of Relationships and Attributes
+
+This section provides an overview of the relationships and attributes of each entity in the object model.
+
+- **User**:
+  - Attributes:
+    - `name`: Name of the user.
+    - `email`: Email address of the user.
+    - `password`: Hashed password for secure login.
+    - `profilePic`: URL or path to the user's profile picture.
+    - `createdAt`: Date and time when the user account was created.
+    - `updatedAt`: Date and time of the last update to the user’s account.
+    - `credit`: Relationship to the `Credit` entity, indicating the user's available credits.
+
+- **Credit**:
+  - Attributes:
+    - `text`: Amount of text credit available for the user.
+    - `video`: Amount of video credit available for the user.
+  - Relationship:
+    - Linked to the `User` entity, representing the available credits for text and video submissions.
+
+- **Spaces**:
+  - Attributes:
+    - `spacename`: Name of the space created by the user.
+    - `spaceLogo`: Logo associated with the space.
+    - `headerTitle`: Title for the space header.
+    - `customMessage`: A custom message displayed within the space.
+    - `listQuestion`: List of questions or prompts within the space.
+    - `inputs`: Relationship to the `Inputs` entity, defining the input fields required in the space.
+    - `starRating`: Integer rating displayed in the space.
+    - `spaceType`: Type of space (text, video, or both), using `SpaceType` enumeration.
+    - `theme`: Relationship to the `Themes` entity, defining the visual theme of the space.
+    - `thankYouPage`: Relationship to `ThankYouPage` for displaying a thank-you message after submission.
+    - `extraSettings`: Relationship to `ExtraSettings`, providing additional customization options.
+    - `emailSettings`: Relationship to `EmailSettings` for configuring email notifications.
+    - `createdAt`: Date and time when the space was created.
+    - `updatedAt`: Date and time of the last update to the space.
+
+- **EmailSettings**:
+  - Attributes:
+    - `emailFrom`: Sender's email address.
+    - `emailTo`: Recipient's email address.
+    - `subject`: Subject line for the email.
+    - `message`: Email message content.
+  - Relationship:
+    - Linked to the `Spaces` entity, defining email configuration for the testimonial collection.
+
+- **ExtraSettings**:
+  - Attributes:
+    - `maxVideoDuration`: Maximum allowed video duration for testimonials.
+    - `maxCharForTheTestimonial`: Maximum character limit for text testimonials.
+    - `videoBtnText`: Button text for video submission.
+    - `textButtonText`: Button text for text submission.
+    - `consentDisplay`: Boolean indicating if a consent form is displayed.
+    - `consentStatement`: Text for the consent statement.
+  - Relationship:
+    - Linked to `Spaces`, providing additional customization for testimonial collection settings.
+
+- **Inputs**:
+  - Attributes:
+    - `name`, `email`, `companyAndTitle`, `socialLinks`, `address`: Fields required for collecting testimonials.
+  - Relationship:
+    - Linked to `Spaces`, defining the structure of the testimonial form.
+    - Contains multiple `Field` entities indicating if fields are required or enabled.
+
+- **Field**:
+  - Attributes:
+    - `required`: Boolean indicating if the field is mandatory.
+    - `enabled`: Boolean indicating if the field is active in the form.
+  - Relationship:
+    - Part of the `Inputs` entity, allowing customization of each field in the form.
+
+- **ThankYouPage**:
+  - Attributes:
+    - `image`: Image to display on the thank-you page.
+    - `title`: Title for the thank-you message.
+    - `message`: Custom thank-you message content.
+  - Relationship:
+    - Linked to `Spaces`, providing a customizable thank-you message after testimonial submission.
+
+- **Testimonial**:
+  - Attributes:
+    - `name`: Name of the testimonial provider.
+    - `companyAndTitle`: Company name and title of the testimonial provider.
+    - `socialLinks`: Social media or other relevant links.
+    - `address`: Address information for the testimonial provider.
+    - `testimonialType`: Type of testimonial (text or video) using the `TestimonialType` enumeration.
+    - `content`: Content of the testimonial.
+    - `profilePic`: URL or path to the testimonial provider’s profile picture.
+    - `createdAt`: Date and time when the testimonial was created.
+    - `updatedAt`: Date and time of the last update to the testimonial.
+  - Relationship:
+    - Linked to `Spaces`, representing the testimonials collected within a space.
+
+- **EmbeddedWall**:
+  - Attributes:
+    - `frameStyle`: Style of the frame for the embedded testimonial wall.
+    - `displayTestimonials`: List of `Testimonial` entities to be displayed.
+  - Relationship:
+    - Linked to `Spaces`, representing a display wall for showcasing testimonials.
+
+- **Themes**:
+  - Enumeration defining possible themes for a space.
+  - Values:
+    - `Light`
+    - `Dark`
+  - Relationship:
+    - Linked to `Spaces`, allowing users to choose between a light or dark theme for their spaces.
+
+
+- **Enumerations**:
+  - **SpaceType**: Defines possible space types.
+    - Values: `Text`, `Video`, `TextAndVideo`
+  - **TestimonialType**: Defines testimonial types.
+    - Values: `Text`, `Video`
+
+This explanation covers each entity’s attributes and relationships, providing context for how the entities interact within the application.
 
 
 
