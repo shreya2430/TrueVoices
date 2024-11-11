@@ -1,5 +1,16 @@
 # TrueVoice Project
+
+## Contributors
+
+This project was created and developed by a team of four contributors:
+
+- **Shreya Wanisha** - <wanisha.s@northeastern.edu>
+- **Maithili Rajendra Wade** - <wade.mai@northeastern.edu>
+- **Jay Vekariya** - <vekariya.ja@northeastern.edu>
+- **Harshit Kant** - <kant.h@northeastern.edu>
+
 ## PROJECT DESCRIPTION
+
 **TrueVoice** is a user-friendly platform that revolutionizes how businesses collect and showcase customer testimonials. This intuitive solution streamlines the process of gathering authentic video and text testimonials, allowing companies to effortlessly capture the genuine voices of their satisfied customers. With its easy-to-use interface, customizable collection forms, and seamless website integration, TrueVoice empowers businesses to leverage powerful social proof, build trust, and boost conversions.
 
 ## Table of Contents
