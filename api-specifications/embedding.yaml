@@ -1,0 +1,192 @@
+openapi: 3.0.0
+info:
+  title: TrueVoice Embedding API
+  description: API getting the embeding
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/v1
+paths:
+  /display/masonry/{spaceId}:
+    get:
+      summary: Get masonry wall for a space
+      description: Retrieves the HTML for a masonry wall of testimonials for the specified space
+      parameters:
+        - name: spaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: theme
+          in: query
+          schema:
+            type: string
+            enum: [light, dark]
+            default: dark
+        - name: card
+          in: query
+          schema:
+            type: string
+            enum: [small, medium, large]
+            default: large
+        - name: loadMore
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: initialCount
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: randomize
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: hideDate
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: hideSource
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: off
+        - name: tag
+          in: query
+          schema:
+            type: string
+            default: all
+        - name: autoLoadMore
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: off
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /display/carousel/{spaceId}:
+    get:
+      summary: Get carousel for a space
+      description: Retrieves the HTML for a carousel of testimonials for the specified space
+      parameters:
+        - name: spaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: theme
+          in: query
+          schema:
+            type: string
+            enum: [light, dark]
+            default: dark
+        - name: autoplay
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: showmore
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: one-row
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: hideDate
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: hideSource
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: off
+        - name: same-height
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: on
+        - name: tag
+          in: query
+          schema:
+            type: string
+            default: all
+        - name: arrowColor
+          in: query
+          schema:
+            type: string
+            default: '9BA9B4'
+        - name: minimizeAttachedImages
+          in: query
+          schema:
+            type: string
+            enum: [on, off]
+            default: off
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized access
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message

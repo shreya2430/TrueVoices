@@ -113,7 +113,7 @@ classDiagram
     + string customMessage
     + List<string> listQuestion
     + Inputs inputs
-    + int starRating
+    + boolean starRating
     + SpaceType spaceType
     + Themes themes
     + ThankYouPage thankYouPage
