@@ -81,23 +81,21 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Space not found."
+                $ref: "/#/components/schemas/Error"
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Internal server error."
+                $ref: "/#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

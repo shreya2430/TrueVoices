@@ -24,44 +24,19 @@ paths:
             application/json:
               schema:
                 type: array
-                items:
-                  type: object
-                  properties:
-                    notificationId:
-                      type: string
-                    message:
-                      type: string
-                    isRead:
-                      type: boolean
-                    createdAt:
-                      type: string
-                      format: date-time
+                $ref: "/#/components/schemas/Notification"
         '404':
           description: User not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "User not found."
+                 $ref: "/#/components/schemas/Error"
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Internal server error."
+                 $ref: "/#/components/schemas/Error"
 
     post:
       summary: Create User Notification
@@ -114,27 +89,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "User not found."
+                 $ref: "/#/components/schemas/Error"
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Internal server error."
+                 $ref: "/#/components/schemas/Error"
     delete:
       summary: Bulk Delete Notifications
       description: Deletes multiple notifications for a specified user.
@@ -164,53 +125,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: "Selected notifications deleted successfully."
+                $ref: "/#/components/schemas/NotificationDeleteResponse"
         '400':
-          description: Invalid request data
+          description: Invalid request data, for example, missing/Incorrect notification ID
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Invalid request data. Please check notification IDs."
+                $ref: "/#/components/schemas/Error"
         '404':
           description: User or notifications not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "User or specified notifications not found."
+                $ref: "/#/components/schemas/Error"
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Internal server error."
+                $ref: "/#/components/schemas/Error"
   /users/{userId}/notifications/mark-all-as-read:
     put:
       summary: Mark All Notifications as Read
@@ -241,24 +174,44 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "User not found."
+                $ref: "/#/components/schemas/Error"
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Internal server error."
+                $ref: "/#/components/schemas/Error"
+
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        notificationId:
+          type: string
+        message:
+          type: string
+        isRead:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    NotificationDeleteResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        deletedNotificationIds:
+          type: array
+          items:
+            type: string
+          description: List of notification IDs that were successfully deleted
+          example: ["notification1", "notification2", "notification3"]
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

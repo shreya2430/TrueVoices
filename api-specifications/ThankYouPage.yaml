@@ -38,7 +38,7 @@ paths:
                   type: boolean
                   description: Option to allow sharing on social media
       responses:
-        '200':
+        "200":
           description: Thank you page updated successfully
           content:
             application/json:
@@ -51,29 +51,27 @@ paths:
                   message:
                     type: string
                     example: "Thank you page updated successfully for space."
-        '404':
+        "404":
           description: Space not found
           content:
-            application/json:
+            "application/json":
               schema:
                 type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Space not found."
-        '500':
+                $ref: "/#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  error:
-                    type: string
-                    example: "Internal server error."
+                $ref: "/#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
