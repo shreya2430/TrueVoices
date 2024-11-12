@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Credit Management API
+  summary: REST APIs for managing user credits and purchasing credits via Stripe
+  version: '1.1'
+servers:
+  - url: http://localhost:3000/v1
+    description: Local development environment
+paths:
+  /users/{userId}/credits:
+    get:
+      operationId: get-user-credits
+      summary: Retrieve user credit details
+      description: Retrieve the current balance and transaction history of credits for a specified user. 
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string 
+      responses:
+        200:
+          description: Successfully retrieved the user's credit details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreditDetails"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schema/ErrorResponse'
+  /users/{userId}/credits/purchase:
+    post:
+      operationId: purchase-credits
+      summary: Purchase credits for a user
+      description: Initiated a credit purchase for a user, integrated with Stripe to handle payment processing.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Details of the credit purchase request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditPurchaseRequest'
+      responses:
+        200:
+          description: Credits successfully purchased and added to user balance
+          content: 
+            application/json:
+              schema:
+                $ref: '#/component/schemas/CreditPurchaseResponse'
+        400:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        402:
+          description: Payment required - Payment failed or was declined
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CreditDetails:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: "12345"
+        balance:
+          type: integer
+          example: 250
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditTransaction'
+    CreditTransaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          example: "txn_56789"
+        amount:
+          type: integer
+          example: 50
+        type:
+          type: string
+          example: "purchase"
+        date:
+          type: string
+          format: date-time
+          example: "2023-08-01T10:00:00Z"
+    CreditPurchaseRequest:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Amount of credits to purchase
+          example: 100
+        paymentMethodId:
+          type: string
+          description: Stripe payment method ID provided by the client for the transaction
+          example: "pm_1Ishbn2eZvKYlo2Co1MaT7Q8"
+        paymentIntentId:
+          type: string
+          description: Stripe Payment Intent ID used for managing transaction status with Stripe
+          example: "pi_1Ishbn2eZvKYlo2Co1MaT7Q8"
+    CreditPurchaseResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: "12345"
+        transactionId:
+          type: string
+          example: "txn_123456"
+        amount:
+          type: integer
+          example: 100
+        newBalance:
+          type: integer
+          example: 350
+        purchaseDate:
+          type: string
+          format: date-time
+          example: "2023-08-01T10:30:00Z"
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "INVALID_REQUEST"
+        message:
+          type: string
+          example: "The request parameters are invalid."
