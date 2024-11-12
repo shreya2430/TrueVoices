@@ -3,9 +3,12 @@ info:
   title: Testimonials API
   version: 1.0.0
   description: API for managing testimonials, allowing users to create, view, update, and delete testimonials.
+servers:
+  - url: http://localhost:8080/v1
+    description: Local development environment
 
 paths:
-  /api/testimonials:
+ /testimonials:
     get:
       summary: Retrieve all testimonials
       description: Fetches a list of all testimonials.
