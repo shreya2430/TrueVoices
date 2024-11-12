@@ -4,7 +4,7 @@ info:
   description: API getting the embeding
   version: 1.0.0
 servers:
-  - url: http://localhost:8080/v1
+  - url: http://localhost:3000/v1
 paths:
   /display/masonry/{spaceId}:
     get:
