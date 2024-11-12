@@ -4,7 +4,7 @@ info:
   description: API for managing notifications for users in the TrueVoices project.
   version: 1.0.0
 servers:
-  - url: http://localhost:8080/v1
+  - url: http://localhost:3000/v1
     description: Local development environment
 paths:
   /users/{userId}/notifications:
