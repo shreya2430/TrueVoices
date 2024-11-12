@@ -8,7 +8,7 @@ servers:
     description: Local development environment
 
 paths:
- /testimonials:
+  /testimonials:
     get:
       summary: Retrieve all testimonials
       description: Fetches a list of all testimonials.

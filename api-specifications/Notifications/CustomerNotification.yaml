@@ -4,7 +4,7 @@ info:
   description: API for sending notifications to customers when their testimonials are featured on the wall of fame.
   version: 1.0.0
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8080/v1
     description: Local development environment
 paths:
   /customers/{testimonialId}/notifications/wall-of-fame:
