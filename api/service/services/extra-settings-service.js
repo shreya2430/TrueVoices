@@ -17,7 +17,7 @@ export async function updateSettings(spaceId, updates) {
     );
 
     if (!updatedSettings) {
-        throw new Error(`The spaceId ${spaceId} does not exist`); 
+        throw new NotFoundError(`The spaceId ${spaceId} does not exist`); 
     }
 
     return updatedSettings; // Return the updated settings
