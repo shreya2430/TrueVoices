@@ -7,7 +7,7 @@ import { setSuccess, setError } from '../response-handler.js';
 //responds with success or error message based on the operation
 export const registerUser = async (req, res) => {
     try {
-        const user = await userService.authenticateUser(req.body);
+        const user = await userService.registerUser(req.body);
         setSuccess(user, res, 'User registered successfully');
     } catch (error) {
         setError(error.message, res, 400);
