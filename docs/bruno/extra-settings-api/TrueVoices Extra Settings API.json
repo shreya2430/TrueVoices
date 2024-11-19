@@ -1,0 +1,91 @@
+{
+  "name": "TrueVoices Extra Settings API",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Update Extra Settings for a Space",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:3000/v1/spaces/:spaceId/extra-settings",
+        "method": "PUT",
+        "headers": [],
+        "params": [
+          {
+            "name": "spaceId",
+            "value": "space1",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"maxVideoDuration\": 24,\n  \"maxTextCharacters\": 900,\n  \"videoButtonText\": \" Start Recording 1234\",\n  \"textButtonText\": \"Submit please\",\n  \"consentDisplay\": true,\n  \"consentStatement\": \"I consent to my testimonial being used publicly.\",\n  \"questionLabel\": \"What do you love about our service?\",\n  \"affiliateLink\": \"https://example.com/affiliate\",\n  \"thirdPartyReviewLink\": \"https://reviewplatform.com/review\",\n  \"autoPopulateTestimonials\": true,\n  \"disableVideoForiOS\": true,\n  \"allowSearchEngines\": true\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get Extra Settings for a Space",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:3000/v1/spaces/:spaceId/extra-settings",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "spaceId",
+            "value": "space1",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    }
+  ],
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "baseUrl",
+          "value": "http://localhost:3000/v1/",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "Local development environment"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "TrueVoices Extra Settings API",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}

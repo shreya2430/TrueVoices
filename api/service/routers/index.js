@@ -6,7 +6,6 @@ import userAuthRouter from './user-authentication-router.js'
 
 const intializeRoutes = (app) => {
     app.use('/v1/spaces', extraSettingsRouter, thankYouPageRouter, spacesRouter);
-    // app.use('/spaces', thankYouPageRouter);
     app.use("/v1/testimonials", testimonialRoutes); // Testimonial routes
     app.use('/v1/auth', userAuthRouter); //user-authentication router
 };

@@ -1,0 +1,60 @@
+{
+  "name": "TrueVoices Thank You Page API",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Update Thank You Page for a Space",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:3000/v1/spaces/:spaceId/thank-you-page",
+        "method": "PUT",
+        "headers": [],
+        "params": [
+          {
+            "name": "spaceId",
+            "value": "space1",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "// {\n  // \"imageUrl\": \"\",\n  // \"title\": \"\",\n  // \"message\": \"\",\n  // \"allowShareOnSocialMedia\": false\n// }\n// \n{\n  \"imageUrl\": \"http://example.com/thank-you.jpg\",\n  \"title\": \"123Thank You for Your Testimonial!\",\n  \"message\": \"We appreciate your feedback again!\",\n  \"allowShareOnSocialMedia\": true\n}\n// \n// {\n  // \n// }\n",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    }
+  ],
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "baseUrl",
+          "value": "http://localhost:3000/v1/",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "Local development environment"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "TrueVoices Thank You Page API",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}
