@@ -1,23 +1,27 @@
 import ExtraSettings from '../models/extra-settings.js';
 import NotFoundError from '../exceptions/NotFoundError.js';
+import Space from '../models/spaces.js';
 
 // Fetch the settings for a specific space
 export async function getSettings(spaceId) {
-    const settings = await ExtraSettings.findOne({ spaceId });
-    if (!settings) throw new NotFoundError(`The spaceId ${spaceId} does not exist`); 
+    const space = await Space.findOne({ spaceName: spaceId });
+    const settings = await ExtraSettings.findById(space.extraSettings);
+    // const settings = await ExtraSettings.findOne({ spaceId });
+    if (!settings) throw new NotFoundError(`The space ${spaceId} does not exist`);
     return settings;
 }
 
 // Update the settings for a specific space
 export async function updateSettings(spaceId, updates) {
-    const updatedSettings = await ExtraSettings.findOneAndUpdate(
-        { spaceId },   // Filter by spaceId
+    const space = await Space.findOne({ spaceName: spaceId });
+    const updatedSettings = await ExtraSettings.findByIdAndUpdate(
+        space.extraSettings,   // Filter by the extraSettings id
         updates,       // Fields to update
-        { new: true }  
+        { new: true }   // Return the updated document, not the original one
     );
 
     if (!updatedSettings) {
-        throw new NotFoundError(`The spaceId ${spaceId} does not exist`); 
+        throw new NotFoundError(`The space ${spaceId} does not exist`);
     }
 
     return updatedSettings; // Return the updated settings
