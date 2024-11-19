@@ -8,6 +8,42 @@ servers:
     description: Local development environment
 paths:
   /users/{userId}:
+    get:
+      operationId: get-user
+      summary: Retrieve user details 
+      description: Retrieve details of a specific user by their unique ID, or retrieve the logged-in user's profile using "me" in the ongoing session.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: the unique identifier of the user. Use "me" to fetch the logged-in user's profile. 
+          schema: 
+            type: string 
+      responses:
+        200:
+          description: Successfully retrieved the user details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        401:
+          description: Unauthorized - User not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403: 
+          description: Forbidden - User lacks permission to retrieve this data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorRersponse'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'     
     delete:
       operationId: delete-user
       summary: Delete a user account
@@ -49,31 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  /auth/user-profile:
-    get:
-      operationId: get-user-profile
-      summary: Retrieve the logged-in user profile
-      description: Retrieve profile information of the currently logged-in user using session data.
-      responses:
-        200:
-          description: Successfully retrieved the user profile
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserProfile'
-        401:
-          description: Unauthorized - User not logged in
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/ErrorResponse'     
   /auth/logout:
     post:
       operationId: logout-user
@@ -141,3 +153,8 @@ components:
           type: string
           format: date-time
           example: "2023-01-02T12:00:00Z"
+
+#/users/{userId} endpoint now serves dual purposes. 
+# 1. /users/me: THis will retrieve the logged-in user's profile details 
+# 2. .users/{specificUserId}: Retrieves details of a specific user. 
+#the rest of the two endpoints are distinct and therefore no changes are needed. 
