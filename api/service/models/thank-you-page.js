@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ThankYouPageSchema = new mongoose.Schema({
+export const ThankYouPageSchema = new mongoose.Schema({
     spaceId: { type: String, required: true, unique: true },
     imageUrl: { type: String, default: '' },
     title: { type: String, default: 'Thank You for Your Testimonial!' },
