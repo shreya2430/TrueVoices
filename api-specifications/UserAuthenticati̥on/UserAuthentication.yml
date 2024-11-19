@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: User Authentication API
-  summary: REST APIs for user registration, login, password reset and profile updates
+  summary: REST APIs for user registration, login and profile updates
   version: '1.0'
 servers:
   - url: http://localhost:3000/v1
@@ -65,39 +65,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /auth/reset-password:
-    post:
-      operationId: reset-password
-      description: Reset the user's password by sending instructions to their email
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ResetPasswordRequest"
-      responses:
-        200:
-          description: Password reset instructions sent to the email
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SuccessMessage"
-        400:
-          description: Invalid or missing email format
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        404:
-          description: Email not associated with any user account
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+  # /auth/reset-password:
+  #   post:
+  #     operationId: reset-password
+  #     description: Reset the user's password by sending instructions to their email
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: "#/components/schemas/ResetPasswordRequest"
+  #     responses:
+  #       200:
+  #         description: Password reset instructions sent to the email
+  #         content:
+  #           application/json:
+  #             schema:
+        #         $ref: "#/components/schemas/SuccessMessage"
+        # 400:
+        #   description: Invalid or missing email format
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: "#/components/schemas/Error"
+        # 404:
+        #   description: Email not associated with any user account
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: "#/components/schemas/Error"
   /auth/update-profile:
     put:
       operationId: update-profile
-      description: Update the user profile information such as username or email
+      description: Update the user profile information such as username, email or password 
       requestBody:
         required: true
         content:
@@ -179,20 +179,6 @@ components:
         expiresIn:
           type: integer
           example: 3600
-    ResetPasswordRequest:
-      type: object
-      required:
-        - email
-      properties:
-        email:
-          type: string
-          format: email
-    SuccessMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          example: "Password reset instructions sent to the mail"
     UpdateProfileRequest:
       type: object
       properties:
@@ -201,6 +187,18 @@ components:
         email:
           type: string
           format: email
+        currentPassword:
+          type: string
+          description: Current password is required to update the password
+        newPassword:
+          type: string
+          description: New password to replace t he existing password
+          format: password
+      required:
+        - currentPassword
+        - newPassword
+        - username
+        - email
     UpdateProfileResponse:
       type: object
       properties:
@@ -223,3 +221,12 @@ components:
           type: string
           message:
             type: string
+
+#Changes made:
+#1. Expanded the UpdateProfileRequest
+#- Added currentPasswrod and newPassword fields for password updates. 
+#- Made these fields optional but required if a password update is requested
+# 2. Removed /auth/reset-password:
+# - its functionality is noew encapsulated in /auth/update-profile
+#3. Validation Logic:
+#- in the backend, validate that when newPassword is provided, currentPassword is also provided
