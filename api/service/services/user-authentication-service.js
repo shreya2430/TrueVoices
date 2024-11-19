@@ -25,7 +25,7 @@ export const authenticateUser = async (userData) => {
         return {
             userId: newUser._id,
             username: newUser.username,
-            message: 'Userregistered successfully', 
+            message: 'User registered successfully', 
         };
     }catch (error) {
         if (error.name === 'ValidationError') {
