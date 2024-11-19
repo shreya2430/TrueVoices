@@ -1,14 +1,15 @@
-import EmailSettings from '../models/email-settings'
-import ExtraSettings from '../models/extra-settings'
-import Space from '../models/spaces'
-import ThankYouPage from '../models/thank-you-page'
+import EmailSettings from '../models/email-settings.js'
+import ExtraSettings from '../models/extra-settings.js'
+import Space from '../models/spaces.js'
+import ThankYouPage from '../models/thank-you-page.js'
 
 export const getSpaces = async () => {
   try {
     const spaces = await Space.find()
-      .populate('thankYouPage')
-      .populate('extraSettings')
-      .populate('emailSettings')
+      .select({ _id: 0, __v: 0 })
+      .populate('thankYouPage', { _id: 0, __v: 0 })
+      .populate('extraSettings', { _id: 0, __v: 0 })
+      .populate('emailSettings', { _id: 0, __v: 0 })
       .exec()
     return spaces
   } catch (error) {
@@ -20,9 +21,10 @@ export const getSpaces = async () => {
 const getSpaceByName = async (spaceName) => {
 	try {
 		const space = await Space.findOne({ spaceName })
-			.populate('thankYouPage')
-			.populate('extraSettings')
-      .populate('emailSettings')
+      .select({ _id: 0, __v: 0 })
+			.populate('thankYouPage', { _id: 0, __v: 0 })
+			.populate('extraSettings', { _id: 0, __v: 0 })
+      .populate('emailSettings', { _id: 0, __v: 0 })
       .exec()
 		if (!space) {
 			throw new Error('Space not found')
@@ -62,4 +64,10 @@ const createSpace = async (spaceData) => {
     console.error('Error creating space:', error)
     throw new Error('Failed to create space: ' + error.message)
   }
+}
+
+export const spaceService = {
+  getSpaces,
+  getSpaceByName,
+  createSpace
 }

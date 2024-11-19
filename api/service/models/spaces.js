@@ -1,7 +1,20 @@
 import mongoose from "mongoose";
 
+const InputsSchema = new mongoose.Schema({
+  name_required: Boolean,
+  name_enabled: Boolean,
+  email_required: Boolean,
+  email_enabled: Boolean,
+  companyAndTitle_required: Boolean,
+  companyAndTitle_enabled: Boolean,
+  socialLinks_required: Boolean,
+  socialLinks_enabled: Boolean,
+  address_required: Boolean,
+  address_enabled: Boolean
+}, { _id: false });
+
 const spaceSchema = new mongoose.Schema({
-  spaceName: { type: String, required: true, unqiue: true },
+  spaceName: { type: String, required: true, unique: true, index: { unique: true } },
   spaceLogo: { type: String, required: true },
   headerTitle: { type: String, required: true, default: 'Testimonial' },
   customMessage: { type: String, required: true, default: 'Please leave your testimonial' },
@@ -18,20 +31,9 @@ const spaceSchema = new mongoose.Schema({
   thankYouPage: { type: mongoose.Schema.Types.ObjectId, ref: 'ThankYouPage' },
   inputs: { type: InputsSchema },
   extraSettings: { type: mongoose.Schema.Types.ObjectId, ref: 'ExtraSettings' },
+  emailSettings: { type: mongoose.Schema.Types.ObjectId, ref: 'EmailSettings' }
 })
 
-const InputsSchema = new mongoose.Schema({
-  name_required: Boolean,
-  name_enabled: Boolean,
-  email_required: Boolean,
-  email_enabled: Boolean,
-  companyAndTitle_required: Boolean,
-  companyAndTitle_enabled: Boolean,
-  socialLinks_required: Boolean,
-  socialLinks_enabled: Boolean,
-  address_required: Boolean,
-  address_enabled: Boolean
-});
 
 const Space = mongoose.model('Space', spaceSchema);
 

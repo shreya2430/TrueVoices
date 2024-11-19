@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 export const ExtraSettingsSchema = new mongoose.Schema({
-    spaceId: { type: String, required: true, unique: true },
     maxVideoDuration: { type: Number, default: 60 },
     maxTextCharacters: { type: Number, default: 500 },
     videoButtonText: { type: String, default: 'Record Video' },
