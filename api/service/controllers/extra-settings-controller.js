@@ -1,5 +1,5 @@
 import { getSettings, updateSettings } from '../services/extra-settings-service.js';
-import { setSuccess, setError } from './response-handler.js';
+import { setSuccess, setError } from '../response-handler.js';
 import NotFoundError from '../exceptions/NotFoundError.js';
 
 

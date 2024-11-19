@@ -1,5 +1,5 @@
 import { updateThankYouPage } from '../services/thank-you-page-service.js';
-import { setSuccess, setError } from './response-handler.js';
+import { setSuccess, setError } from '../response-handler.js';
 import NotFoundError from '../exceptions/NotFoundError.js';
 
 export async function updateThankYouPageForSpace(req, res) {
