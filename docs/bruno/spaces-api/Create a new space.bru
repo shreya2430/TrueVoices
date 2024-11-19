@@ -1,0 +1,49 @@
+meta {
+  name: Create a new space
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/spaces
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "spaceName": "space1",
+    "spaceLogo": "logo-url.jpg",
+    "headerTitle": "Welcome to My Space",
+    "customMessage": "Please leave your feedback",
+    "listQuestion": ["How was your experience?", "Would you recommend us?"],
+    "starRating": true,
+    "spaceType": "TextAndVideo",
+    "themes": "Light",
+    "inputs": {
+      "name_required": true,
+      "name_enabled": true,
+      "email_required": false,
+      "email_enabled": true
+    },
+    "thankYouPage": {
+      "image": "thank-you.jpg",
+      "title": "Thank You!",
+      "message": "We appreciate your feedback."
+    },
+    "extraSettings": {
+      "maxVideoDuration": 60,
+      "maxCharForTheTestimonial": 500,
+      "videoBtnText": "Record Video",
+      "textButtonText": "Submit Text",
+      "consentDisplay": true,
+      "consentStatement": "I agree to share my testimonial."
+    },
+    "emailSettings": {
+      "emailFrom": "noreply@example.com",
+      "emailTo": "feedback@example.com",
+      "subject": "New Testimonial Received",
+      "message": "A new testimonial has been submitted for {spacename}."
+    }
+  }
+}
