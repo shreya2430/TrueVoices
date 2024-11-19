@@ -13,7 +13,7 @@ export async function updateSettings(spaceId, updates) {
     const updatedSettings = await ExtraSettings.findOneAndUpdate(
         { spaceId },   // Filter by spaceId
         updates,       // Fields to update
-        { new: true }   // Return the updated document, not the original one
+        { new: true }  
     );
 
     if (!updatedSettings) {
