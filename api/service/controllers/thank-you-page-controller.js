@@ -19,7 +19,7 @@ export async function updateThankYouPageForSpace(req, res) {
                 message: error.message
             });
         } else {
-            setError(error.message, res);  // Assuming `setError` handles general errors
+            setError(error.message, res); 
         }
     }
 }

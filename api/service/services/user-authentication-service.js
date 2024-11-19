@@ -6,12 +6,12 @@ const isPasswordMatch = (plainPassword, storedPassword) => {
 };
 
 //Function to authenticate the user
-export const authenticateUser = async (userData) => {
+export const registerUser = async (userData) => {
     try {
-        //validating passwords match
-        if (userData.password !== userData.confirmPassword) {
-            throw new Error('Passwords do not match');
-        }
+        // //validating passwords match
+        // if (userData.password !== userData.confirmPassword) {
+        //     throw new Error('Passwords do not match');
+        // }
 
         //Creating the user in the database
         const newUser = new User({
@@ -76,8 +76,8 @@ export const updateProfile = async (userId, updateData) => {
         }
         if (updateData.email){
             //if email is updated, then checking if it is unique or not 
-            const existingEmail = await User.findOne({ email: updateDaya.email });
-            if (exisitingEmail && exisitingEmail._id.toString() !== userId){
+            const existingEmail = await User.findOne({ email: updateData.email });
+            if (existingEmail && existingEmail._id.toString() !== userId){
                 throw new Error('Email already exists');
             } 
             user.email = updateData.email;

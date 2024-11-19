@@ -2,11 +2,12 @@ import extraSettingsRouter from './extra-settings-router.js';
 import thankYouPageRouter from './thank-you-page.router.js';
 import testimonialRoutes from "./testimonial-router.js"; // Your feature's router
 import userAuthRouter from './user-authentication-router.js';
+import spacesRouter from './spaces.js';
 
 const intializeRoutes = (app) => {
-    app.use('/spaces', extraSettingsRouter);
-    app.use('/spaces', thankYouPageRouter);
-    app.use("/api/testimonials", testimonialRoutes); // Testimonial routes
-    app.use('/auth', userAuthRouter); //user-authentication router
+    app.use('/v1/spaces', extraSettingsRouter, thankYouPageRouter, spacesRouter);
+    // app.use('/spaces', thankYouPageRouter);
+    app.use("/v1/testimonials", testimonialRoutes); // Testimonial routes
+    app.use('/v1/auth', userAuthRouter); //user-authentication router
 };
 export default intializeRoutes;
