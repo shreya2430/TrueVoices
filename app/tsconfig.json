@@ -1,13 +1,21 @@
 {
-  "files": [],
+  "compilerOptions": {
+    "target": "ESNext", // Specify the ECMAScript target version
+    "module": "ESNext", // Use ES modules for compatibility with Vite
+    "moduleResolution": "node", // Ensure Node.js-style resolution
+    "strict": true, // Enable all strict type-checking options
+    "esModuleInterop": true, // Allow ES module default imports
+    "skipLibCheck": true, // Skip type checks for declaration files
+    "forceConsistentCasingInFileNames": true, // Enforce consistent file naming
+    "baseUrl": ".", // Base directory for resolving paths
+    "paths": {
+      "@/*": ["./src/*"] // Path alias for your source directory
+    }
+  },
+  "include": ["src"], // Include all files in the src folder
+  "exclude": ["node_modules"], // Exclude node_modules folder
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+  ]
 }
