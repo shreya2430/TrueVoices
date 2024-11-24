@@ -1,41 +1,104 @@
 import * as userService from '../services/user-authentication-service.js'; 
 import { setSuccess, setError } from '../response-handler.js';
 
-
-//Registering a new user
-//user the function from user-authentication-service.js to register a new user
-//responds with success or error message based on the operation
-export const registerUser = async (req, res) => {
+//Registering a new user 
+export const registerUser = async(req, res) => {
     try {
-        const user = await userService.registerUser(req.body);
-        setSuccess(user, res, 'User registered successfully');
+        const { firstName, lastName, username, email, password } = req.body;
+
+        //check if email or username already exists
+        if (await userService.doesEmailExist(email)) {
+            return res.status(400).json({ message: 'Email is already in use!'});
+        }
+        if (await userService.doesUsernameExist(username)) {
+            return res.status(400).json({ message: 'Username is already taken!'})
+        }
+
+        //Creating the user
+        const newUser = await userService.createUser({ firstName, lastName, username, email, password });
+        return res.status(201).json({ message: "User registered successfully!", user: newUser});
     } catch (error) {
-        setError(error.message, res, 400);
+        console.error('Error registering user: ', error);
+        return res.status(500).json({ message: 'Internal Server Error!'});
     }
 };
 
-//Login a user
-// uses function froom the serivce file to log in a user by verifying the email and password 
-//Returns a session token and user details if successful
+//Logging in an existing user 
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const loginResponse = await userService.loginUser(email, password);
-        setSuccess(loginResponse, res, 'Login Successful');
+
+        //Authenticate the user
+        const user  = await userService.authenticateUser(email, password);
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password!'});
+        }
+
+        //In future, implement JWT token generation here
+        return res.status(200).json({ message: "Login Successful!", user});
     } catch (error) {
-        setError(error.message, res, 401); //Unauthorized for incorrect login attempt
+        console.error("Error logging in user: ", error);
+        return res.status(500).json({ message: "Internal Server Error!"});
     }
 };
 
-//Update user profile 
-//uses the function from the service file to update the suer's profile by it's userid
-//validates fields like username, email and password during the updates 
-export const updateUserProfile = async (req, res) => {
+//get user details by email
+
+export const getUserByEmail = async (req, res) => {
     try {
-        const userId = req.params.userId;
-        const updatedProfile = await userService.updateProfile(userId, req.body);
-        setSuccess(updatedProfile, res, 'Profile updated Successfully');
+        const {email} = req.params;
+
+        const user = await userService.findUserByEmail(email);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found!'});
+        }
+        return res.status(200).json({ user})
     } catch (error) {
-        setError(error.message, res, 400); // Bad request 
+        console.error("Error fetching user by email:", error);
+        return res.status(500).json({ message: "Internal Server Error!"});
     }
-}; 
+};
+
+//Check if email exists
+export const checkEmailExists = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const exists = await userService.doesEmailExist(email);
+        return res.status(200).json({ exists});
+    } catch (error) {
+        console.error("Error checking email: ", error);
+        return res.status(500).json({ message: "Internal Server Error!"});
+    }
+};
+
+//Check if username exists
+export const checkUsernameExists = async (req, res) => {
+    try {
+        const { username } = req.body;
+        const exists = await userService.doesUsernameExist(username);
+        return res.status(200).json({ exists });
+    } catch (error) {
+        console.error("Error checking username: ", error);
+        return res.status(500).json({ message: "Internal Server Error!"});
+    }
+};
+
+export const resetPassword = async (req, res) => {
+    try { 
+        const { email, nePassword } = req.body;
+
+        //Checking if the user exists
+        const user = await userService.findUserByEmail(email);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found!'});
+        }
+
+        //Updating the user's password
+        const updatedUser = await userService.updatePassword(email, newPassword);
+        return res.status(200).json({ message: 'Password reset successfully!', user: updatedUser});
+    } catch(error){
+        console.error("Error resetting the password: ", error);
+        return res.status(500).json({ message: "Internal Server Error!"});
+    }
+};

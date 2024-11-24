@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: User Authentication API
-  summary: REST APIs for user registration, login and profile updates
+  summary: REST APIs for user registration, login and password reset
   version: '1.0'
 servers:
   - url: http://localhost:3000/v1
@@ -65,85 +65,68 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  # /auth/reset-password:
-  #   post:
-  #     operationId: reset-password
-  #     description: Reset the user's password by sending instructions to their email
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: "#/components/schemas/ResetPasswordRequest"
-  #     responses:
-  #       200:
-  #         description: Password reset instructions sent to the email
-  #         content:
-  #           application/json:
-  #             schema:
-        #         $ref: "#/components/schemas/SuccessMessage"
-        # 400:
-        #   description: Invalid or missing email format
-        #   content:
-        #     application/json:
-        #       schema:
-        #         $ref: "#/components/schemas/Error"
-        # 404:
-        #   description: Email not associated with any user account
-        #   content:
-        #     application/json:
-        #       schema:
-        #         $ref: "#/components/schemas/Error"
-  /auth/update-profile:
-    put:
-      operationId: update-profile
-      description: Update the user profile information such as username, email or password 
+  /auth/reset-password:
+    post:
+      operationId: reset-password
+      description: Reset the user's password by sending instructions to their email
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateProfileRequest"
+              $ref: "#/components/schemas/ResetPasswordRequest"
       responses:
         200:
-          description: Profile updated successfully
+          description: Password reset instructions sent to the email
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UpdateProfileResponse"
+                $ref: "#/components/schemas/SuccessMessage"
         400:
-          description: Invalid input or conflicts with existing data 
+          description: Invalid or missing email format
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-        401:
-          description: Unauthorized or missing token
+        404:
+          description: Email not associated with any user account
           content:
             application/json:
-              schema:
+             schema:
                 $ref: "#/components/schemas/Error"
 components:
   schemas:
     RegisterRequest:
       type: object
       required:
+        - firstName
+        - lastName
         - username
         - email
         - password
         - confirmPassword
       properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
         username:
           type: string
+          example: johndoe123
         email:
           type: string
           format: email
+          example: johndoe@gmail.com
         password:
           type: string
           format: password
+          example: P@ssw0rd!
         confirmPassword:
           type: string
-          format: password
+          format: 
+          example: P@ssw0rd!
     RegisterResponse:
       type: object
       properties:
@@ -163,9 +146,11 @@ components:
         email:
           type: string
           format: email
+          example: johndoe@gmail.com
         password:
           type: string
           format: password
+          example: P@ssw0rd!
     LoginResponse:
       type: object
       properties:
@@ -179,54 +164,27 @@ components:
         expiresIn:
           type: integer
           example: 3600
-    UpdateProfileRequest:
+    ResetPasswordRequest:
       type: object
+      required:
+        - email
       properties:
-        username:
-          type: string
         email:
           type: string
           format: email
-        currentPassword:
-          type: string
-          description: Current password is required to update the password
-        newPassword:
-          type: string
-          description: New password to replace t he existing password
-          format: password
-      required:
-        - currentPassword
-        - newPassword
-        - username
-        - email
-    UpdateProfileResponse:
+          example: johndoe@gmail.com
+    SuccessMessage:
       type: object
       properties:
         message:
           type: string
-          example: "Profile updated successfully"
-        user:
-          type: object
-          properties:
-            userId:
-              type: string
-            username:
-              type: string
-            email:
-              type: string
+          example: "Password reset instructions sent to the email"
     Error:
       type: object
       properties:
         code:
           type: string
-          message:
+          example: ERR_INVALID_INPUT
+        message:
             type: string
-
-#Changes made:
-#1. Expanded the UpdateProfileRequest
-#- Added currentPasswrod and newPassword fields for password updates. 
-#- Made these fields optional but required if a password update is requested
-# 2. Removed /auth/reset-password:
-# - its functionality is noew encapsulated in /auth/update-profile
-#3. Validation Logic:
-#- in the backend, validate that when newPassword is provided, currentPassword is also provided
+            example: "Invalid input provided"
