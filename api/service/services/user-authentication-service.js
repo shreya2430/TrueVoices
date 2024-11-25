@@ -19,13 +19,20 @@ export const createUser = async (userDetails) => {
 
 //authenticating a user 
 export const authenticateUser = async (email, password) => {
-    const user = await User.findOne([email]);
-    if (!user) {
-        return null;
-    }
+    try {
+        // Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return null; // User not found
+        }
 
-    const isMatch = await user.comparePassword(password);
-    return isMatch ? user : null;
+        // Compare passwords
+        const isMatch = await user.comparePassword(password);
+        return isMatch ? user : null; // Return user if valid, else null
+    } catch (error) {
+        console.error("Error in authenticateUser:", error);
+        throw error; // Rethrow the error to be handled by the caller
+    }
 };
 
 //Find user by email
@@ -52,10 +59,6 @@ export const updatePassword = async (email, newPassword) => {
         throw error;
     }
 };
-
-
-
-
 
 
 

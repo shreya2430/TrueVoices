@@ -86,7 +86,7 @@ export const checkUsernameExists = async (req, res) => {
 
 export const resetPassword = async (req, res) => {
     try { 
-        const { email, nePassword } = req.body;
+        const { email, newPassword } = req.body;
 
         //Checking if the user exists
         const user = await userService.findUserByEmail(email);
