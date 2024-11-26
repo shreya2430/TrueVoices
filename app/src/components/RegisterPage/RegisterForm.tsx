@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from "@/components/ui/label";
+import './Style.css';
 
 
 export function RegisterForm() {
@@ -73,7 +74,7 @@ export function RegisterForm() {
       <CardContent>
         {/* register a user form */}
         <form onSubmit={handleSubmit} className="grid gap-4"> 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             {/* First Name */}
             <div className="grid gap-2">
               <Label htmlFor="firstName" className="text-blue-500">First Name</Label>
@@ -110,6 +111,7 @@ export function RegisterForm() {
                 required
               />
             </div>
+            {/* Email */}
             <div className="grid gap-2">
               <Label htmlFor="email" className="text-blue-500">Email</Label>
               <Input
@@ -121,6 +123,7 @@ export function RegisterForm() {
                 required
               />
             </div>
+            {/* Password */}
             <div className="grid gap-2">
               <Label htmlFor="password" className="text-blue-500">Password</Label>
               <Input
@@ -132,6 +135,7 @@ export function RegisterForm() {
                 required
               />
             </div>
+            {/* Confirm Password */}
             <div>
               <Label htmlFor="confirmPassword" className="text-blue-500">Confirm Password</Label>
               <Input

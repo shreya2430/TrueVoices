@@ -1,6 +1,7 @@
 import './App.css'
 import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/LoginPage/LoginPage';
+import SignUpPage from './components/RegisterPage/SignUpPage';
 
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
   return (
     <div>
       {/* <LandingPage /> */}
-      <LoginPage />
+      {/* <LoginPage /> */}
+      <SignUpPage />
 
     </div>
   )
