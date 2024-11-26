@@ -6,10 +6,17 @@ import initialize from './service/app.js';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3003;
 
+// Initialize middleware, routes, etc.
 initialize(app);
 
+// Define a root route for testing
+app.get("/", (req, res) => {
+    res.send("Welcome to the Testimonials API!");
+});
+
+// Start the server
 app.listen(port, () => {
-    console.log(`Listening to port ${port}`)
+    console.log(`Listening to port ${port}`);
 });
