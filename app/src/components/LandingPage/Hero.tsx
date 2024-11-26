@@ -1,7 +1,10 @@
 import React from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
 
+
 const Hero = () => {
+  
+
   return (
     <Container maxWidth="md" sx={{ textAlign: 'center', mt: 8 }}>
       <Typography variant="h2" gutterBottom>
