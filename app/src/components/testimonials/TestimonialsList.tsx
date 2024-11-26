@@ -8,7 +8,7 @@ const TestimonialsList = () => {
         // Ensure the backend API endpoint is correct
         const fetchTestimonials = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/testimonials'); // Adjust to backend port
+                const response = await fetch('http://localhost:3003/api/testimonials'); // Adjust to backend port
                 if (!response.ok) {
                     throw new Error('Failed to fetch testimonials');
                 }
@@ -32,6 +32,9 @@ const TestimonialsList = () => {
                     <div key={testimonial._id} className="testimonial">
                         <h3>{testimonial.name}</h3>
                         <p>{testimonial.message}</p>
+                        <p>{testimonial.companyAndTitle}</p>
+                        <p>{testimonial.content}</p>
+                        <p>Email: {testimonial.email}</p>
                     </div>
                 ))
             ) : (

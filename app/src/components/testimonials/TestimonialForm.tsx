@@ -6,6 +6,10 @@ const TestimonialsForm = () => {
         name: "",
         companyAndTitle: "",
         content: "",
+        profilePic: "",
+        testimonialType: "",
+        address: "",
+       
     });
 
     const [loading, setLoading] = useState(false); // Loading state
@@ -20,6 +24,7 @@ const TestimonialsForm = () => {
         e.preventDefault(); // Prevent default form submission behavior
         setMessage(""); // Clear any previous messages
         setLoading(true); // Set loading state
+
 
     try {
         const response = await fetch("http://localhost:3003/api/testimonials", {
@@ -46,6 +51,7 @@ const TestimonialsForm = () => {
             profilePic: "",
             testimonialType: "",
             address: "",
+            email: "", // Clear email field
         });
     } catch (error) {
         console.error("Error submitting testimonial:", error);
@@ -139,11 +145,7 @@ const TestimonialsForm = () => {
                    margin="normal"
                 />
 
-
-                
-
-
-                
+              
     
                 <Button
                     type="submit"
