@@ -34,7 +34,6 @@ const TestimonialsList = () => {
                         <p>{testimonial.message}</p>
                         <p>{testimonial.companyAndTitle}</p>
                         <p>{testimonial.content}</p>
-
                     </div>
                 ))
             ) : (

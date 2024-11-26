@@ -25,10 +25,6 @@ const TestimonialsForm = () => {
         setMessage(""); // Clear any previous messages
         setLoading(true); // Set loading state
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6937a55 (Integrated harshit-api into the project)
     try {
         const response = await fetch("http://localhost:3003/api/testimonials", {
             method: "POST",
@@ -54,10 +50,7 @@ const TestimonialsForm = () => {
             profilePic: "",
             testimonialType: "",
             address: "",
-<<<<<<< HEAD
             email: "", // Clear email field
-=======
->>>>>>> 6937a55 (Integrated harshit-api into the project)
         });
     } catch (error) {
         console.error("Error submitting testimonial:", error);
@@ -151,16 +144,7 @@ const TestimonialsForm = () => {
                    margin="normal"
                 />
 
-<<<<<<< HEAD
-              
-=======
 
-                
-
-
-                
->>>>>>> 6937a55 (Integrated harshit-api into the project)
-    
                 <Button
                     type="submit"
                     variant="contained"
