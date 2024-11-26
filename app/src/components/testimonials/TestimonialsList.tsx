@@ -29,16 +29,12 @@ const TestimonialsList = () => {
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
             {testimonials.length > 0 ? (
                 testimonials.map((testimonial) => (
-                    <div key={testimonial._id} class
-                    Name="testimonial">
+                    <div key={testimonial._id} className="testimonial">
                         <h3>{testimonial.name}</h3>
                         <p>{testimonial.message}</p>
-<<<<<<< HEAD
                         <p>{testimonial.companyAndTitle}</p>
                         <p>{testimonial.content}</p>
-                        <p>Email: {testimonial.email}</p>
-=======
->>>>>>> 9f1b36b (feat: UI work in progress)
+
                     </div>
                 ))
             ) : (
