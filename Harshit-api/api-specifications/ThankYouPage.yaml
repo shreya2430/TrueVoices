@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: TrueVoices Thank You Page API
+  description: API for updating the thank you page for a specific space
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/v1
+    description: Local development environment
+paths:
+  /spaces/{spaceId}/thank-you-page:
+    put:
+      summary: Update Thank You Page for a Space
+      description: Update the thank you page content for a specific space.
+      parameters:
+        - name: spaceId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: ID of the space to update the thank you page for.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageUrl:
+                  type: string
+                  description: URL of the image to display on the thank you page
+                title:
+                  type: string
+                  description: Title text for the thank you page
+                message:
+                  type: string
+                  description: Custom thank you message for the thank you page
+                allowShareOnSocialMedia:
+                  type: boolean
+                  description: Option to allow sharing on social media
+      responses:
+        "200":
+          description: Thank you page updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Thank you page updated successfully for space."
+        "404":
+          description: Space not found
+          content:
+            "application/json":
+              schema:
+                type: object
+                $ref: "/#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "/#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

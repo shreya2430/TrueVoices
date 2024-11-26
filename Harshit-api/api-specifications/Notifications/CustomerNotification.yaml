@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: TrueVoices Customer Notifications API
+  description: API for sending notifications to customers when their testimonials are featured on the wall of fame.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/v1
+    description: Local development environment
+paths:
+  /customers/{testimonialId}/notifications/wall-of-fame:
+    post:
+      summary: Send Customer Notification for Wall of Fame
+      description: Notify a customer when their testimonial is featured on the wall of fame.
+      parameters:
+        - name: testimonialId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "Thank you for your testimonal, it is now on our [Website Name]'s Wall of Fame! helping others make informed decisions."
+                linkToWallOfFame:
+                  type: string
+                  example: "https://example.com/wall-of-fame"
+      responses:
+        '201':
+          description: Notification sent to customer successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Notification sent to customer successfully."
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                 $ref: "/#/components/schemas/Error"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: "/#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

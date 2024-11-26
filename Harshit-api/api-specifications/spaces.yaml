@@ -1,0 +1,238 @@
+openapi: 3.0.0
+info:
+  title: TrueVoice Spaces API
+  description: API for managing Spaces in the TrueVoice system
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/v1
+paths:
+  /spaces:
+    get:
+      summary: List all spaces
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:    
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a new space
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Space'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /spaces/{spaceId}:
+    get:
+      summary: Get a space by ID
+      parameters:
+        - name: spaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update a space
+      parameters:
+        - name: spaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Space'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a space
+      parameters:
+        - name: spaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successful deletion
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized access
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Space:
+      type: object
+      properties:
+        id:
+          type: string
+        spacename:
+          type: string
+        spaceLogo:
+          type: string
+        headerTitle:
+          type: string
+        customMessage:
+          type: string
+        listQuestion:
+          type: array
+          items:
+            type: string
+        starRating:
+          type: boolean
+        spaceType:
+          $ref: '#/components/schemas/SpaceType'
+        themes:
+          $ref: '#/components/schemas/Themes'
+        inputs:
+          $ref: '#/components/schemas/Inputs'
+        thankYouPage:
+          $ref: '#/components/schemas/ThankYouPage'
+        extraSettings:
+          $ref: '#/components/schemas/ExtraSettings'
+        emailSettings:
+          $ref: '#/components/schemas/EmailSettings'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    SpaceType:
+      type: string
+      enum: [Text, Video, TextAndVideo]
+    Themes:
+      type: string
+      enum: [Light, Dark]
+    Inputs:
+      type: object
+      properties:
+        name_required:
+          type: boolean
+        name_enabled:
+          type: boolean
+        email_required:
+          type: boolean
+        email_enabled:
+          type: boolean
+        companyAndTitle_required:
+          type: boolean
+        companyAndTitle_enabled:
+          type: boolean
+        socialLinks_required:
+          type: boolean
+        socialLinks_enabled:
+          type: boolean
+        address_required:
+          type: boolean
+        address_enabled:
+          type: boolean
+    ThankYouPage:
+      type: object
+      properties:
+        image:
+          type: string
+        title:
+          type: string
+        message:
+          type: string
+    ExtraSettings:
+      type: object
+      properties:
+        maxVideoDuration:
+          type: integer
+        maxCharForTheTestimonial:
+          type: integer
+        videoBtnText:
+          type: string
+        textButtonText:
+          type: string
+        consentDisplay:
+          type: boolean
+        consentStatement:
+          type: string
+    EmailSettings:
+      type: object
+      properties:
+        emailFrom:
+          type: string
+        emailTo:
+          type: string
+        subject:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message

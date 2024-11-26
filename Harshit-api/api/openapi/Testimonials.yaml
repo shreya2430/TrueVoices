@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  title: Testimonials API
+  version: 1.0.0
+  description: API for managing testimonials, allowing users to create, view, update, and delete testimonials.
+servers:
+  - url: http://localhost:3000/v1
+    description: Local development environment
+
+paths:
+  /testimonials:
+    get:
+      summary: Retrieve all testimonials
+      description: Fetches a list of all testimonials.
+      responses:
+        '200':
+          description: A list of testimonials
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Testimonial'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new testimonial
+      description: Adds a new testimonial to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestimonialInput'
+      responses:
+        '201':
+          description: Testimonial created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+        '400':
+          description: Invalid request
+        '500':
+          description: Server error
+
+  /api/testimonials/{id}:
+    get:
+      summary: Retrieve a testimonial by ID
+      description: Fetches a single testimonial by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Unique identifier for the testimonial
+      responses:
+        '200':
+          description: A single testimonial
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+        '404':
+          description: Testimonial not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update a testimonial by ID
+      description: Updates a specific testimonial’s information.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Unique identifier for the testimonial
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestimonialInput'
+      responses:
+        '200':
+          description: Testimonial updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Testimonial'
+        '400':
+          description: Invalid request
+        '404':
+          description: Testimonial not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete a testimonial by ID
+      description: Removes a specific testimonial from the database.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: Unique identifier for the testimonial
+      responses:
+        '204':
+          description: Testimonial deleted successfully
+        '404':
+          description: Testimonial not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Testimonial:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the testimonial
+          example: "613b6a9e4d1c4f001f8f3c56"
+        name:
+          type: string
+          description: Name of the person giving the testimonial
+          example: "John Doe"
+        companyAndTitle:
+          type: string
+          description: Company name and title of the person
+          example: "CEO, ABC Corp"
+        socialLinks:
+          type: array
+          items:
+            type: string
+          description: Social media links of the person
+        address:
+          type: string
+          description: Address of the person giving the testimonial
+          example: "123 Main St, Anytown, USA"
+        testimonialType:
+          type: string
+          description: Type of testimonial
+          enum:
+            - Text
+            - Video
+          example: "Video"
+        content:
+          type: string
+          description: The testimonial content
+          example: "This product exceeded my expectations!"
+        profilePic:
+          type: string
+          format: uri
+          description: URL to the profile picture of the person
+          example: "https://example.com/profile.jpg"
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation date of the testimonial
+          example: "2023-09-15T14:48:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update date of the testimonial
+          example: "2023-09-16T10:32:00.000Z"
+
+    TestimonialInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the person giving the testimonial
+          example: "Jane Doe"
+        companyAndTitle:
+          type: string
+          description: Company name and title of the person
+          example: "CTO, XYZ Inc"
+        socialLinks:
+          type: array
+          items:
+            type: string
+          description: Social media links of the person
+        address:
+          type: string
+          description: Address of the person giving the testimonial
+          example: "456 Elm St, Metropolis, USA"
+        testimonialType:
+          type: string
+          description: Type of testimonial
+          enum:
+            - Text
+            - Video
+          example: "Text"
+        content:
+          type: string
+          description: The testimonial content
+          example: "Exceptional service and product quality!"
+        profilePic:
+          type: string
+          format: uri
+          description: URL to the profile picture of the person
+          example: "https://example.com/profile_jane.jpg"
+
+
+

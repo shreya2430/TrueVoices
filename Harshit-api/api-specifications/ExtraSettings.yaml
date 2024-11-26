@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: TrueVoices Extra Settings API
+  description: API for updating extra settings for a specific space in the TrueVoices project.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/v1
+    description: Local development environment
+paths:
+  /spaces/{spaceId}/extra-settings:
+    put:
+      summary: Update Extra Settings for a Space
+      description: Update extra settings for a specific space, including options for video duration, text limits, and consent settings.
+      parameters:
+        - name: spaceId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: ID of the space to update settings for.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxVideoDuration:
+                  type: integer
+                  description: Maximum video duration in seconds
+                maxTextCharacters:
+                  type: integer
+                  description: Maximum character limit for text testimonials
+                videoButtonText:
+                  type: string
+                  description: Text for the video button (e.g, "Record Video")
+                textButtonText:
+                  type: string
+                  description: Text for the text submission button (e.g, Send in text)
+                consentDisplay:
+                  type: string
+                  description: Consent display setting (e.g., "Required, Optional, None")
+                consentStatement:
+                  type: string
+                  description: Text for the consent statement (e.g.,By default this consent will be provided - "I give this company permission to use my testimonial accross social channels and marketing efforts.")
+                questionLabel:
+                  type: string
+                  description: Label for testimonial questions (e.g., "What did you like about our service?")
+                affiliateLink:
+                  type: string
+                  description: Affiliate link associated with the space
+                thirdPartyReviewLink:
+                  type: string
+                  description: Link to third-party reviews
+                autoPopulateTestimonials:
+                  type: boolean
+                  description: Automatically populate testimonials to the Wall of Love
+                disableVideoForiOS:
+                  type: boolean
+                  description: Disable video recording for iOS users
+                allowSearchEngines:
+                  type: boolean
+                  description: Allow search engines to index this page
+      responses:
+        '200':
+          description: Extra settings updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Extra settings updated successfully for space."
+        '404':
+          description: Space not found
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "/#/components/schemas/Error"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "/#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

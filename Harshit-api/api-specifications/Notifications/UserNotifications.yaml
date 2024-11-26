@@ -1,0 +1,217 @@
+openapi: 3.0.0
+info:
+  title: TrueVoices User Notifications API
+  description: API for managing notifications for users in the TrueVoices project.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/v1
+    description: Local development environment
+paths:
+  /users/{userId}/notifications:
+    get:
+      summary: Retrieve User Notifications
+      description: Retrieve all notifications for a specified user, including notifications for new testimonials.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Notifications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: "/#/components/schemas/Notification"
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                 $ref: "/#/components/schemas/Error"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: "/#/components/schemas/Error"
+
+    post:
+      summary: Create User Notification
+      description: Create a new notification for a specified user, for example, when a new testimonial is received.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "New testimonial received for your space."
+                type:
+                  type: string
+                  example: "testimonial"
+                spaceId:
+                  type: string
+                  example: "space123"
+                sourceId:
+                  type: string
+                  example: "testimonial789"
+                createdAt:
+                  type: string
+                  format: date-time
+                  example: "2024-11-11T15:30:00Z"
+      responses:
+        '201':
+          description: Notification created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Notification created successfully."
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                 $ref: "/#/components/schemas/Error"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                 $ref: "/#/components/schemas/Error"
+    delete:
+      summary: Bulk Delete Notifications
+      description: Deletes multiple notifications for a specified user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: ID of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notificationIds:
+                  type: array
+                  items:
+                    type: string
+                  description: List of notification IDs to be deleted
+                  example: ["notification1", "notification2", "notification3"]
+      responses:
+        '200':
+          description: Notifications deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "/#/components/schemas/NotificationDeleteResponse"
+        '400':
+          description: Invalid request data, for example, missing/Incorrect notification ID
+          content:
+            application/json:
+              schema:
+                $ref: "/#/components/schemas/Error"
+        '404':
+          description: User or notifications not found
+          content:
+            application/json:
+              schema:
+                $ref: "/#/components/schemas/Error"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "/#/components/schemas/Error"
+  /users/{userId}/notifications/mark-all-as-read:
+    put:
+      summary: Mark All Notifications as Read
+      description: Marks all notifications as read for a specified user.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: ID of the user.
+      responses:
+        '200':
+          description: All notifications marked as read
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "All notifications marked as read."
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "/#/components/schemas/Error"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "/#/components/schemas/Error"
+
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        notificationId:
+          type: string
+        message:
+          type: string
+        isRead:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    NotificationDeleteResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        deletedNotificationIds:
+          type: array
+          items:
+            type: string
+          description: List of notification IDs that were successfully deleted
+          example: ["notification1", "notification2", "notification3"]
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
