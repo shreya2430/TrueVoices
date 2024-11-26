@@ -39,6 +39,10 @@ const getSpaceByName = async (spaceName) => {
 const createSpace = async (spaceData) => {
   try {
     let extraSettings, thankYouPage, emailSettings
+    const spaceExists = await Space.findOne({ spaceName: spaceData.spaceName })
+    if (spaceExists) {
+      throw new Error(`space already exists with ${spaceData.spaceName}`)
+    }
     if (spaceData.extraSettings) {
       extraSettings = new ExtraSettings(spaceData.extraSettings)
       await extraSettings.save()

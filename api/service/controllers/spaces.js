@@ -6,13 +6,16 @@ const post = async (req, res) => {
     const space = await spaceService.createSpace(data)
     res.status(201).json(space)
   } catch (error) {
-    if (error.message.includes('duplicate key error')) {
-      res.status(400).json({ message: 'Space name already exists' })
-    } else if (error.message.includes('validation failed')) {
-      res.status(400).json({ message: error.message })
-    } else {
-      res.status(500).json({ message: error.message })
-    }
+    if (
+			error.message.includes('duplicate key error') ||
+			error.message.includes('space already exists')
+		) {
+			res.status(409).json({ message: 'Space name already exists' })
+		} else if (error.message.includes('validation failed')) {
+			res.status(400).json({ message: error.message })
+		} else {
+			res.status(500).json({ message: error.message })
+		}
   }
 }
 
