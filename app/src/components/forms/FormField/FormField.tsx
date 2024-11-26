@@ -8,19 +8,19 @@ type FormFieldProps = {
     type: string;
     placeholder:string;
     value: string;
-    required: boolean;
-    onChange: (id: string, value: string) => void;
+    required?: boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const FormField: React.FC<FormFieldProps> =({
-    id, 
-    label, 
+export const FormField: React.FC<FormFieldProps> = ({
+    id,
+    label,
     type,
-    placeholder, 
-    value, 
-    required, 
+    placeholder,
+    value,
+    required = false,
     onChange,
-}) => {
+  }) => {
     return (
         <div className="grid gap-2">
             <Label htmlFor={id} className="text-blue-500">{label}</Label>
@@ -29,8 +29,7 @@ export const FormField: React.FC<FormFieldProps> =({
                 type={type}
                 placeholder={placeholder}
                 value={value}
-                onChange={(e) => onChange(id, e.target.value)}
-                required={required}
+                onChange={onChange}
             />
         </div>
     )

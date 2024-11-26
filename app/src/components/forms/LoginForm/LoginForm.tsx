@@ -21,7 +21,8 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
     const [error, setError ] = useState<string | null>(null);
     const [successMessage, setSuccessMessage ] = useState<string | null>(null);
 
-    const handleChange = (id: string, value: string) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
         setFormData((prev) => ({ ...prev, [id]: value }));
         setError(null); //Clear any errors when user starts typing
     };
@@ -30,7 +31,7 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch('http://localhost:3000/v1/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

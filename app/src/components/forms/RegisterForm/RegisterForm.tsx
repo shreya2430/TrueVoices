@@ -21,10 +21,11 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
     const [error, setError] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-    const handleChange = (id: string, value: string) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
         setFormData((prev) => ({ ...prev, [id]: value }));
-        setError(null); //Clear any errors when user starts typing
-    };
+        setError(null); // Clear any errors when user starts typing
+      };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,41 +34,57 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
             setError('Passwords do not match');
             return;
         }
-    
-        //pass form data to parents
-        onSubmit(formData);
+        try {
+            const response = await fetch('http://localhost:3000/v1/auth/register', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+            });
+      
+            const result = await response.json();
+            if (response.ok) {
+              setSuccessMessage(result.message);
+              setFormData({}); // Clear form on success
+            } else {
+              setError(result.message || 'Registration failed');
+            }
+          } catch (err) {
+            setError('Server error, please try again later');
+          }
     };
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <Card className="mx-auto max-w-md">
-                <CardHeader>
-                    <CardTitle className="text-2xl text-blue-500">Sign Up</CardTitle>
-                    <CardDescription>Enter your details to create an account</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form onSubmit={handleSubmit}>
-                        <ul className="grid grid-cols-2 gap-6">
-                            {fields.map((field) => (
-                                <li key={field.id}>
-                                    <FormField
-                                        id={field.id}
-                                        label={field.label}
-                                        type={field.type}
-                                        placeholder={field.placeholder}
-                                        value={formData[field.id] || ''} 
-                                        required={field.required}
-                                        onChange={handleChange}   
-                                    />
-                                </li>
-                            ))}
-                        </ul>
-                        {error && <div className="text-red-500">{error}</div>}
-                        {successMessage && <div className="text-green-500">{successMessage}</div>}
-                        <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign Up</Button>
-                    </form>
-                </CardContent>
-            </Card>                
+            <CardHeader>
+                <CardTitle className="text-2xl text-blue-500">Sign Up</CardTitle>
+                <CardDescription>Enter your details to create an account</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <form onSubmit={handleSubmit}>
+                    <ul className="grid grid-cols-2 gap-6">
+                        {fields.map((field) => (
+                            <li key={field.id}>
+                                <FormField
+                                    id={field.id}
+                                    label={field.label}
+                                    type={field.type}
+                                    placeholder={field.placeholder}
+                                    value={formData[field.id] || ''} 
+                                    required={field.required}
+                                    onChange={handleChange}   
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                    {error && <div className="text-red-500">{error}</div>}
+                    {successMessage && <div className="text-green-500">{successMessage}</div>}
+                    <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign Up</Button>
+                </form>
+            </CardContent>
+        </Card>                
         </div>
         
     );
