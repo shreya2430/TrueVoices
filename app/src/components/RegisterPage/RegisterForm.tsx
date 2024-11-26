@@ -65,7 +65,7 @@ export function RegisterForm() {
   return (
     <Card className="mx-auto max-w-md">
       <CardHeader>
-        <CardTitle className="text-2xl">Sign Up</CardTitle>
+        <CardTitle className="text-2xl text-blue-500">Sign Up</CardTitle>
         <CardDescription>
           Enter your details to create an account
         </CardDescription>
@@ -73,78 +73,80 @@ export function RegisterForm() {
       <CardContent>
         {/* register a user form */}
         <form onSubmit={handleSubmit} className="grid gap-4"> 
-          {/* First Name */}
-          <div className="grid gap-2">
-            <Label htmlFor="firstName">First Name</Label>
-            <Input
-              id="firstName"
-              type="text"
-              placeholder="John"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          {/* Last Name */}
-          <div className="grid gap-2">
-            <Label htmlFor="lastName">Last Name</Label>
-            <Input
-              id="lastName"
-              type="text"
-              placeholder="Doe"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          {/* Username */}
-          <div className="grid gap-2">
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              type="text"
-              placeholder="johndoe123"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="johndoe@gmail.com"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="At least 6 characters"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-              id="confirmPassword"
-              type="password"
-              placeholder="Retype Your Password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+          <div className="grid grid-cols-2 gap-4">
+            {/* First Name */}
+            <div className="grid gap-2">
+              <Label htmlFor="firstName" className="text-blue-500">First Name</Label>
+              <Input
+                id="firstName"
+                type="text"
+                placeholder="John"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {/* Last Name */}
+            <div className="grid gap-2">
+              <Label htmlFor="lastName" className="text-blue-500">Last Name</Label>
+              <Input
+                id="lastName"
+                type="text"
+                placeholder="Doe"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {/* Username */}
+            <div className="grid gap-2">
+              <Label htmlFor="username" className="text-blue-500">Username</Label>
+              <Input
+                id="username"
+                type="text"
+                placeholder="johndoe123"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="email" className="text-blue-500">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="johndoe@gmail.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password" className="text-blue-500">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="At least 6 characters"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="confirmPassword" className="text-blue-500">Confirm Password</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="Retype Your Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
           {error && <p className="text-red-500 text-sm">{error}</p>}
           {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full bg-blue-500 text-lg">
             Sign Up
           </Button>
         </form> 
