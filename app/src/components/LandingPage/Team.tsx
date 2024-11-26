@@ -13,24 +13,24 @@ const teamMembers = [
     bio: 'Full-stack developer with a passion for building web applications. Expertise in Java, Spring Boot, React, and Node.js.',
   },
   {
-    name: 'Team Member 2',
-    image: '/assets/TeamImages/member2.jpg',
-    linkedin: 'https://www.linkedin.com/in/team-member-2/',
+    name: 'Maithili Wade',
+    image: '/TeamImages/_DSC9226-Enhanced-NR-3.jpg',
+    linkedin: 'https://www.linkedin.com/in/maithili-wade/',
+    bio: 'Architect turned Software Engineer. Currently exploring the exciting intersection of technology and design.',
+  },
+  {
+    name: 'Jay Vekariya',
+    image: '/TeamImages/jay.jpeg',
+    linkedin: 'https://www.linkedin.com/in/jay-vekariya/',
     bio: 'Full-stack developer focusing on React and Node.js.',
   },
   {
-    name: 'Team Member 3',
+    name: 'Harshit Kant',
     image: '/assets/TeamImages/member2.jpg',
-    linkedin: 'https://www.linkedin.com/in/team-member-2/',
+    linkedin: 'https://www.linkedin.com/in/harshit-kant-hk-0a87864b/',
     bio: 'Full-stack developer focusing on React and Node.js.',
   },
-  {
-    name: 'Team Member 4',
-    image: '/assets/TeamImages/member2.jpg',
-    linkedin: 'https://www.linkedin.com/in/team-member-2/',
-    bio: 'Full-stack developer focusing on React and Node.js.',
-  },
-  // Add more team members here
+
 ];
 
 const Team = () => {
