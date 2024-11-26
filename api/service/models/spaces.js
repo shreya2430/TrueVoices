@@ -13,26 +13,42 @@ const InputsSchema = new mongoose.Schema({
   address_enabled: Boolean
 }, { _id: false });
 
-const spaceSchema = new mongoose.Schema({
-  spaceName: { type: String, required: true, unique: true, index: { unique: true } },
-  spaceLogo: { type: String, required: true },
-  headerTitle: { type: String, required: true, default: 'Testimonial' },
-  customMessage: { type: String, required: true, default: 'Please leave your testimonial' },
-  listQuestion: [String],
-  starRating: Boolean,
-  spaceType: {
-    type: String,
-    enum: ['Text', 'Video', 'TextAndVideo']
-  },
-  themes: {
-    type: String,
-    enum: ['Light', 'Dark']
-  },
-  thankYouPage: { type: mongoose.Schema.Types.ObjectId, ref: 'ThankYouPage' },
-  inputs: { type: InputsSchema },
-  extraSettings: { type: mongoose.Schema.Types.ObjectId, ref: 'ExtraSettings' },
-  emailSettings: { type: mongoose.Schema.Types.ObjectId, ref: 'EmailSettings' }
-})
+const spaceSchema = new mongoose.Schema(
+	{
+		spaceName: {
+			type: String,
+			required: true,
+			unique: true,
+			index: { unique: true },
+		},
+		spaceLogo: { type: String, required: true },
+		headerTitle: { type: String, required: true, default: 'Testimonial' },
+		customMessage: {
+			type: String,
+			required: true,
+			default: 'Please leave your testimonial',
+		},
+		listQuestion: [String],
+		starRating: Boolean,
+		text: Boolean,
+		video: Boolean,
+		themes: {
+			type: String,
+			enum: ['Light', 'Dark'],
+		},
+		thankYouPage: { type: mongoose.Schema.Types.ObjectId, ref: 'ThankYouPage' },
+		inputs: { type: InputsSchema },
+		extraSettings: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'ExtraSettings',
+		},
+		emailSettings: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'EmailSettings',
+		},
+	},
+	{ timestamps: true },
+)
 
 
 const Space = mongoose.model('Space', spaceSchema);

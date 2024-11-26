@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const EmailSettingsSchema = new mongoose.Schema({
   emailFrom: String,
   emailTo: String,

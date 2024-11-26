@@ -5,6 +5,7 @@ import Space from '../models/spaces.js';
 // Fetch the settings for a specific space
 export async function getSettings(spaceId) {
     const space = await Space.findOne({ spaceName: spaceId });
+    if (!space) throw new NotFoundError(`The space ${spaceId} does not exist`);
     const settings = await ExtraSettings.findById(space.extraSettings);
     // const settings = await ExtraSettings.findOne({ spaceId });
     if (!settings) throw new NotFoundError(`The space ${spaceId} does not exist`);
@@ -14,6 +15,7 @@ export async function getSettings(spaceId) {
 // Update the settings for a specific space
 export async function updateSettings(spaceId, updates) {
     const space = await Space.findOne({ spaceName: spaceId });
+    if (!space) throw new NotFoundError(`The space ${spaceId} does not exist`);
     const updatedSettings = await ExtraSettings.findByIdAndUpdate(
         space.extraSettings,   // Filter by the extraSettings id
         updates,       // Fields to update
