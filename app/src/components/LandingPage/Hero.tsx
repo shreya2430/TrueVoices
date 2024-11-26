@@ -1,7 +1,10 @@
 import React from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
+import Link from '@mui/material/Link';
 
 const Hero = () => {
+  
+
   return (
     <Container maxWidth="md" sx={{ textAlign: 'center', mt: 8 }}>
       <Typography variant="h2" gutterBottom>
@@ -14,7 +17,7 @@ const Hero = () => {
         Your customers’ voices are your most powerful marketing tool. With TrueVoices, you can effortlessly collect, manage, and embed testimonials—no coding required. Build trust and credibility through genuine feedback from satisfied customers. Set up your testimonial page in minutes and watch your brand thrive!
       </Typography>
       <Box sx={{ mt: 4 }}>
-        <Button variant="contained" color="primary" sx={{ mr: 2 }}>
+        <Button component={Link}  href="/register" variant="contained" color="primary" sx={{ mr: 2 }}>
           Sign Up
         </Button>
         <Button variant="outlined" color="primary">
