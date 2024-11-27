@@ -1,4 +1,4 @@
-import { FieldValues, UseFormReturn, Path } from 'react-hook-form'
+import { FieldValues, Path, useFormContext } from 'react-hook-form'
 import {
 	FormControl,
 	FormField,
@@ -13,34 +13,51 @@ type FormInputProps<T extends FieldValues> = {
 	// Props definition goes here
 	className?: string
 	name: Path<T>
-	form: UseFormReturn<T>
 	required?: boolean
 	label?: string
 	placeholder: string
-	type?: string
+	type?:
+		| 'text'
+		| 'number'
+		| 'file'
+		| 'email'
+		| 'password'
+		| 'tel'
+		| 'url'
+		| 'search'
+		| 'date'
+		| 'time'
+		| 'datetime-local'
+		| 'month'
+		| 'week'
+		| 'color'
+		| 'range'
 	accept?: string
 }
 
 export const FormInput = <T extends FieldValues>({
 	className,
 	name,
-	form,
 	required,
 	label,
 	placeholder,
 	type = 'text',
 	accept,
 }: FormInputProps<T>) => {
+	const { control } = useFormContext()
+
 	return (
 		<FormField
-			control={form.control}
+			control={control}
 			name={name}
 			render={({ field }) => (
 				<FormItem className="space-y-1 w-full">
-					<FormLabel>
-						{label || ''}
-						{required && <span className="text-destructive"> *</span>}
-					</FormLabel>
+					{label && (
+						<FormLabel>
+							{label}
+							{required && <span className="text-destructive"> *</span>}
+						</FormLabel>
+					)}
 					<FormControl>
 						<Input
 							type={type}
@@ -53,15 +70,19 @@ export const FormInput = <T extends FieldValues>({
 							{...field}
 							{...(type === 'file'
 								? {
-										onChange: (e) => field.onChange(e.target.files?.[0]),
+										onChange: (e) => {
+											console.log(e.target.files?.[0])
+											field.onChange(e.target.files?.[0])
+											console.log(field.value)
+										},
 										value: field.value?.fileName,
-                  }
+								  }
 								: {})}
 							{...(type === 'number'
 								? {
 										inputMode: 'numeric',
 										onChange: (e) => field.onChange(Number(e.target.value)),
-                  }
+								  }
 								: {})}
 						/>
 					</FormControl>

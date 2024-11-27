@@ -1,4 +1,8 @@
-import { FieldValues, UseFormReturn, Path } from 'react-hook-form'
+import {
+	FieldValues,
+	Path,
+	useFormContext,
+} from 'react-hook-form'
 import {
 	FormControl,
 	FormField,
@@ -13,7 +17,6 @@ type FormTextareaProps<T extends FieldValues> = {
 	// Props definition goes here
 	className?: string
 	name: Path<T>
-	form: UseFormReturn<T>
 	required?: boolean
 	label: string
 	placeholder: string
@@ -22,17 +25,18 @@ type FormTextareaProps<T extends FieldValues> = {
 export const FormTextarea = <T extends FieldValues>({
 	className,
 	name,
-	form,
 	required,
 	label,
 	placeholder,
 }: FormTextareaProps<T>) => {
+	const { control } = useFormContext()
+
 	return (
 		<FormField
-			control={form.control}
+			control={control}
 			name={name}
 			render={({ field }) => (
-				<FormItem className='space-y-1'>
+				<FormItem className="space-y-1">
 					<FormLabel>
 						{label}
 						{required && <span className="text-destructive"> *</span>}
@@ -47,7 +51,7 @@ export const FormTextarea = <T extends FieldValues>({
 							{...field}
 						/>
 					</FormControl>
-					<FormMessage/>
+					<FormMessage />
 				</FormItem>
 			)}
 		/>

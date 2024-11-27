@@ -1,4 +1,4 @@
-import { FieldValues, UseFormReturn, Path } from 'react-hook-form'
+import { FieldValues, Path, useFormContext } from 'react-hook-form'
 import {
 	FormControl,
 	FormField,
@@ -13,7 +13,6 @@ type FormInputProps<T extends FieldValues> = {
 	// Props definition goes here
 	className?: string
 	name: Path<T>
-	form: UseFormReturn<T>
 	required?: boolean
 	label: string
 	placeholder: string
@@ -24,16 +23,18 @@ type FormInputProps<T extends FieldValues> = {
 export const FormInput = <T extends FieldValues>({
 	className,
 	name,
-	form,
 	required,
 	label,
 	placeholder,
 	type = 'text',
 	accept,
 }: FormInputProps<T>) => {
+
+	const { control } = useFormContext()
+
 	return (
 		<FormField
-			control={form.control}
+			control={control}
 			name={name}
 			render={({ field }) => (
 				<FormItem className="space-y-1">

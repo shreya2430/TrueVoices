@@ -1,19 +1,20 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './App.css'
 import LandingPage from './components/LandingPage/LandingPage'
+import { SpaceForm } from './components/space/SpaceForm'
 
 function App() {
-	const queryClient = new QueryClient()
-
 	return (
-		<QueryClientProvider client={queryClient}>
-			<div>
-				<LandingPage />
-			</div>
-		</QueryClientProvider>
+		<div>
+			<LandingPage />
+			<SpaceForm />
+		</div>
 	)
 }
 
+<<<<<<< Updated upstream
 
 export default App;
 
+=======
+export default App
+>>>>>>> Stashed changes

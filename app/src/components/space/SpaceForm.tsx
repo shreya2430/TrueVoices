@@ -17,7 +17,7 @@ import { EmailsettingForm } from './EmailsettingForm'
 import { ExtrasettingsForm } from './ExtrasettingsForm'
 import { GeneralForm } from './GeneralForm'
 import { ThankyouForm } from './ThankyouForm'
-import { Space, SpaceSchema } from '@/types/space'
+import { Space, SpaceResSchema, SpaceSchema } from '@/types/space'
 import { createSpace } from '@/services/space-service'
 import { useState } from 'react'
 
@@ -52,6 +52,7 @@ export const SpaceForm = () => {
 			],
 			thankYouPage: {
 				imageUrl: '',
+				image: new File([], ''),
 				title: 'Thank You',
 				message: 'Thank you for your feedback!',
 				allowShareOnSocialMedia: false,
@@ -77,6 +78,7 @@ export const SpaceForm = () => {
 				message: 'You got a new testimonial from {name}!',
 			},
 		},
+		shouldUnregister: false,
 	})
 
 	const [open, setOpen] = useState(false)
@@ -89,6 +91,7 @@ export const SpaceForm = () => {
 			setOpen(false)
 		},
 		onError: (error) => {
+			console.log(SpaceResSchema.shape);
 			console.log(error)
 		},
 	})
