@@ -26,9 +26,9 @@ const teamMembers = [
   },
   {
     name: 'Harshit Kant',
-    image: '/assets/TeamImages/member2.jpg',
+    image: '/TeamImages/harshit.jpeg',
     linkedin: 'https://www.linkedin.com/in/harshit-kant-hk-0a87864b/',
-    bio: 'Full-stack developer focusing on React and Node.js.',
+    bio: 'Passionate MERN Stack Software Engineer, with strong interest in Front-End Engineering, Test Automation, and Quality Assurance (QA).',
   },
 
 ];
