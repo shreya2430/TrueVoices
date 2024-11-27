@@ -11,7 +11,7 @@ export const createSpace = async (data: Space) => {
 
   const res = await axios.post(url + '/spaces', spacePayload, {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data',
     },
   })
 
