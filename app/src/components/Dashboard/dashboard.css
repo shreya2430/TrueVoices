@@ -1,0 +1,194 @@
+/* Dashboard Container */
+.dashboard {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 65px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.dashboard-title {
+  font-weight: 700;
+  color: #1a73e8;
+  font-size: 20px;
+}
+
+/* Overview Title */
+.overview {
+  align-self: flex-start;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Overview Section */
+.overview-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 10px;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  transition: box-shadow 0.3s ease;
+  height: 110px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.upper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.lower {
+  /* font-size: larger;
+  justify-content: space-between; */
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: larger;
+  width: 100%;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: smaller;
+}
+
+.card-title {
+  color: #1a73e8;
+font-size: smaller;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: small;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-icon {
+  display: flex;
+  color: #1a73e8;
+}
+.heading-overview{
+  font-size: xx-large;
+  font-weight: 450;
+  color: #307cdf;
+  margin-top: 55px;
+  width: 100%;
+  max-width: 1000px;
+}
+.heading-space{
+  font-size: xx-large;
+  font-weight: 450;
+  color: #307cdf;
+  margin-top: 25px;
+  width: 100%;
+  max-width: 1000px;
+}
+/* Upgrade Button */
+.upgrade-button {
+ 
+  /* flex-direction: column-reverse; */
+  /* margin-top: 12px;
+  background-color: #1a73e8;
+  color: #ffffff;
+
+  border-radius: 8px;
+  transition: background-color 0.3s ease; */
+
+   margin-top: 12px;
+  background-color: #1a73e8;
+  color: #ffffff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  padding: 8px 16px;
+  margin-left: auto;
+  /* align-self: flex-end;  */
+}
+
+.upgrade-button:hover {
+  background-color: #155bb5;
+}
+
+/* Spaces Section */
+.spaces-section {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.spaces-title {
+  color: #1a73e8;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.no-spaces-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.create-space-button {
+  margin-top: 16px;
+  background-color: #1a73e8;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.create-space-button:hover {
+  background-color: #155bb5;
+}
+
+.menu-icon {
+  color: #1a73e8;
+}
