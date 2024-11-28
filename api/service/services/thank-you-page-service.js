@@ -1,5 +1,4 @@
 import ThankYouPage from '../models/thank-you-page.js';
-import NotFoundError from '../exceptions/NotFoundError.js';
 import Space from '../models/spaces.js';
 
 // Update the settings for a specific space

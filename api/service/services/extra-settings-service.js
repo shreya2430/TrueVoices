@@ -1,5 +1,4 @@
 import ExtraSettings from '../models/extra-settings.js';
-import NotFoundError from '../exceptions/NotFoundError.js';
 import Space from '../models/spaces.js';
 
 // Fetch the settings for a specific space
