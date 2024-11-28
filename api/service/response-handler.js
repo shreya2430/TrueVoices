@@ -1,39 +1,36 @@
 // Handle successful response
 export function setSuccess(data, res, message = 'Request was successful') {
-    res.status(200).json({
-        success: true,
+    return res.status(200).json({
         message: message,
         data: data
     });
 }
 
 // Handle error response
-export function setError(errorMessage, res, statusCode = 500) {
-    // Log the error for debugging
-    console.error(errorMessage);
-
-    if (!res.headersSent) {
-        res.status(500).json({ success: false, errorMessage });
-    }
-
-    // Customize error response based on status code
+export function setError(error, res) {
+    let statusCode = 500;
     let errorResponse = {
-        success: false,
-        message: errorMessage,
-        code: 'UNKNOWN_ERROR', // Default error code for unspecified errors
+        message: error.message || 'Something went wrong',
+        code: 'INTERNAL_SERVER_ERROR',
+        statusCode: 500
     };
 
-    if (statusCode === 404) {
-        errorResponse.code = 'NOT_FOUND';
-    } else if (statusCode === 400) {
-        errorResponse.code = 'BAD_REQUEST';
-    } else if (statusCode === 500) {
-        errorResponse.code = 'INTERNAL_SERVER_ERROR';
+    if (error.message?.includes('not found')) {
+        statusCode = 404;
+        errorResponse = {
+            message: error.message,
+            code: 'NOT_FOUND',
+            statusCode: 404
+        };
+    } else if (error.message?.includes('spaceId cannot be empty')) {
+        statusCode = 400;
+        errorResponse = {
+            message: error.message,
+            code: 'BAD_REQUEST',
+            statusCode: 400
+        };
     }
 
-    // Log the response object for debugging purposes
-    console.log(errorResponse);
-
-    // Send the error response
-    res.status(statusCode).json(errorResponse);
+    console.error('Error:', error);
+    return res.status(statusCode).json(errorResponse);
 }
