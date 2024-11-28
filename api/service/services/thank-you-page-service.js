@@ -4,17 +4,15 @@ import Space from '../models/spaces.js';
 
 // Update the settings for a specific space
 export async function updateThankYouPage(spaceId, updates) {
+    if(spaceId === undefined || spaceId.trim() === '') {
+        throw new Error('spaceId cannot be empty');
+    }
     const space = await Space.findOne({ spaceName: spaceId });
-    if (!space) throw new NotFoundError(`Space with ID ${spaceId} does not exist`);
+     if (!space) throw new Error(`space with id ${spaceId} not found`);
     const updatedThankYouPage = await ThankYouPage.findByIdAndUpdate(
          space.thankYouPage,  
         updates,     
         { new: true }  
     );
-
-    if (!updatedThankYouPage) {
-        throw new NotFoundError(`The spaceId ${spaceId} does not exist`);
-    }
-
     return updatedThankYouPage; 
 }
