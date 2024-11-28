@@ -1,17 +1,15 @@
-import { Label } from './ui/label'
+import {
+	useFieldArray,
+	useFormContext
+} from 'react-hook-form'
 import { FormInput } from './FormInput'
 import { Button } from './ui/button'
-import {
-	FieldValues,
-	Path,
-	useFieldArray,
-	useFormContext,
-} from 'react-hook-form'
+import { Label } from './ui/label'
 
-type FormFieldInputProp<T extends FieldValues> = {
+type FormFieldInputProp = {
 	// Props definition goes here
 	className?: string
-	name: Path<T>
+	name: string
 	required?: boolean
 	label?: string
 	placeholder: string
@@ -34,13 +32,13 @@ type FormFieldInputProp<T extends FieldValues> = {
 	accept?: string
 }
 
-export const FormFieldInput = <T extends FieldValues>({
+export const FormFieldInput = ({
 	name,
 	required,
 	label,
 	type = 'text',
 	accept,
-}: FormFieldInputProp<T>) => {
+}: FormFieldInputProp) => {
 	const { control } = useFormContext()
 	const { fields, append, remove } = useFieldArray({
 		control,

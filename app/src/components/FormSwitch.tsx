@@ -1,24 +1,24 @@
-import { FieldValues, Path, useFormContext } from 'react-hook-form'
-import { FormControl, FormField, FormItem, FormLabel } from './ui/form'
 import { cn } from '@/lib/utils'
+import { useFormContext } from 'react-hook-form'
+import { FormControl, FormField, FormItem, FormLabel } from './ui/form'
 import { Switch } from './ui/switch'
 
-type FormSwitchProps<T extends FieldValues> = {
+type FormSwitchProps = {
 	// Props definition goes here
 	className?: string
-	name: Path<T>
+	name: string
 	required?: boolean
 	label: string
 	disabled?: boolean
 }
 
-export const FormSwitch = <T extends FieldValues>({
+export const FormSwitch = ({
 	className,
 	name,
 	required,
 	label,
 	disabled = false,
-}: FormSwitchProps<T>) => {
+}: FormSwitchProps) => {
 	const { control } = useFormContext()
 
 	return (

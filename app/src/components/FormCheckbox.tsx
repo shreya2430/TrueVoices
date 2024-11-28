@@ -1,4 +1,5 @@
-import { FieldValues, Path, useFormContext } from 'react-hook-form'
+import { cn } from '@/lib/utils'
+import { useFormContext } from 'react-hook-form'
 import {
 	FormControl,
 	FormField,
@@ -7,12 +8,11 @@ import {
 	FormMessage,
 } from './ui/form'
 import { Input } from './ui/input'
-import { cn } from '@/lib/utils'
 
-type FormInputProps<T extends FieldValues> = {
+type FormInputProps = {
 	// Props definition goes here
 	className?: string
-	name: Path<T>
+	name: string
 	required?: boolean
 	label: string
 	placeholder: string
@@ -20,7 +20,7 @@ type FormInputProps<T extends FieldValues> = {
 	accept?: string
 }
 
-export const FormInput = <T extends FieldValues>({
+export const FormInput = ({
 	className,
 	name,
 	required,
@@ -28,8 +28,7 @@ export const FormInput = <T extends FieldValues>({
 	placeholder,
 	type = 'text',
 	accept,
-}: FormInputProps<T>) => {
-
+}: FormInputProps) => {
 	const { control } = useFormContext()
 
 	return (
@@ -56,7 +55,7 @@ export const FormInput = <T extends FieldValues>({
 								? {
 										onChange: (e) => field.onChange(e.target.files?.[0]),
 										value: field.value?.fileName,
-                  }
+								  }
 								: {})}
 						/>
 					</FormControl>

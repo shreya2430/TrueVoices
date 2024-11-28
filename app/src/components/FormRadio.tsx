@@ -1,25 +1,25 @@
-import { FieldValues, Path, useFormContext } from 'react-hook-form'
-import { FormControl, FormField, FormItem, FormLabel } from './ui/form'
 import { cn } from '@/lib/utils'
+import { useFormContext } from 'react-hook-form'
+import { FormControl, FormField, FormItem, FormLabel } from './ui/form'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
 
-type FormRadioProps<T extends FieldValues> = {
+type FormRadioProps = {
 	className?: string
-	name: Path<T>
+	name: string
 	required?: boolean
 	label: string
 	disabled?: boolean
 	options: { label: string; value: string }[]
 }
 
-export const FormRadio = <T extends FieldValues>({
+export const FormRadio = ({
 	className,
 	name,
 	required,
 	label,
 	disabled = false,
 	options,
-}: FormRadioProps<T>) => {
+}: FormRadioProps) => {
 	const { control } = useFormContext()
 
 	return (

@@ -1,7 +1,6 @@
+import { cn } from '@/lib/utils'
 import {
-	FieldValues,
-	Path,
-	useFormContext,
+	useFormContext
 } from 'react-hook-form'
 import {
 	FormControl,
@@ -10,25 +9,24 @@ import {
 	FormLabel,
 	FormMessage,
 } from './ui/form'
-import { cn } from '@/lib/utils'
 import { Textarea } from './ui/textarea'
 
-type FormTextareaProps<T extends FieldValues> = {
+type FormTextareaProps = {
 	// Props definition goes here
 	className?: string
-	name: Path<T>
+	name: string
 	required?: boolean
 	label: string
 	placeholder: string
 }
 
-export const FormTextarea = <T extends FieldValues>({
+export const FormTextarea = ({
 	className,
 	name,
 	required,
 	label,
 	placeholder,
-}: FormTextareaProps<T>) => {
+}: FormTextareaProps) => {
 	const { control } = useFormContext()
 
 	return (
