@@ -4,27 +4,27 @@
   "description": "API TrueVoice",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
-    "@emotion/react": "^11.13.5",
-    "@emotion/styled": "^11.13.5",
-    "@mui/material": "^6.1.8",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "debug": "^4.3.7",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "mongoose": "^8.8.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^7.0.1"
+    "mongoose": "^8.8.2"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1"
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.11.9",
+    "nodemon": "^3.0.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.3.3"
   }
 }

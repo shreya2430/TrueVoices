@@ -50,7 +50,9 @@ const spaceSchema = new mongoose.Schema(
 	{ timestamps: true },
 )
 
+export type Space = mongoose.InferSchemaType<typeof spaceSchema>;
 
-const Space = mongoose.model('Space', spaceSchema);
+const SpaceModel = mongoose.model<Space>('Space', spaceSchema);
 
-export default Space;
+
+export default SpaceModel;
