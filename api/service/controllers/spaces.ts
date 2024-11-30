@@ -26,14 +26,14 @@ const getById = async (req: Request, res: Response) => {
 		res.status(200).json(space)
 	} catch (error) {
 		if (error.message === 'Space not found') {
-			return res.status(404).json({ message: error.message })
+			res.status(404).json({ message: error.message })
 		} else {
-			return res.status(500).json({ message: error.message })
+			res.status(500).json({ message: error.message })
 		}
 	}
 }
 
-const get = async (_, res: Response) => {
+const get = async (_: Request, res: Response) => {
 	try {
 		const spaces = await spaceService.getSpaces()
 		res.status(200).json(spaces)

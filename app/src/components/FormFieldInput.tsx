@@ -1,3 +1,4 @@
+import { Plus, Trash2 } from 'lucide-react'
 import {
 	useFieldArray,
 	useFormContext
@@ -34,7 +35,7 @@ type FormFieldInputProp = {
 
 export const FormFieldInput = ({
 	name,
-	required,
+	required = false,
 	label,
 	type = 'text',
 	accept,
@@ -49,7 +50,7 @@ export const FormFieldInput = ({
 		<div className="space-y-2">
 			<Label className="block text-sm font-medium text-gray-700">
 				{label || ''}
-				{required && <span className="text-red-600"> *</span>}
+				{required && <span className="text-destructive"> *</span>}
 			</Label>
 			{fields.map((field, index) => (
 				<div
@@ -64,11 +65,11 @@ export const FormFieldInput = ({
 						accept={accept}
 					/>
 					<Button
-						variant={'outline'}
+						variant={'destructive'}
+						size={'icon'}
 						onClick={() => remove(index)}
-						className="text-red-600 border border-red-600 hover:bg-red-100 hover:text-red-800"
 					>
-						Remove
+						<Trash2 />
 					</Button>
 				</div>
 			))}
@@ -79,8 +80,9 @@ export const FormFieldInput = ({
 					append({ question: '' })
 				}}
 				disabled={fields.length >= 5}
-				className="w-full text-blue-600 border-dashed border-blue-600 hover:bg-blue-100 hover:text-blue-800 disabled:border-neutral-500 disabled:text-neutral-500"
+				className="w-full border-dashed text-foreground border-primary hover:bg-primary/15 space-x-2"
 			>
+				<Plus />
 				Add Question
 			</Button>
 		</div>

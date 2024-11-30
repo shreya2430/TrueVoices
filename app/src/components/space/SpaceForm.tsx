@@ -1,7 +1,11 @@
-import { useForm } from 'react-hook-form'
-import { Button } from '../ui/button'
+import { createSpace } from '@/services/space-service'
+import { Space, SpaceResSchema, SpaceSchema } from '@/types/space'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { Button } from '../ui/button'
 import {
 	Dialog,
 	DialogContent,
@@ -17,16 +21,19 @@ import { EmailsettingForm } from './EmailsettingForm'
 import { ExtrasettingsForm } from './ExtrasettingsForm'
 import { GeneralForm } from './GeneralForm'
 import { ThankyouForm } from './ThankyouForm'
-import { Space, SpaceResSchema, SpaceSchema } from '@/types/space'
-import { createSpace } from '@/services/space-service'
-import { useState } from 'react'
 
-export const SpaceForm = () => {
+type SpaceFormProps = {
+	// Props definition goes here
+	children?: React.ReactNode
+	open?: boolean
+}
+
+export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 	const form = useForm<Space>({
 		resolver: zodResolver(SpaceSchema),
 		defaultValues: {
 			spaceName: '',
-			spaceLogo: '',
+			spaceLogo: new File([], ''),
 			headerTitle: '',
 			customMessage: '',
 			inputs: {
@@ -35,7 +42,7 @@ export const SpaceForm = () => {
 				name_required: true,
 				email_required: true,
 			},
-			themes: 'Light',
+			themes: 'light',
 			starRating: true,
 			text: true,
 			video: true,
@@ -80,31 +87,34 @@ export const SpaceForm = () => {
 		},
 		shouldUnregister: false,
 	})
+	const navigate = useNavigate()
+	const [isOpen, setIsOpen] = useState(open)
 
-	const [open, setOpen] = useState(false)
+	const onOpenChange = (open: boolean) => {
+		setIsOpen(open)
+		navigate(-1)
+	}
 
 	const { mutate: addSpace } = useMutation({
 		mutationFn: createSpace,
 		onSuccess: () => {
 			console.log('Space created successfully')
 			form.reset()
-			setOpen(false)
+			onOpenChange(false)
 		},
 		onError: (error) => {
-			console.log(SpaceResSchema.shape);
+			console.log(SpaceResSchema.shape)
 			console.log(error)
 		},
 	})
 
 	return (
 		<Dialog
-			open={open}
-			onOpenChange={setOpen}
+			open={isOpen}
+			onOpenChange={onOpenChange}
 		>
 			<DialogOverlay className="backdrop-blur-sm bg-black/70" />
-			<DialogTrigger asChild>
-				<Button variant={'outline'}>Create Space</Button>
-			</DialogTrigger>
+			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent className="min-w-max my-8">
 				<DialogHeader>
 					<DialogTitle>Create Space</DialogTitle>

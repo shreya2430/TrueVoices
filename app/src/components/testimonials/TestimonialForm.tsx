@@ -9,7 +9,6 @@ const TestimonialsForm = () => {
         profilePic: "",
         testimonialType: "",
         address: "",
-       
     });
 
     const [loading, setLoading] = useState(false); // Loading state

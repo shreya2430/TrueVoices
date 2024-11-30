@@ -34,7 +34,7 @@ const spaceSchema = new mongoose.Schema(
 		video: Boolean,
 		themes: {
 			type: String,
-			enum: ['Light', 'Dark'],
+			enum: ['light', 'dark'],
 		},
 		thankYouPage: { type: mongoose.Schema.Types.ObjectId, ref: 'ThankYouPage' },
 		inputs: { type: InputsSchema },

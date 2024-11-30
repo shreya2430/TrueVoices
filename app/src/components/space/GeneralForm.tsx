@@ -42,21 +42,28 @@ export const GeneralForm = ({ className }: GeneralFormProps) => {
 				name="spaceName"
 				label="Space Name"
 				placeholder="Enter space name"
+				required
 			/>
 			<FormInput
 				name="spaceLogo"
+				className='hidden'
 				label="Space Logo"
-				placeholder="Enter space logo URL"
+				placeholder="Enter space logo"
+				type="file"
+				accept="image/*"
+				required
 			/>
 			<FormInput
 				name="headerTitle"
 				label="Header Title"
 				placeholder="Enter header title"
+				required
 			/>
 			<FormTextarea
 				name="customMessage"
 				label="Custom Message"
 				placeholder="Enter custom message"
+				required
 			/>
 
 			<FormSwitch
@@ -81,8 +88,8 @@ export const GeneralForm = ({ className }: GeneralFormProps) => {
 				name={'themes'}
 				label="Display Type"
 				options={[
-					{ value: 'Light', label: 'Light' },
-					{ value: 'Dark', label: 'Dark' },
+					{ value: 'light', label: 'Light' },
+					{ value: 'dark', label: 'Dark' },
 				]}
 			/>
 			<div>
