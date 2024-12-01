@@ -1,5 +1,4 @@
-import React from 'react';
-import { Container, Typography, Grid, Card, CardContent, Box, Button } from '@mui/material';
+import { Button } from '../ui/button';
 
 const features = [
   {
@@ -32,28 +31,48 @@ const features = [
 
 const Features = () => {
   return (
-    <Container sx={{ py: 8 }} id="features">
-      <Typography variant="h4" align="center" gutterBottom>Our Features</Typography>
-      <Grid container spacing={4}>
-        {features.map((feature, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 2 }}>
-              <CardContent sx={{ flexGrow: 1 }}>
-                <Typography variant="h5" gutterBottom>{feature.title}</Typography>
-                <Typography variant="subtitle1" color="textSecondary">{feature.subtitle}</Typography>
-                <Typography variant="body2" mt={1}>{feature.description}</Typography>
+    <section className="py-7" id="features">
+      <div className="container mx-auto text-center">
+        <h2 className="text-3xl font-semibold mb-8">Our Features</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="p-6 rounded-xl border shadow-xl flex flex-col bg-white dark:bg-gray-800"
+            >
+              {/* Card Header */}
+              <div className="mb-4">
+                <h3 className="text-xl font-medium text-gray-900 dark:text-gray-100">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {feature.subtitle}
+                </p>
+              </div>
+
+              {/* Card Content */}
+              <div className="flex-1 mb-4">
+                <p className="text-gray-700 dark:text-gray-300">
+                  {feature.description}
+                </p>
                 {feature.note && (
-                  <Box mt={1}>
-                    <Typography variant="caption" color="textSecondary">{feature.note}</Typography>
-                  </Box>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    {feature.note}
+                  </p>
                 )}
-              </CardContent>
-              <Button variant="contained" color="primary" sx={{ mt: 'auto' }}>Try it for Free</Button>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+              </div>
+
+              {/* Call to Action */}
+              <div className="mt-auto">
+                <Button color="primary" className="w-full">
+                  Try it for Free
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

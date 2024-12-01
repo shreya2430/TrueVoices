@@ -1,20 +1,23 @@
-import React from 'react';
-import { Box, Typography, Link, Container } from '@mui/material';
-
 const Footer = () => {
   return (
-    <Box sx={{ bgcolor: 'grey.200', py: 3, mt: 8 }}>
-      <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-        <Typography variant="body1">
-          <Link href="#" color="inherit" sx={{ mx: 2 }}>About</Link>
-          <Link href="#" color="inherit" sx={{ mx: 2 }}>Privacy Policy</Link>
-          <Link href="#" color="inherit" sx={{ mx: 2 }}>Contact Us</Link>
-        </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+    <footer className="border-t py-4 mt-16">
+      <div className="container mx-auto text-center">
+        <div className="mb-4">
+          <a href="#" className="text-sm text-gray-700 mx-4 hover:underline" aria-label="About page">
+            About
+          </a>
+          <a href="#" className="text-sm text-gray-700 mx-4 hover:underline" aria-label="Privacy Policy page">
+            Privacy Policy
+          </a>
+          <a href="#" className="text-sm text-gray-700 mx-4 hover:underline" aria-label="Contact Us page">
+            Contact Us
+          </a>
+        </div>
+        <p className="text-xs text-gray-500 mt-2">
           © {new Date().getFullYear()} TrueVoices. All rights reserved.
-        </Typography>
-      </Container>
-    </Box>
+        </p>
+      </div>
+    </footer>
   );
 };
 

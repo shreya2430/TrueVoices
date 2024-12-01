@@ -1,19 +1,40 @@
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
-
 const Header = () => {
-  // const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          TrueVoices
-        </Typography>
-        <Button color="inherit">Home</Button>
-        <Button color="inherit">Features</Button>
-        <Button color="inherit">Pricing</Button>
-        <Button color="inherit">Sign In</Button>
-      </Toolbar>
-    </AppBar>
+    <header className="border-b bg-card text-card-foreground shadow-sm">
+      <div className="container mx-auto flex items-center justify-between px-4 py-3">
+        <h1 className="text-xl font-semibold">TrueVoices</h1>
+
+        <nav className="flex items-center space-x-4">
+          <a
+            href="#"
+            className="text-sm font-medium hover:text-primary transition-colors"
+            aria-label="Go to Home"
+          >
+            Home
+          </a>
+          <a
+            href="#"
+            className="text-sm font-medium hover:text-primary transition-colors"
+            aria-label="Go to Features"
+          >
+            Features
+          </a>
+          <a
+            href="#"
+            className="text-sm font-medium hover:text-primary transition-colors"
+            aria-label="Go to Pricing"
+          >
+            Pricing
+          </a>
+          <button
+            className="rounded-lg border border-primary bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90 transition"
+            aria-label="Sign In"
+          >
+            Sign In
+          </button>
+        </nav>
+      </div>
+    </header>
   );
 };
 
