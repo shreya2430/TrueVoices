@@ -66,7 +66,7 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
     
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex items-center justify-center bg-gray-100">
             <Card className="mx-auto max-w-md">
             <CardHeader>
                 <CardTitle className="text-2xl text-blue-500">Sign Up</CardTitle>
