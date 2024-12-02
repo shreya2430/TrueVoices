@@ -1,8 +1,9 @@
-import * as userService from '../services/user-authentication-service.js'; 
+import * as userService from '../services/user-authentication-service'; 
 import { setSuccess, setError } from '../response-handler.js';
+import { Request, Response } from 'express'; //Importing types from Express
 
 //Registering a new user 
-export const registerUser = async(req, res) => {
+export const registerUser = async(req: Request, res: Response): Promise<Response> => {
     try {
         const { firstName, lastName, username, email, password } = req.body;
 
@@ -24,7 +25,7 @@ export const registerUser = async(req, res) => {
 };
 
 //Logging in an existing user 
-export const loginUser = async (req, res) => {
+export const loginUser = async (req: Request, res: Response): Promise<Response> => {
     try {
         const { email, password } = req.body;
 
@@ -43,8 +44,7 @@ export const loginUser = async (req, res) => {
 };
 
 //get user details by email
-
-export const getUserByEmail = async (req, res) => {
+export const getUserByEmail = async (req: Request, res: Response): Promise<Response> => {
     try {
         const {email} = req.params;
 
@@ -60,7 +60,7 @@ export const getUserByEmail = async (req, res) => {
 };
 
 //Check if email exists
-export const checkEmailExists = async (req, res) => {
+export const checkEmailExists = async (req: Request, res: Response): Promise<Response> => {
     try {
         const { email } = req.body;
 
@@ -73,7 +73,7 @@ export const checkEmailExists = async (req, res) => {
 };
 
 //Check if username exists
-export const checkUsernameExists = async (req, res) => {
+export const checkUsernameExists = async (req: Request, res: Response): Promise<Response> => {
     try {
         const { username } = req.body;
         const exists = await userService.doesUsernameExist(username);
@@ -84,7 +84,8 @@ export const checkUsernameExists = async (req, res) => {
     }
 };
 
-export const resetPassword = async (req, res) => {
+//Reset the password 
+export const resetPassword = async (req: Request, res: Response): Promise<Response> => {
     try { 
         const { email, newPassword } = req.body;
 

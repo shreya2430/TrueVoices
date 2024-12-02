@@ -1,7 +1,7 @@
-import express from "express";
-import * as userController from "../controllers/user-authentication-controller.js";
+import express, { Router } from "express";
+import * as userController from "../controllers/user-authentication-controller";
 
-const router = express.Router();
+const router: Router = express.Router();
 
 //Route to register a new user 
 router.post("/register", userController.registerUser);
