@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { FormField } from '@/components/forms/FormField/FormField';
+import { GoogleLogin } from '@react-oauth/google';
 
 type FieldType ={
     id: string;
@@ -55,6 +56,15 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
           }
     };
 
+    const handleGoogleSuccess = (credentialResponse: any) => {
+        console.log('Google Login Success: ', credentialResponse);
+    };
+
+    const handleGoogleError = () => {
+        setError('Google Sign-In failed. Please try again');
+    }
+    
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <Card className="mx-auto max-w-md">
@@ -82,6 +92,17 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
                     {error && <div className="text-red-500">{error}</div>}
                     {successMessage && <div className="text-green-500">{successMessage}</div>}
                     <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign Up</Button>
+                    <div className="flex items-center my-4">
+                        <hr className="flex-grow border-gray-300" />
+                        <span className="mx-4 text-gray-500"> Or, Register with your Email</span>
+                        <hr className="flex-grow border-gray-300" />
+                    </div>
+                    <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={handleGoogleError}
+                        text="signup_with"
+                        containerProps={{ className: "w-full bg-white text-gray-500 text-lg mt-4" }}
+                        />
                 </form>
             </CardContent>
         </Card>                

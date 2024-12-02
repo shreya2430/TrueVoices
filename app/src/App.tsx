@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import LandingPage from './components/LandingPage/LandingPage'
 import { Dashboard } from '@/components/Dashboard'
 import { SpaceForm } from './components/space/SpaceForm'
@@ -11,6 +12,8 @@ import { LoginPage } from './components/pages/LoginPage';
 
 function App() {
   return (
+
+	<GoogleOAuthProvider clientId="GOOGLE_CLIENT_ID">
 		<Router>
 			<Routes>
 				<Route
@@ -72,6 +75,8 @@ function App() {
 					</Route>
 			</Routes>
 		</Router>
+	</GoogleOAuthProvider>
+		
 	)
 }
 
