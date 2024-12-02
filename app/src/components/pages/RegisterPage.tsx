@@ -10,11 +10,11 @@ const fields = [
         required: true,
     }, 
     {
-        id: 'kastName',
+        id: 'lastName',
         label: 'Last Name',
         type: 'text',
         placeholder: 'Doe',
-        required: true,
+        required: false,
     }, 
     {
         id: 'username',

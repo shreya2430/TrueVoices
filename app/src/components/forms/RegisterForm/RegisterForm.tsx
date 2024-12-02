@@ -102,7 +102,15 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
                         onError={handleGoogleError}
                         text="signup_with"
                         containerProps={{ className: "w-full bg-white text-gray-500 text-lg mt-4" }}
-                        />
+                    />
+                    <div className="text-center mt-4">
+                        <span className="text-gray-600">
+                            Already have an Account?
+                        </span>
+                        <a href='/login' className='text-blue-500 ml-2 hover:underline'>
+                            Sign In
+                        </a>
+                    </div>
                 </form>
             </CardContent>
         </Card>                
