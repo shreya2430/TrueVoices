@@ -1,19 +1,21 @@
-import { createSpace } from '@/services/space-service'
-import { Space, SpaceResSchema, SpaceSchema } from '@/types/space'
+import { defaultSpaceData } from '@/lib/space-default'
+import { useUploadFileMutation } from '@/store/file-upload-api'
+import { useCreateSpaceMutation } from '@/store/space-store'
+import { Space, SpaceResSchema, SpaceResType, SpaceSchema } from '@/types/space'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { TestimonialPage } from '../TestimonialPage'
 import { Button } from '../ui/button'
 import {
-	Dialog,
-	DialogContent,
-	DialogFooter,
-	DialogHeader,
-	DialogOverlay,
-	DialogTitle,
-	DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogTitle,
+  DialogTrigger,
 } from '../ui/dialog'
 import { Form } from '../ui/form'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
@@ -31,82 +33,48 @@ type SpaceFormProps = {
 export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 	const form = useForm<Space>({
 		resolver: zodResolver(SpaceSchema),
-		defaultValues: {
-			spaceName: '',
-			spaceLogo: new File([], ''),
-			headerTitle: '',
-			customMessage: '',
-			inputs: {
-				name_enabled: true,
-				email_enabled: true,
-				name_required: true,
-				email_required: true,
-			},
-			themes: 'light',
-			starRating: true,
-			text: true,
-			video: true,
-			listQuestion: [
-				{
-					question: 'How was your experience?',
-				},
-				{
-					question: 'What did you like the most?',
-				},
-				{
-					question: 'What can we improve?',
-				},
-			],
-			thankYouPage: {
-				imageUrl: '',
-				image: new File([], ''),
-				title: 'Thank You',
-				message: 'Thank you for your feedback!',
-				allowShareOnSocialMedia: false,
-			},
-			extraSettings: {
-				maxVideoDuration: 60,
-				maxTextCharacters: 500,
-				videoButtonText: 'Record Video',
-				textButtonText: 'Write Text',
-				consentDisplay: true,
-				consentStatement: 'I agree to the terms and conditions',
-				questionLabel: 'Question',
-				affiliateLink: '',
-				thirdPartyReviewLink: '',
-				autoPopulateTestimonials: false,
-				disableVideoForiOS: false,
-				allowSearchEngines: false,
-			},
-			emailSettings: {
-				emailFrom: 'donot-reply@truevoice.com',
-				emailTo: 'notification@truevoice.com',
-				subject: 'You got a new testimonial!',
-				message: 'You got a new testimonial from {name}!',
-			},
-		},
+		defaultValues: defaultSpaceData,
 		shouldUnregister: false,
 	})
 	const navigate = useNavigate()
 	const [isOpen, setIsOpen] = useState(open)
-
-	const onOpenChange = (open: boolean) => {
+  const [createSpace, { isError, isSuccess }] = useCreateSpaceMutation()
+  const [uploadFile, state] = useUploadFileMutation()
+	const onOpenChange = (open: boolean, url?: string) => {
 		setIsOpen(open)
-		navigate(-1)
+    if (!url) navigate(-1)
+		else navigate(url)
 	}
 
-	const { mutate: addSpace } = useMutation({
-		mutationFn: createSpace,
-		onSuccess: () => {
-			console.log('Space created successfully')
-			form.reset()
-			onOpenChange(false)
-		},
-		onError: (error) => {
-			console.log(SpaceResSchema.shape)
-			console.log(error)
-		},
-	})
+  const handleSumbit = async (data: Space) => {
+    const formData = new FormData()
+    formData.append('file', data.spaceLogo)
+    const profilePic = await uploadFile({data: formData, type: 'image', spaceName: data.spaceName});
+    formData.delete('file')
+    formData.append('file', data.thankYouPage.image)
+    const thankYouPageImage = await uploadFile({data: formData, type: 'gif', spaceName: data.spaceName});
+    const spacePayload: SpaceResType = SpaceResSchema.parse({
+      ...data,
+      spaceLogo: profilePic.data?.url,
+      thankYouPage: {
+        ...data.thankYouPage,
+        image: thankYouPageImage.data?.url
+      },
+      listQuestion: data.listQuestion.map((que) => que.question),
+    })
+
+    await createSpace(spacePayload)
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      onOpenChange(false, `/dashboard/${form.getValues().spaceName}`)
+      form.reset()
+    }
+    if (isError) {
+      console.log(state.error)
+    }
+  }, [isSuccess, isError])
 
 	return (
 		<Dialog
@@ -115,18 +83,32 @@ export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 		>
 			<DialogOverlay className="backdrop-blur-sm bg-black/70" />
 			<DialogTrigger asChild>{children}</DialogTrigger>
-			<DialogContent className="min-w-max my-8">
+			<DialogContent className="max-w-screen-xl mx-auto m-8">
 				<DialogHeader>
 					<DialogTitle>Create Space</DialogTitle>
 				</DialogHeader>
 				<Tabs
 					defaultValue="general"
-					className=""
-				>
+					className="flex gap-12 w-full"
+				> 
+          <div className='w-[34rem]'>
+            <TabsContent value="general">
+              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
+            </TabsContent>
+            <TabsContent value="thankyou">
+              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
+            </TabsContent>
+            <TabsContent value="extrasetting">
+              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
+            </TabsContent>
+            <TabsContent value="emailsetting">
+              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
+            </TabsContent>
+          </div>
 					<Form {...form}>
 						<form
-							className="flex flex-col justify-between min-h-max min-w-max"
-							onSubmit={form.handleSubmit((data) => addSpace(data))}
+							className="flex flex-col justify-between min-h-max flex-1"
+							onSubmit={form.handleSubmit(handleSumbit)}
 						>
 							<div className="space-y-4">
 								<TabsList className="w-full">

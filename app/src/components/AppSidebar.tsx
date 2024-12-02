@@ -1,12 +1,9 @@
 import {
-	AudioWaveform,
-	Command,
-	GalleryVerticalEnd,
 	Heart,
 	Inbox,
 	ScrollText,
 	Settings2,
-	Video,
+	Video
 } from 'lucide-react'
 import * as React from 'react'
 
@@ -27,23 +24,6 @@ const data = {
 		name: 'shadcn',
 		email: 'm@example.com',
 		avatar: '/avatars/shadcn.jpg',
-	},
-	spaces: {
-		acme_inc: {
-			name: 'Acme Inc',
-			logo: GalleryVerticalEnd,
-			plan: 'Enterprise',
-		},
-		acme_corp: {
-			name: 'Acme Corp.',
-			logo: AudioWaveform,
-			plan: 'Startup',
-		},
-		evil_corp: {
-			name: 'Evil Corp.',
-			logo: Command,
-			plan: 'Free',
-		},
 	},
 	navMain: {
 		Testimonials: [
@@ -87,7 +67,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			{...props}
 		>
 			<SidebarHeader>
-				<SpaceSwitcher spaces={data.spaces} />
+				<SpaceSwitcher />
 			</SidebarHeader>
 			<SidebarContent>
 				{Object.entries(data.navMain).map(([title, items]) => (

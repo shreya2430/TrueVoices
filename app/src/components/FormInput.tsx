@@ -45,7 +45,7 @@ export const FormInput = ({
 	type = 'text',
 	accept,
 }: FormInputProps) => {
-	const { control, getValues } = useFormContext()
+	const { control, getValues, setValue } = useFormContext()
 	const [fileName, setFileName] = useState<string | null>(null)
 
 	useEffect(() => {
@@ -88,6 +88,7 @@ export const FormInput = ({
 										onChange: (e) => {
 											field.onChange(e.target.files?.[0])
 											setFileName(e.target.files?.[0].name || null)
+											setValue(name+'Url', e.target.files?.[0] ? URL.createObjectURL(e.target.files[0]) : '')
 										},
 										value: field.value?.fileName,
 								  }

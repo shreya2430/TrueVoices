@@ -4,6 +4,8 @@ import LandingPage from './components/LandingPage/LandingPage'
 import { Dashboard } from '@/components/Dashboard'
 import { SpaceForm } from './components/space/SpaceForm'
 import { Display } from './components/Display'
+import { TestimonialPage } from './components/TestimonialPage';
+import { Intermediate } from './components/Intermediate';
 
 function App() {
   return (
@@ -12,6 +14,18 @@ function App() {
 				<Route
 					path="/"
 					element={<LandingPage />}
+				/>
+				<Route
+					path="/:spaceName/collect"
+					element={<TestimonialPage />}
+				/>
+				<Route 
+					path='/route'
+					element={<Intermediate />}
+				/>
+				<Route
+					path='/space-form'
+					element={<SpaceForm open />}
 				/>
 				<Route
 					path="/dashboard/:space"

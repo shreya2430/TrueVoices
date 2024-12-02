@@ -8,9 +8,10 @@ export const upload = async (req: Request, res: Response) => {
       res.status(400).send("No file uploaded.");
       return;
     }
-    const path = req.url.split("/").slice(2).join("/");
+    const path = req.url.split("/").slice(1).join("/");
+    console.log(path);
     const sasUrl = await uploadFile(file, path);
-    res.status(200).send(sasUrl);
+    res.status(200).json({ url: sasUrl });
   } catch (error) {
     console.error(error);
     res.status(500).send("Failed to upload file.");

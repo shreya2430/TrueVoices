@@ -41,7 +41,7 @@ const generateSasUrl = (blobClient: BlobClient) => {
 		blobName: blobClient.name,
 		permissions: BlobSASPermissions.parse('r'),
 		startsOn: new Date(),
-		expiresOn: new Date(new Date().valueOf() + 86400 * 30),
+		expiresOn: new Date('2025-12-31'), // Set a far future date to effectively not expire
 		protocol: SASProtocol.HttpsAndHttp,
 	}
 

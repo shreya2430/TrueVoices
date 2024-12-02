@@ -1,4 +1,3 @@
-import { Document } from 'mongoose'
 import EmailSettings from '../models/email-settings.js'
 import ExtraSettings from '../models/extra-settings.js'
 import SpaceModel, { Space } from '../models/spaces'
@@ -50,9 +49,9 @@ const getSpaceByName = async (spaceName: string): Promise<Space> => {
 /**
  * 
  * @param spaceData Space
- * @returns {Promise<void>} - Promise<void>
+ * @returns {Promise<Space>} - Promise<Space>
  */
-const createSpace = async (spaceData: Space): Promise<void> => {
+const createSpace = async (spaceData: Space): Promise<Space> => {
 	try {
 		let extraSettings, thankYouPage, emailSettings
 		const spaceExists = await SpaceModel.findOne({ spaceName: spaceData.spaceName })
@@ -71,15 +70,15 @@ const createSpace = async (spaceData: Space): Promise<void> => {
 			emailSettings = new EmailSettings(spaceData.emailSettings)
 			await emailSettings.save()
 		}
-		const space = new SpaceModel({
+		const newSpace = new SpaceModel({
 			...spaceData,
 			extraSettings: extraSettings ? extraSettings._id : null,
 			thankYouPage: thankYouPage ? thankYouPage._id : null,
 			emailSettings: emailSettings ? emailSettings._id : null,
 		})
 
-		await space.save()
-		return
+		await newSpace.save({ validateBeforeSave: true })
+		return spaceData
 	} catch (error) {
 		console.error('Error creating space:', error)
 		throw new Error('Failed to create space: ' + error.message)
