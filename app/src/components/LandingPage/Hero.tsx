@@ -1,4 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+
 const Hero = () => {
+
+  const navigate = useNavigate();
+
   return (
     <section className="py-16 bg-background text-foreground">
       <div className="container mx-auto text-center max-w-2xl">
@@ -22,7 +27,8 @@ const Hero = () => {
 
 
         <div className="mt-10 flex justify-center space-x-6">
-          <button type="submit"
+          <button 
+            onClick={() => navigate('/register')}
             className="h-10 px-6 font-semibold rounded-md bg-primary text-primary-foreground shadow-md hover:bg-primary/90 transition"
           >
             Sign Up

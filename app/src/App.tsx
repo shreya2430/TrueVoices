@@ -6,6 +6,7 @@ import { SpaceForm } from './components/space/SpaceForm'
 import { Display } from './components/Display'
 import { TestimonialPage } from './components/TestimonialPage';
 import { Intermediate } from './components/Intermediate';
+import { RegisterPage } from './components/pages/RegisterPage';
 
 function App() {
   return (
@@ -14,6 +15,10 @@ function App() {
 				<Route
 					path="/"
 					element={<LandingPage />}
+				/>
+				<Route 
+					path="/register" 
+					element={<RegisterPage />} 
 				/>
 				<Route
 					path="/:spaceName/collect"
