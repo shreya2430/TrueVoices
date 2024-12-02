@@ -7,6 +7,7 @@ import { Display } from './components/Display'
 import { TestimonialPage } from './components/TestimonialPage';
 import { Intermediate } from './components/Intermediate';
 import { RegisterPage } from './components/pages/RegisterPage';
+import { LoginPage } from './components/pages/LoginPage';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
 				<Route 
 					path="/register" 
 					element={<RegisterPage />} 
+				/>
+				<Route
+					path="/login"
+					element={<LoginPage />}
 				/>
 				<Route
 					path="/:spaceName/collect"
