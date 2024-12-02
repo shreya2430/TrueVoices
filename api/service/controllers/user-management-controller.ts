@@ -1,9 +1,12 @@
-import * as UserManagementService from '../services/user-management-service.js';
+import * as UserManagementService from '../services/user-management-service';
+import { Request, Response } from 'express';
 
 //Controller to get user by id 
-export const getUserById = async (req,  res) => {
+export const getUserById = async (req: Request,  res: Response): Promise<Response> => {
     try {
-        const user = await UserManagementService.getUserById(req.params.userId);
+        const { userId } = req.params;
+        const user = await UserManagementService.getUserById(userId);
+
         if (!user) {
             return res.status(404).json({ message: 'User not found!'});
         }
@@ -15,10 +18,13 @@ export const getUserById = async (req,  res) => {
 };
 
 //Controller to update user profile
-export const updateUserProfile = async (req, res) => {
+export const updateUserProfile = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const updatedUser = await UserManagementService.updateUserProfile(req.params.userId, req.body);
-        res.status(200).json({ updatedUser });
+        const { userId } = req.params;
+        const updateData = req.body;
+
+        const updatedUser = await UserManagementService.updateUserProfile(userId, updateData);
+        res.status(200).json({ message: "User profile updated successfully!", user: updatedUser });
     } catch (error) {
         console.error('Error updating user profile: ', error);
         res.status(500).json({ message: 'Internal Server Error!'});
@@ -26,13 +32,14 @@ export const updateUserProfile = async (req, res) => {
 };
 
 //Controller to delete a user
-export const deleteUser = async (req, res) => {
+export const deleteUser = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const deletedUser = await UserManagementService.deleteUser(req.params.userId);
+        const { userId } = req.params;
+        const deletedUser = await UserManagementService.deleteUser(userId);
         if (!deletedUser) {
             return res.status(404).json({ message: 'User not found'})
         }
-        res.status(200).json({ message: 'User deleted successfully!'});
+        res.status(200).json({ message: 'User deleted successfully!', user: deletedUser });
     } catch (error) {
         console.error('Error deleting user: ', error);
         res.status(500).json({ message: 'Internal Server Error!'});
@@ -40,7 +47,7 @@ export const deleteUser = async (req, res) => {
 };
 
 //Controller to get all users
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (req: Request, res: Response): Promise<Response> => {
     try {
         const users = await UserManagementService.getAllUsers();
         res.status(200).json({ users });
@@ -48,4 +55,4 @@ export const getAllUsers = async (req, res) => {
         console.error('Error fetching users: ', error);
         res.status(500).json({ message: 'Internal Server Error!'});
     }
-}
+};

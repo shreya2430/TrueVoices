@@ -1,12 +1,15 @@
-import UserManage from '../models/user-management.js';
+import UserManage, { IUser} from '../models/user-management';
 
 //getting user by id
-export const getUserById = async (userId) => {
+export const getUserById = async (userId: string): Promise<Omit<IUser, "password"> | null> => {
     return await UserManage.findById(userId).select('-password');
 }
 
 //updating the user profile
-export const updateUserProfile = async (userId, updateData) => {
+export const updateUserProfile = async (
+    userId: string, 
+    updateData: Partial<IUser>
+): Promise<IUser> => {
     try {
         const updatedUser = await UserManage.updateUserProfile(userId, updateData);
         return updatedUser;
@@ -17,7 +20,7 @@ export const updateUserProfile = async (userId, updateData) => {
 };
 
 //deleting a user
-export const deleteUser = async (userId) => {
+export const deleteUser = async (userId: string): Promise<IUser | null> => {
     try {
         const deleteUser = await UserManage.findByIdAndDelete(userId);
         return deleteUser;
@@ -28,6 +31,6 @@ export const deleteUser = async (userId) => {
 };
 
 //getting all users
-export const getAllUsers = async () => {
+export const getAllUsers = async (): Promise<Omit<IUser, "password">[]> => {
     return await UserManage.find().select('-password');
 };

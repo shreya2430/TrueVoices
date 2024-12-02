@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { Router } from 'express';
 import * as UserManagementController from '../controllers/user-management-controller.js';
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.get('/users/:userId', UserManagementController.getUserById);
 router.put('/users/:userId', UserManagementController.updateUserProfile);
