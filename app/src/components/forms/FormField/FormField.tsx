@@ -23,7 +23,10 @@ export const FormField: React.FC<FormFieldProps> = ({
   }) => {
     return (
         <div className="grid gap-2">
-            <Label htmlFor={id} className="text-blue-500">{label}</Label>
+            <Label htmlFor={id} className="text-blue-500">
+                {label}
+                {required && <span className="text-red-500 ml-1">*</span>}
+            </Label>
             <Input
                 id={id}
                 type={type}

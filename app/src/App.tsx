@@ -1,19 +1,32 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import LandingPage from './components/LandingPage/LandingPage'
 import { Dashboard } from '@/components/Dashboard'
 import { SpaceForm } from './components/space/SpaceForm'
 import { Display } from './components/Display'
 import { TestimonialPage } from './components/TestimonialPage';
 import { Intermediate } from './components/Intermediate';
+import { RegisterPage } from './components/pages/RegisterPage';
+import { LoginPage } from './components/pages/LoginPage';
 
 function App() {
   return (
+
+	<GoogleOAuthProvider clientId="GOOGLE_CLIENT_ID">
 		<Router>
 			<Routes>
 				<Route
 					path="/"
 					element={<LandingPage />}
+				/>
+				<Route 
+					path="/register" 
+					element={<RegisterPage />} 
+				/>
+				<Route
+					path="/login"
+					element={<LoginPage />}
 				/>
 				<Route
 					path="/:spaceName/collect"
@@ -62,6 +75,8 @@ function App() {
 					</Route>
 			</Routes>
 		</Router>
+	</GoogleOAuthProvider>
+		
 	)
 }
 
