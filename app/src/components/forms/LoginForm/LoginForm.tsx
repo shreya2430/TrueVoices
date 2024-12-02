@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FormField } from '@/components/forms/FormField/FormField';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GoogleLogin } from '@react-oauth/google';
 
 type FieldType ={ 
     id: string;
@@ -52,15 +53,25 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
         }
     };
 
+    const handleGoogleSuccess = (credentialResponse: any) => {
+        console.log('Google Login Success: ', credentialResponse);
+    };
+
+    const handleGoogleError = () => {
+        setError('Google Sign-In Failed. Please try again.')
+    }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <Card className="mx-auto max-w-md">
                 <CardHeader>
+                    {/* Login heading and the description below it */}
                     <CardTitle className="text-2xl text-blue-500">Login</CardTitle>
                     <CardDescription>Enter your details to login to your account</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
+                        {/* Fields in the form  */}
                         <ul className="grid gap-4">
                             {fields.map((field) => (
                                 <li key={field.id}>
@@ -78,7 +89,20 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
                         </ul>
                         {error && <div className="text-red-500">{error}</div>}
                         {successMessage && <div className="text-green-500">{successMessage}</div>}
+                        {/* Login button */}
                         <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Login</Button>
+                        {/* Separator with text */}
+                        <div className="flex items-center my-4">
+                            <hr className="flex-grow border-gray-300" />
+                            <span className="mx-4 text-gray-500"> Or, Sign In with</span>
+                            <hr className="flex-grow border-gray-300"/>
+                        </div>
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={handleGoogleError}
+                            text="signin_with"
+                            containerProps={{ className: "ww-full bg-white text-gray-500 text-lg mt-4" }}
+                        />
                     </form>
                 </CardContent>
             </Card>
