@@ -7,14 +7,14 @@ const fields =[
         id:'email', 
         label:'Email', 
         type: 'email', 
-        placeholder: 'Enter your email', 
+        placeholder: 'Your email', 
         required: true
     }, 
     {
         id: 'password',
         label: 'Password',
         type: 'password',
-        placeholder: 'Enter your password',
+        placeholder: 'Password',
         required: true
     },
 ];
@@ -25,5 +25,10 @@ export function LoginPage() {
         console.log(formData);
     };
 
-    return <LoginForm fields={fields} onSubmit={handleLoginSubmit} />;
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <h2 className="text-3xl font-semibold mb-4">Welcome back 👋</h2>
+            <LoginForm fields={fields} onSubmit={handleLoginSubmit} />
+        </div>
+    ) 
 };
