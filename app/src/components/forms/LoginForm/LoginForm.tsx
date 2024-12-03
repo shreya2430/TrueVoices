@@ -123,4 +123,4 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
             </Card>
         </div>
     )
-}
+};
