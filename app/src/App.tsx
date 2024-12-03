@@ -9,6 +9,7 @@ import { TestimonialPage } from './components/TestimonialPage';
 import { Intermediate } from './components/Intermediate';
 import { RegisterPage } from './components/pages/RegisterPage';
 import { LoginPage } from './components/pages/LoginPage';
+import { ResetPasswordPage } from './components/pages/ResetPassword';
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
 				<Route
 					path="/login"
 					element={<LoginPage />}
+				/>
+				<Route 
+					path='/reset-password'
+					element={<ResetPasswordPage />}
 				/>
 				<Route
 					path="/:spaceName/collect"

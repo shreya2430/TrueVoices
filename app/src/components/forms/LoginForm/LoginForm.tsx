@@ -93,7 +93,7 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
                         <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign In</Button>
                         {/* Forgot password Link */}
                         <div className="mt-2">
-                            <a href="/forgot-password" className="text-sm text-blue-500 hover:underline">
+                            <a href="/reset-password" className="text-sm text-blue-500 hover:underline">
                                 Forgot Password?
                             </a>
                         </div>
@@ -123,4 +123,4 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
             </Card>
         </div>
     )
-}
+};
