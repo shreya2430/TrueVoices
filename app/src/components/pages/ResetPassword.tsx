@@ -39,36 +39,42 @@ export function ResetPasswordPage(): JSX.Element {
     };
     
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="max-w-md p-8 bg-white shadow-md rounded-md">
-                <h2 className="text-2xl text-blue-500 mb-4">Forgot your password?</h2>
-                <p className="text-gray-600 mb-6">We'll email you a link to reset it.</p>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        placeholder="Enter your email"
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
-                    {successMessage && <div className="text-green-500 mt-2">{successMessage}</div>}
-                    <Button 
-                        onClick={handleResetPasswordClick} 
-                        className="w-full bg-blue-500 text-white mt-4">
-                        Reset Password
-                    </Button>
-                </form>
-                <div className='mt-4'>
-                    <a href="/login" className="text-blue-500 hover:underline">Go to Sign-In Page </a>
+        <div className="flex items-center justify-center mt-24">
+            <div className="flex flex-col items-center bg-white rounded-md p-8 max-w-lg">
+                {/* Header Section */}
+                <div className="mb-6 text-center">
+                <h1 className="text-4xl font-bold mb-2">Forgot your password?</h1>
+                    <p className="text-gray-600">We'll email you a link to reset it.</p>
+                </div>
+
+                {/* Form Section */}
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="email" className="block text-md font-medium text-gray-700 mb-2">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            placeholder="Enter your email"
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
+                        {successMessage && <div className="text-green-500 mt-2">{successMessage}</div>}
+                        <Button 
+                            onClick={handleResetPasswordClick} 
+                            className="w-full bg-blue-500 text-md text-white mt-4">
+                            Reset Password
+                        </Button>
+                    </form>
+                    <div className="mt-4 text-center">
+                        <a href="/login" className="text-blue-500 hover:underline">Go to Sign-In Page</a>
+                    </div>
                 </div>
             </div>
         </div>
-    )
-    
+    ); 
 }
