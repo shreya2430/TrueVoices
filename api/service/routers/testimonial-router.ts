@@ -1,8 +1,9 @@
-import express from "express";
-import * as testimonialController from "../controllers/testimonial-controller.js";
+import express, { Router } from "express";
+import * as testimonialController from "../controllers/testimonial-controller";
 
-const router = express.Router();
+const router: Router = express.Router();
 
+// Define routes for testimonials
 router.post("/", testimonialController.createTestimonial);
 router.get("/", testimonialController.getAllTestimonials);
 router.get("/:id", testimonialController.getTestimonialById);
