@@ -9,6 +9,7 @@ import {
 	FormMessage,
 } from './ui/form'
 import { Input } from './ui/input'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 type FormInputProps = {
 	// Props definition goes here
@@ -34,6 +35,8 @@ type FormInputProps = {
 		| 'color'
 		| 'range'
 	accept?: string
+	min?: number
+	max?: number
 }
 
 export const FormInput = ({
@@ -43,6 +46,8 @@ export const FormInput = ({
 	label,
 	placeholder,
 	type = 'text',
+	min,
+	max,
 	accept,
 }: FormInputProps) => {
 	const { control, getValues, setValue } = useFormContext()
@@ -66,9 +71,15 @@ export const FormInput = ({
 							{label}
 							{required && <span className="text-destructive"> *</span>}
 							{type === 'file' ? (
-								<div className="flex items-center space-x-3 mt-2 border rounded-md">
-									<span className="p-3 border-r">Upload file</span>
-									<span>{fileName || "choose your file"}</span>
+								<div className="flex items-center space-x-3 px-4 py-3 mt-2 border border-dashed rounded-md">
+									<Avatar className='rounded-lg size-12'>
+										<AvatarImage src={getValues(name+'Url')} className='object-cover'/>
+										<AvatarFallback className='rounded-lg size-12 bg-neutral-200'/>
+									</Avatar>
+									<div className='flex flex-col gap-2'>
+										<span className="px-3">Upload file</span>
+										<span className='px-3'>{fileName}</span>
+									</div>
 								</div>
 							): ''}
 						</FormLabel>
@@ -97,6 +108,8 @@ export const FormInput = ({
 								? {
 										inputMode: 'numeric',
 										onChange: (e) => field.onChange(Number(e.target.value)),
+										min,
+										max,
 								  }
 								: {})}
 						/>

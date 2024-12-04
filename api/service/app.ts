@@ -3,6 +3,7 @@ import cors from 'cors'
 import express, { Express } from 'express'
 import dotenv from 'dotenv' // Import dotenv for environment variables
 import initializeRoutes from './routers/index' // Import main route initializer
+import { generateRandomPfp } from './utils/generate-random-pfp'
 
 dotenv.config() // Load environment variables from .env file
 
@@ -18,6 +19,7 @@ const initialize = (app: Express) => {
 		.then(() => console.log('Connected to MongoDB'))
 		.catch((err) => console.error('Failed to connect to MongoDB', err))
 
+	generateRandomPfp()
 	// Initialize all routes
 	initializeRoutes(app)
 

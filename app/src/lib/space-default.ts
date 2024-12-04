@@ -3,7 +3,7 @@ import { Space } from "@/types/space";
 export const defaultSpaceData: Space = {
 	spaceName: '',
   spaceLogoUrl: 'https://live.staticflickr.com/65535/53405989488_c12c5b2532.jpg',
-	spaceLogo: new File([], ''),
+	spaceLogo: new File([], 'defaultSpaceLogo'),
 	headerTitle: 'Testimonials',
 	customMessage: 'We would love to hear your thoughts, suggestions, and feedback!',
 	inputs: {
@@ -29,7 +29,7 @@ export const defaultSpaceData: Space = {
 	],
 	thankYouPage: {
 		imageUrl: '',
-		image: new File([], ''),
+		image: new File([], 'defaultThankYouImage'),
 		title: 'Thank You',
 		message: 'Thank you for your feedback!',
 		allowShareOnSocialMedia: false,
