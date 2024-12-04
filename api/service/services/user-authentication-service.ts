@@ -1,5 +1,28 @@
 import User, {IUser} from '../models/user-authentication';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+//Secret key for JWT
+const secretKey = process.env.JWT_SECRET;
+
+//Token expiration time 
+const jwt_expiresIn = process.env.JWT_EXPIRES_IN;
+
+//Generating JWT Token 
+export const generateToken = (user: IUser): string => {
+    const payload = { id: user._id, email: user.email, username: user.username };
+    return jwt.sign(payload, secretKey, { expiresIn: jwt_expiresIn });   
+};
+
+//Verify JWT token
+export const verifyToken = (token: string): any => {
+    try {
+        return jwt.verify(token, secretKey);
+    } catch (err) {
+        throw new Error('Invalid or expired token');
+    }
+};
 
 /**
  * Check if a user exists by email.
