@@ -1,5 +1,6 @@
 import UserManage, { IUser} from '../models/user-management';
 
+
 //getting user by id
 export const getUserById = async (userId: string): Promise<Omit<IUser, "password"> | null> => {
     return await UserManage.findById(userId).select('-password');
