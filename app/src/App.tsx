@@ -1,15 +1,18 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Dashboard } from '@/components/Dashboard';
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import LandingPage from './components/LandingPage/LandingPage'
-import { Dashboard } from '@/components/Dashboard'
-import { SpaceForm } from './components/space/SpaceForm'
-import { Display } from './components/Display'
-import { TestimonialPage } from './components/TestimonialPage';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import './App.css';
+import { CarouselWall } from './components/CarouselWall';
+import { Display } from './components/Display';
 import { Intermediate } from './components/Intermediate';
-import { RegisterPage } from './components/pages/RegisterPage';
+import LandingPage from './components/LandingPage/LandingPage';
+import { MasonryWall } from './components/MasonryWall';
 import { LoginPage } from './components/pages/LoginPage';
+import { RegisterPage } from './components/pages/RegisterPage';
 import { ResetPasswordPage } from './components/pages/ResetPassword';
+import { SpaceForm } from './components/space/SpaceForm';
+import { TestimonialPage } from './components/TestimonialPage';
+import { WallOfLove } from './components/WallofLove';
 
 function App() {
   return (
@@ -46,6 +49,14 @@ function App() {
 					element={<SpaceForm open />}
 				/>
 				<Route
+					path="/display/carousel/:spaceName"
+					element={<CarouselWall />}
+				/>
+				<Route
+					path="/display/masonry/:spaceName"
+					element={<MasonryWall />}
+				/>
+				<Route
 					path="/dashboard/:space"
 					element={<Dashboard />}
 				>
@@ -71,7 +82,7 @@ function App() {
 						/>
 						<Route 
 							path="wall-of-love"
-							element={<Display />}
+							element={<WallOfLove />}
 						/>
 						<Route
 							path="settings"
