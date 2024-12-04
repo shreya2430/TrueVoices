@@ -1,5 +1,5 @@
 import { useGetAllSpaceQuery } from '@/store/space-store'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const Intermediate = () => {

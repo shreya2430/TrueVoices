@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { useFormContext } from 'react-hook-form'
+import { Checkbox } from './ui/checkbox'
 import {
 	FormControl,
 	FormField,
@@ -7,28 +8,23 @@ import {
 	FormLabel,
 	FormMessage,
 } from './ui/form'
-import { Input } from './ui/input'
 
-type FormInputProps = {
+type FormCheckboxProps = {
 	// Props definition goes here
 	className?: string
 	name: string
 	required?: boolean
 	label: string
-	placeholder: string
-	type?: string
-	accept?: string
+	disabled?: boolean
 }
 
-export const FormInput = ({
+export const FormCheckbox = ({
 	className,
 	name,
 	required,
 	label,
-	placeholder,
-	type = 'text',
-	accept,
-}: FormInputProps) => {
+	disabled = false,
+}: FormCheckboxProps) => {
 	const { control } = useFormContext()
 
 	return (
@@ -36,29 +32,20 @@ export const FormInput = ({
 			control={control}
 			name={name}
 			render={({ field }) => (
-				<FormItem className="space-y-1">
-					<FormLabel>
+				<FormItem className="flex items-center gap-2 text-center space-y-0">
+					<FormControl>
+							<Checkbox
+								className={cn('rounded-[0.35rem]', className)}
+								id={name}
+								disabled={disabled}
+								checked={field.value}
+                onCheckedChange={field.onChange}
+								/>
+					</FormControl>
+					<FormLabel className='py-2'>
 						{label}
 						{required && <span className="text-destructive"> *</span>}
 					</FormLabel>
-					<FormControl>
-						<Input
-							type={type}
-							placeholder={placeholder}
-							className={cn(
-								'focus-visible:ring-[3px] focus-visible:ring-offset-0 focus-visible:border-primary/60 focus-visible:ring-ring/20',
-								className,
-							)}
-							accept={accept}
-							{...field}
-							{...(type === 'file'
-								? {
-										onChange: (e) => field.onChange(e.target.files?.[0]),
-										value: field.value?.fileName,
-								  }
-								: {})}
-						/>
-					</FormControl>
 					<FormMessage />
 				</FormItem>
 			)}
