@@ -1,0 +1,96 @@
+{
+  "features": [
+    {
+      "title": "Collect and Display Testimonials",
+      "subtitle": "All in one solution",
+      "description": "Create a dedicated landing page for your business. Share the page link easily via email, social media, or SMS. Setup can be done in two minutes."
+    },
+    {
+      "title": "Easy to Manage",
+      "subtitle": "A dashboard to manage all testimonials",
+      "description": "You will have a simple & clean dashboard to manage all testimonials in one place. It's like your email inbox, but designed for your social proof!"
+    },
+    {
+      "title": "Track the Metrics",
+      "subtitle": "Understand how video testimonials are performing",
+      "description": "Track metrics from all embedded videos, help your marketing team understand performance, and promote the best-performing videos.",
+      "note": "* Available in the Ultimate plan"
+    },
+    {
+      "title": "More Social Proof",
+      "subtitle": "Not only text and video testimonials",
+      "description": "Manage testimonials from social media, video platforms, and review sites in a single place!"
+    },
+    {
+      "title": "Embed the Wall of Love",
+      "subtitle": "The best testimonials all in one place",
+      "description": "Showcase all your favorite testimonials. Embed it on your website in under a minute with no coding knowledge required!"
+    }
+  ],
+  "ourFeatures": "Our Features",
+  "tryForFree": "Try it for Free",
+  "footer": {
+    "links": [
+      {
+        "text": "About",
+        "href": "#",
+        "ariaLabel": "About page"
+      },
+      {
+        "text": "Privacy Policy",
+        "href": "#",
+        "ariaLabel": "Privacy Policy page"
+      },
+      {
+        "text": "Contact Us",
+        "href": "#",
+        "ariaLabel": "Contact Us page"
+      }
+    ],
+    "copyright": "© {{year}} TrueVoices. All rights reserved."
+  },
+  "header": {
+    "title": "TrueVoices",
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "signIn": "Sign In"
+  },
+"hero": {
+    "title": "Welcome to TrueVoices",
+    "subtitle": "Collect and showcase authentic testimonials from your customers with ease.",
+    "paragraph1": "Your customers’ voices are your most powerful marketing tool. With TrueVoices, you can effortlessly collect, manage, and embed testimonials—no coding required.",
+    "paragraph2": "Build trust and credibility through genuine feedback from satisfied customers. Set up your testimonial page in minutes and watch your brand thrive!",
+    "buttonSignUp": "Sign Up",
+    "buttonLearnMore": "Learn More"
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "members": [
+      {
+        "name": "Shreya Wanisha",
+        "image": "/TeamImages/ShreyaWanisha.jpeg",
+        "linkedin": "https://www.linkedin.com/in/shreya-wanisha/",
+        "bio": "Full-stack developer with a passion for building web applications. Expertise in Java, Spring Boot, React, and Node.js."
+      },
+      {
+        "name": "Maithili Wade",
+        "image": "/TeamImages/_DSC9226-Enhanced-NR-3.jpg",
+        "linkedin": "https://www.linkedin.com/in/maithili-wade/",
+        "bio": "Architect turned Software Engineer. Currently exploring the exciting intersection of technology and design."
+      },
+      {
+        "name": "Jay Vekariya",
+        "image": "/TeamImages/jay.jpeg",
+        "linkedin": "https://www.linkedin.com/in/jay-vekariya/",
+        "bio": "Full-stack developer focusing on React and Node.js."
+      },
+      {
+        "name": "Harshit Kant",
+        "image": "/TeamImages/harshit.jpeg",
+        "linkedin": "https://www.linkedin.com/in/harshit-kant-hk-0a87864b/",
+        "bio": "Passionate MERN Stack Software Engineer, with strong interest in Front-End Engineering, Test Automation, and Quality Assurance (QA)."
+      }
+    ]
+  }
+}
