@@ -9,4 +9,6 @@ const EmailSettingsSchema = new mongoose.Schema({
 
 const EmailSettings = mongoose.model('EmailSettings', EmailSettingsSchema);
 
+export type EmailSettingsType = mongoose.InferSchemaType<typeof EmailSettingsSchema>
+
 export default EmailSettings;

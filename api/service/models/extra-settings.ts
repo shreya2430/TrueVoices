@@ -41,4 +41,6 @@ const ExtraSettings: Model<IExtraSettings> = mongoose.model<IExtraSettings>(
   ExtraSettingsSchema
 );
 
+export type ExtraSettingsType = mongoose.InferSchemaType<typeof ExtraSettingsSchema>
+
 export default ExtraSettings;

@@ -119,7 +119,3 @@ export const updatePassword = async (email: string, newPassword: string): Promis
         throw error;
     }
 };
-
-
-
-

@@ -85,6 +85,43 @@ const createSpace = async (spaceData: Space): Promise<Space> => {
 	}
 }
 
+const updateSpace = async (spaceData: Partial<Space>): Promise<Space> => {
+	try {
+		const space = await SpaceModel
+			.findOneAndUpdate({ spaceName: spaceData.spaceName }, spaceData, { new: true })
+			.select({ _id: 0, __v: 0 })
+			.populate('thankYouPage', { _id: 0, __v: 0 })
+			.populate('extraSettings', { _id: 0, __v: 0 })
+			.populate('emailSettings', { _id: 0, __v: 0 })
+			.exec()
+
+		if (!space) {
+			throw new Error('Space not found')
+		}
+
+		return space
+	} catch (error) {
+		console.error('Error updating space:', error)
+		throw new Error('Failed to update space')
+	}
+}
+
+const deleteSpace = async (spaceName: string): Promise<void> => {
+	try {
+		const space = await SpaceModel.findOneAndDelete
+			({ spaceName })
+			.select({ _id: 0, __v: 0 })
+			.populate('thankYouPage', { _id: 0, __v: 0 })
+			.populate('extraSettings', { _id: 0, __v: 0 })
+			.populate('emailSettings', { _id: 0, __v: 0 })
+			.exec()
+		return
+	} catch (error) {
+		console.error('Error deleting space:', error)
+		throw new Error('Failed to delete space')
+	}
+}
+
 export const spaceService = {
 	getSpaces,
 	getSpaceByName,

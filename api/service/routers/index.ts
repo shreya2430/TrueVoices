@@ -5,12 +5,13 @@ import spacesRouter from './spaces.js';
 import userAuthRouter from './user-authentication-router.js';
 import userManagementRouter from './user-management.router.js';
 import { filesRouter } from './files.js'
+import { Request, Response, Express } from 'express'
+import { authenticateToken } from '../middlewares/jwt-middleware.js';
 
-const intializeRoutes = (app) => {
-	app.get('/', (req, res) => {
+const intializeRoutes = (app: Express) => {
+	app.get('/', (req: Request, res: Response) => {
 		res.send('Welcome to the Testimonials API!')
 	})
-
 	app.use('/v1/spaces', extraSettingsRouter, thankYouPageRouter, spacesRouter)
 	app.use('/v1/upload', filesRouter)
 	app.use('/v1/testimonials', testimonialRoutes) // Testimonial routes

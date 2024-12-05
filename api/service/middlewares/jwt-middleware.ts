@@ -1,13 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { IUser } from '../models/user-management';
 
 const secretKey = process.env.JWT_SECRET as string;
 
-interface CustomRequest extends Request {
-    user?: string | jwt.JwtPayload;
+declare global {
+    namespace Express {
+        interface Request {
+            user?: IUser;
+        }
+    }
 }
 
-export const authenticateToken = (req: CustomRequest, res: Response, next: NextFunction): void => {
+export const authenticateToken = (req: Request, res: Response, next: NextFunction): void => {
 
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
@@ -17,7 +22,7 @@ export const authenticateToken = (req: CustomRequest, res: Response, next: NextF
 
     try {
         const decoded = jwt.verify(token, secretKey);
-        req.user = decoded;
+        req.user = decoded as IUser;
         next();
     } catch (error) {
         console.error("JWT verification failed:", error);
