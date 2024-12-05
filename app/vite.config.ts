@@ -1,9 +1,90 @@
-import path from "path"
-import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
+import path from "path";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  plugins: [react()],
+plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      injectRegister: 'auto',
+      strategies: 'generateSW',
+      devOptions: {
+        enabled: true
+      },
+     manifest: {
+  name: "True Voices",
+  short_name: "TV",
+  description: "Collect and showcase testimonials effortlessly.",
+  start_url: "./",
+  display: "standalone",
+  background_color: "#f0f0f0", // Light gray background
+  theme_color: "#0078D4", // A vibrant blue that complements most logos
+  icons: [
+    {
+      "src": "/assets/pwa-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+},
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => {
+              return url.pathname.includes('assets');
+            },
+            handler: 'CacheFirst',
+            method: 'GET',
+            options: {
+              cacheName: 'static-assets',
+              expiration: {
+                maxAgeSeconds: 60 * 60 * 24,
+                maxEntries: 100
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: ({ url }) => {
+              return url.pathname.includes('students');
+            },
+            handler: 'NetworkFirst',
+            method: 'GET',
+            options: {
+              cacheName: 'students-api',
+              expiration: {
+                maxAgeSeconds: 60 * 60 * 24,
+                maxEntries: 100
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          }
+        ]
+      }
+    })
+  ],
   server: {
     port: 3030,
   },
@@ -12,4 +93,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-})
+});
