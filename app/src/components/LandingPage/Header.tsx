@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -10,9 +9,13 @@ const Header = () => {
   return (
     <header className="border-b bg-card text-card-foreground shadow-sm">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        <h1 className="text-xl font-semibold">{t('header.title')}</h1>
-        <LanguageSwitcher />
+        {/* Title and LanguageSwitcher */}
+        <div className="flex items-center space-x-4">
+          <h1 className="text-xl font-semibold">{t('header.title')}</h1>
+          <LanguageSwitcher />
+        </div>
 
+        {/* Navbar */}
         <nav className="flex items-center space-x-4">
           <a
             href="#"
