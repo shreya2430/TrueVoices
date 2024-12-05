@@ -3,6 +3,7 @@ import { FormField } from '@/components/forms/FormField/FormField';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 
 type FieldType ={ 
     id: string;
@@ -21,6 +22,7 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
     const [formData, setFormData ] = useState<{ [key: string]: string}>({});
     const [error, setError ] = useState<string | null>(null);
     const [successMessage, setSuccessMessage ] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
@@ -44,6 +46,8 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
                 const data = await response.json();
                 setSuccessMessage(data.message);
                 setFormData({}); //clearing the form
+                //Navigate to the Dashboard page 
+                navigate('/route');
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || 'Login Failed!');
