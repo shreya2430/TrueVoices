@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import * as userController from "../controllers/user-authentication-controller";
+import { authenticateToken } from "../middlewares/jwt-middleware";
 
 const router: Router = express.Router();
 
@@ -16,7 +17,7 @@ router.post('/check-email', userController.checkEmailExists);
 router.post('/check-username', userController.checkUsernameExists);
 
 // Reset Password
-router.post('/reset-password', userController.resetPassword);
+router.post('/reset-password', authenticateToken, userController.resetPassword);
 
 
 export default router;

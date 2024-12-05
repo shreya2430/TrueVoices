@@ -1,14 +1,27 @@
-import Testimonial, { ITestimonial } from "../models/testimonials-models";
+import Testimonial, { ITestimonial } from '../models/testimonial-models'
+import { generateRandomPfp } from '../utils/generate-random-pfp';
 
 // Create a new testimonial
-export const createTestimonial = async (data: Partial<ITestimonial>): Promise<ITestimonial> => {
-  const testimonial = new Testimonial(data);
-  return await testimonial.save();
+export const createTestimonial = async (data: ITestimonial): Promise<ITestimonial> => {
+  try {
+    if (!data.profilePic) {
+      data.profilePic = await generateRandomPfp(data.name);
+    }
+    const testimonial = new Testimonial(data);
+    return await testimonial.save();
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 // Get all testimonials
-export const getAllTestimonials = async (): Promise<ITestimonial[]> => {
-  return await Testimonial.find({});
+export const getAllTestimonials = async (spaceName: string): Promise<ITestimonial[]> => {
+  try {
+    const testimonials = await Testimonial.find({ spaceName });
+    return testimonials;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 // Get a single testimonial by ID

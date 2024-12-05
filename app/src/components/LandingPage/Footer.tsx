@@ -1,21 +1,38 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+// Define the type for footer links
+type FooterLink = {
+  text: string;
+  href: string;
+  ariaLabel: string;
+};
+
 const Footer = () => {
+  const { t } = useTranslation();
+
+  // Fetch links array and copyright text
+  const links: FooterLink[] = t('footer.links', { returnObjects: true }) as FooterLink[];
+  const copyright: string = t('footer.copyright', {
+    year: new Date().getFullYear(),
+  });
+
   return (
     <footer className="border-t py-4 mt-16">
       <div className="container mx-auto text-center">
         <div className="mb-4">
-          <a href="#" className="text-sm text-gray-700 mx-4 hover:underline" aria-label="About page">
-            About
-          </a>
-          <a href="#" className="text-sm text-gray-700 mx-4 hover:underline" aria-label="Privacy Policy page">
-            Privacy Policy
-          </a>
-          <a href="#" className="text-sm text-gray-700 mx-4 hover:underline" aria-label="Contact Us page">
-            Contact Us
-          </a>
+          {links.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              className="text-sm text-gray-700 mx-4 hover:underline"
+              aria-label={link.ariaLabel}
+            >
+              {link.text}
+            </a>
+          ))}
         </div>
-        <p className="text-xs text-gray-500 mt-2">
-          © {new Date().getFullYear()} TrueVoices. All rights reserved.
-        </p>
+        <p className="text-xs text-gray-500 mt-2">{copyright}</p>
       </div>
     </footer>
   );

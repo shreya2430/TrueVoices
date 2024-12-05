@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 const post = async (req: Request, res: Response) => {
 	try {
 		const data = req.body
-		const space = await spaceService.createSpace(data)
+		const space = await spaceService.createSpace({ ...data, userId: req.user })
 		res.status(201).json(space)
 	} catch (error) {
 		if (

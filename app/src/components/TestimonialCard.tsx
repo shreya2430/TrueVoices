@@ -29,7 +29,7 @@ export const TestimonialCard = ({ className, testimonial, showDate=true }: Testi
         )}
       </CardContent>
       <CardFooter>
-        {showDate && testimonial.createdAt.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'})}
+        {showDate && new Date(testimonial.createdAt).toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'})}
       </CardFooter>
     </Card>
   )

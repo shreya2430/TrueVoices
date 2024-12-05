@@ -22,4 +22,6 @@ const ThankYouPage: Model<IThankYouPage> = mongoose.model<IThankYouPage>(
   ThankYouPageSchema
 );
 
+export type ThankYouPageType = mongoose.InferSchemaType<typeof ThankYouPage>
+
 export default ThankYouPage;

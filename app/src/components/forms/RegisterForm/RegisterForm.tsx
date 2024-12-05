@@ -52,6 +52,7 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
               setError(result.message || 'Registration failed');
             }
           } catch (err) {
+            console.error('Error:', err);
             setError('Server error, please try again later');
           }
     };
