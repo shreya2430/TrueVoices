@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FormField } from '@/components/forms/FormField/FormField';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FormField } from '../FormField/FormField';
 import { GoogleLogin } from '@react-oauth/google';
 
 type FieldType ={
@@ -21,6 +22,7 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
     const [error, setError] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
@@ -48,6 +50,9 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
             if (response.ok) {
               setSuccessMessage(result.message);
               setFormData({}); // Clear form on success
+              localStorage.setItem('token', result.token);
+              //Redirecting to the user's dashboard after successful registration
+              navigate('/route');
             } else {
               setError(result.message || 'Registration failed');
             }

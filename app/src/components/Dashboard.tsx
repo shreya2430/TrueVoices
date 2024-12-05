@@ -8,7 +8,9 @@ import {
 import { Outlet } from 'react-router-dom'
 import { Badge } from './ui/badge'
 
+
 export const Dashboard = () => {
+
 	return (
 		<SidebarProvider>
 			<AppSidebar />
