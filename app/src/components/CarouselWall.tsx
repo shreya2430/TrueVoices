@@ -1,10 +1,11 @@
 import { cn } from '@/lib/utils'
+import { useGetAllTestimonialsQuery } from '@/store/testimonial-api'
 import { CarouselFormType } from '@/types/carousel'
-import { Testimonial } from '@/types/testimonial'
+import { TestimonialRes } from '@/types/testimonial'
 import '@iframe-resizer/child'
 import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay'
-import { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useEffect, useMemo } from 'react'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useTheme } from './Providers/ThemeProvider'
 import { TestimonialCard } from './TestimonialCard'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel'
@@ -16,52 +17,54 @@ type CarouselWallProps = {
 }
 
 export const CarouselWall = ({ preview=false, formSettings }: CarouselWallProps) => {
-	const dummyData: Testimonial[] = [
-		{
-			name: 'John Doe',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 2',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 1',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 1',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-	]
+	// const dummyData: Testimonial[] = [
+	// 	{
+	// 		name: 'John Doe',
+	// 		companyAndTitle: 'Acme Inc - CEO',
+	// 		rating: 4,
+	// 		testimonialType: 'text',
+	// 		address: '1234 Elm St, Springfield, IL',
+	// 		content:
+	// 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+	// 		createdAt: new Date(),
+	// 		socialLinks: 'https://twitter.com/johndoe',
+	// 	},
+	// 	{
+	// 		name: 'John Doe 2',
+	// 		companyAndTitle: 'Acme Inc - CEO',
+	// 		rating: 4,
+	// 		testimonialType: 'text',
+	// 		address: '1234 Elm St, Springfield, IL',
+	// 		content:
+	// 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+	// 		createdAt: new Date(),
+	// 		socialLinks: 'https://twitter.com/johndoe',
+	// 	},
+	// 	{
+	// 		name: 'John Doe 1',
+	// 		companyAndTitle: 'Acme Inc - CEO',
+	// 		rating: 4,
+	// 		testimonialType: 'text',
+	// 		address: '1234 Elm St, Springfield, IL',
+	// 		content:
+	// 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+	// 		createdAt: new Date(),
+	// 		socialLinks: 'https://twitter.com/johndoe',
+	// 	},
+	// 	{
+	// 		name: 'John Doe 1',
+	// 		companyAndTitle: 'Acme Inc - CEO',
+	// 		rating: 4,
+	// 		testimonialType: 'text',
+	// 		address: '1234 Elm St, Springfield, IL',
+	// 		content:
+	// 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+	// 		createdAt: new Date(),
+	// 		socialLinks: 'https://twitter.com/johndoe',
+	// 	},
+	// ]
+	const { space } = useParams()
+	const { data: testimonials, isSuccess, isFetching } = useGetAllTestimonialsQuery(space);
 	const [searchParam] = useSearchParams()
 	const showDate = preview ? formSettings?.showDate : searchParam.get('showDate') === 'true'
 	const { setTheme } = useTheme()
@@ -73,6 +76,7 @@ export const CarouselWall = ({ preview=false, formSettings }: CarouselWallProps)
 	useEffect(() =>
 		setTheme(searchParam.get('darkMode') === 'true' ? 'dark' : 'light')
 	, [searchParam, setTheme])
+	const filteredTestimonials = useMemo(() => testimonials?.filter((item: TestimonialRes) => item.liked), [testimonials]) as TestimonialRes[]
 
 	const autoplayOptions: AutoplayOptionsType = autoPlay ? { delay: 1000 * Number(autoPlaySpeed), stopOnMouseEnter: true, stopOnInteraction: false, active: true } : { active: false }
 	return (
@@ -86,9 +90,11 @@ export const CarouselWall = ({ preview=false, formSettings }: CarouselWallProps)
 				plugins={[Autoplay(autoplayOptions)]}
 			>
 				<CarouselContent className=''>
-					{dummyData.map((item, index) => (
+					{isFetching && <div>Loading...</div>}
+					{!isSuccess && !isFetching && <div>No testimonials found</div>}
+					{isSuccess && filteredTestimonials.map((item: TestimonialRes) => (
 						<CarouselItem
-							key={index}
+							key={item._id}
 							className={`ml-0 md:basis-1/2`}
 						>
 							<TestimonialCard testimonial={item} showDate={showDate} className={`${cardSize === 'sm' ? 'max-w-sm' : cardSize === 'md' ? 'max-w-md' : 'max-w-lg' } mx-auto`}/>

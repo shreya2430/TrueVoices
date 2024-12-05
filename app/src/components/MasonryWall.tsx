@@ -1,8 +1,9 @@
+import { useGetAllTestimonialsQuery } from '@/store/testimonial-api'
 import { MasonryFormType } from '@/types/masonry'
-import { Testimonial } from '@/types/testimonial'
+import { TestimonialRes } from '@/types/testimonial'
 import '@iframe-resizer/child'
 import { useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useTheme } from './Providers/ThemeProvider'
 import { TestimonialCard } from './TestimonialCard'
 
@@ -12,7 +13,7 @@ type MasonryWallProps = {
 }
 
 // Fisher-Yates shuffle function
-const shuffleArray = (array: Testimonial[]) => {
+const shuffleArray = (array: TestimonialRes[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1))
 		;[array[i], array[j]] = [array[j], array[i]]
@@ -24,109 +25,9 @@ export const MasonryWall = ({
 	preview = false,
 	formSettings,
 }: MasonryWallProps) => {
-	const dummyData: Testimonial[] = [
-		{
-			name: 'John Doe',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 112',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 5,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 34',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 3,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 2',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 2312',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 5,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 1',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 2,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 421412',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 5',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 1,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-		{
-			name: 'John Doe 7',
-			companyAndTitle: 'Acme Inc - CEO',
-			rating: 4,
-			testimonialType: 'text',
-			address: '1234 Elm St, Springfield, IL',
-			content:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse aspernatur laborum veritatis labore quos hic nobis sequi error rem repellendus non molestias voluptates possimus fugiat aliquam expedita soluta, culpa suscipit corrupti magni. Cum pariatur vitae reprehenderit voluptates? Corporis, doloribus ipsum.',
-			createdAt: new Date(),
-			socialLinks: 'https://twitter.com/johndoe',
-		},
-	]
-	// Shuffle the data using useMemo to avoid re-shuffling on every render
 	const [searchParam] = useSearchParams()
+	const { space } = useParams()
+	const { data: testimonials, isSuccess } = useGetAllTestimonialsQuery(space)
 	const showDate = preview
 	? formSettings?.showDate || false
 	: searchParam.get('showDate') === 'true'
@@ -136,9 +37,10 @@ export const MasonryWall = ({
 	const cardSize = preview
 	? formSettings?.cardSize
 	: searchParam.get('cardSize') || 'md'
-	const shuffledData = useMemo(() => {
-		return randomize ? shuffleArray(dummyData) : dummyData
-	}, [randomize])
+	const shuffledAndFilteredTestimonials = useMemo(() => {
+		const filteredData = testimonials?.filter((item) => item.liked) as TestimonialRes[]
+		return randomize ? shuffleArray(filteredData) : filteredData
+	}, [randomize, testimonials])
 	setTheme(searchParam.get('darkMode') === 'true' ? 'dark' : 'light')
 
 	return (
@@ -151,9 +53,9 @@ export const MasonryWall = ({
 					: 'columns-md'
 			} ${preview && theme} gap-4`}
 		>
-			{shuffledData.map((item) => (
+			{isSuccess && shuffledAndFilteredTestimonials.map((item) => (
 				<TestimonialCard
-					key={item.name}
+					key={item._id}
 					testimonial={item}
 					showDate={showDate}
 					className={`mb-4 break-inside-avoid-column`}
