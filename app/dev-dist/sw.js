@@ -82,12 +82,25 @@ define(['./workbox-47da91e0'], (function (workbox) { 'use strict';
     "revision": "3ca0b8505b4bec776b69afdba2768812"
   }, {
     "url": "index.html",
-    "revision": "0.p69rsnhghoo"
+    "revision": "0.ib4nl619n1g"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
     allowlist: [/^\/$/]
   }));
+  workbox.registerRoute(({
+    url
+  }) => {
+    return url.pathname === "/dashboard/space1/wall-of-love";
+  }, new workbox.CacheFirst({
+    "cacheName": "wall-of-love-page",
+    plugins: [new workbox.ExpirationPlugin({
+      maxAgeSeconds: 604800,
+      maxEntries: 1
+    }), new workbox.CacheableResponsePlugin({
+      statuses: [0, 200]
+    })]
+  }), 'GET');
   workbox.registerRoute(({
     url
   }) => {
@@ -104,9 +117,9 @@ define(['./workbox-47da91e0'], (function (workbox) { 'use strict';
   workbox.registerRoute(({
     url
   }) => {
-    return url.pathname.includes("students");
+    return url.pathname.includes("space");
   }, new workbox.NetworkFirst({
-    "cacheName": "students-api",
+    "cacheName": "space-api",
     plugins: [new workbox.ExpirationPlugin({
       maxAgeSeconds: 86400,
       maxEntries: 100
