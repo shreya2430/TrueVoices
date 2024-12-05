@@ -1,48 +1,36 @@
+import React from 'react';
 import { Button } from '../ui/button';
+import { useTranslation } from 'react-i18next';
 
-const features = [
-  {
-    title: 'Collect and Display Testimonials',
-    subtitle: 'All in one solution',
-    description: 'Create a dedicated landing page for your business. Share the page link easily via email, social media, or SMS. Setup can be done in two minutes.',
-  },
-  {
-    title: 'Easy to Manage',
-    subtitle: 'A dashboard to manage all testimonials',
-    description: 'You will have a simple & clean dashboard to manage all testimonials in one place. It\'s like your email inbox, but designed for your social proof!',
-  },
-  {
-    title: 'Track the Metrics',
-    subtitle: 'Understand how video testimonials are performing',
-    description: 'Track metrics from all embedded videos, help your marketing team understand performance, and promote the best-performing videos.',
-    note: '* Available in the Ultimate plan',
-  },
-  {
-    title: 'More Social Proof',
-    subtitle: 'Not only text and video testimonials',
-    description: 'Manage testimonials from social media, video platforms, and review sites in a single place!',
-  },
-  {
-    title: 'Embed the Wall of Love',
-    subtitle: 'The best testimonials all in one place',
-    description: 'Showcase all your favorite testimonials. Embed it on your website in under a minute with no coding knowledge required!',
-  },
-];
+// Define the type for each feature
+type Feature = {
+  title: string;
+  subtitle: string;
+  description: string;
+  note?: string | null;
+};
 
 const Features = () => {
+  const { t } = useTranslation();
+
+  // Fetch features with type assertion
+  const features: Feature[] = t('features', { returnObjects: true }) as Feature[];
+  
   return (
-    <section className="py-7" id="features">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-semibold mb-8">Our Features</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <section className="py-10 bg-gray-50 dark:bg-gray-900" id="features">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">
+          {t('ourFeatures')} {/* Add a key for "Our Features" */}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-6 rounded-xl border shadow-xl flex flex-col bg-white dark:bg-gray-800"
+              className="p-6 rounded-lg border border-gray-200 shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col"
             >
               {/* Card Header */}
               <div className="mb-4">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-gray-100">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                   {feature.title}
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -64,8 +52,11 @@ const Features = () => {
 
               {/* Call to Action */}
               <div className="mt-auto">
-                <Button color="primary" className="w-full">
-                  Try it for Free
+                <Button
+                  color="primary"
+                  className="w-full bg-blue-500 text-white hover:bg-blue-600 rounded-md py-2"
+                >
+                  {t('tryForFree')} {/* Add a key for "Try it for Free" */}
                 </Button>
               </div>
             </div>
