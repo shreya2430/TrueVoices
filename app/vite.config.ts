@@ -49,6 +49,23 @@ plugins: [
         runtimeCaching: [
           {
             urlPattern: ({ url }) => {
+              return url.pathname === '/dashboard/space1/wall-of-love';
+            },
+            handler: 'CacheFirst', // Cache the entire page
+            method: 'GET',
+            options: {
+              cacheName: 'wall-of-love-page',
+              expiration: {
+                maxAgeSeconds: 60 * 60 * 24 * 7, // Cache for 7 days
+                maxEntries: 1 // Cache only this page
+              },
+              cacheableResponse: {
+                statuses: [0, 200], // Cache successful and opaque responses
+              }
+            }
+    },
+          {
+            urlPattern: ({ url }) => {
               return url.pathname.includes('assets');
             },
             handler: 'CacheFirst',
@@ -66,12 +83,12 @@ plugins: [
           },
           {
             urlPattern: ({ url }) => {
-              return url.pathname.includes('students');
+              return url.pathname.includes('space');
             },
             handler: 'NetworkFirst',
             method: 'GET',
             options: {
-              cacheName: 'students-api',
+              cacheName: 'space-api',
               expiration: {
                 maxAgeSeconds: 60 * 60 * 24,
                 maxEntries: 100
