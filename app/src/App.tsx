@@ -13,7 +13,7 @@ import { ResetPasswordPage } from './components/pages/ResetPassword';
 import { SpaceForm } from './components/space/SpaceForm';
 import { TestimonialPage } from './components/TestimonialPage';
 import { WallOfLove } from './components/WallofLove';
-
+import PricingPage from './components/pricing/PricingPage'
 function App() {
   return (
 
@@ -27,6 +27,10 @@ function App() {
 				<Route 
 					path="/register" 
 					element={<RegisterPage />} 
+				/>
+				<Route
+					path="/pricing"
+					element={<PricingPage />}
 				/>
 				<Route
 					path="/login"
