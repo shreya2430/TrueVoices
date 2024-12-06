@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormField } from '../FormField/FormField';
-import { GoogleLogin } from '@react-oauth/google';
+
 
 type FieldType ={
     id: string;
@@ -61,14 +61,6 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
             setError('Server error, please try again later');
           }
     };
-
-    const handleGoogleSuccess = (credentialResponse: any) => {
-        console.log('Google Login Success: ', credentialResponse);
-    };
-
-    const handleGoogleError = () => {
-        setError('Google Sign-In failed. Please try again');
-    }
     
 
     return (
@@ -98,17 +90,6 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
                     {error && <div className="text-red-500">{error}</div>}
                     {successMessage && <div className="text-green-500">{successMessage}</div>}
                     <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign Up</Button>
-                    <div className="flex items-center my-4">
-                        <hr className="flex-grow border-gray-300" />
-                        <span className="mx-4 text-gray-500"> Or, Register with your Email</span>
-                        <hr className="flex-grow border-gray-300" />
-                    </div>
-                    <GoogleLogin
-                        onSuccess={handleGoogleSuccess}
-                        onError={handleGoogleError}
-                        text="signup_with"
-                        containerProps={{ className: "w-full bg-white text-gray-500 text-lg mt-4" }}
-                    />
                     <div className="text-center mt-4">
                         <span className="text-gray-600">
                             Already have an Account?
