@@ -13,7 +13,8 @@ import { ResetPasswordPage } from './components/pages/ResetPassword';
 import { SpaceForm } from './components/space/SpaceForm';
 import { TestimonialPage } from './components/TestimonialPage';
 import { WallOfLove } from './components/WallofLove';
-import PricingPage from './components/pricing/PricingPage'
+import PricingPage from './components/Pricing/PricingPage'
+
 function App() {
   return (
 
