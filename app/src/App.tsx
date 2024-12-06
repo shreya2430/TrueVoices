@@ -9,12 +9,14 @@ import LandingPage from './components/LandingPage/LandingPage';
 import { MasonryWall } from './components/MasonryWall';
 import { LoginPage } from './components/pages/LoginPage';
 import { RegisterPage } from './components/pages/RegisterPage';
-import { ResetPasswordPage } from './components/pages/ResetPassword';
 import { SpaceForm } from './components/space/SpaceForm';
 import { TestimonialPage } from './components/TestimonialPage';
 import { WallOfLove } from './components/WallofLove';
 import PricingPage from './components/Pricing/PricingPage'
 import { UpdateSpcaeForm } from './components/space/UpdateSpcaeForm'
+import { ResetPassword } from './components/pages/ResetPassword';
+
+
 
 function App() {
   return (
@@ -39,7 +41,7 @@ function App() {
 					/>
 					<Route
 						path="/reset-password"
-						element={<ResetPasswordPage />}
+						element={<ResetPassword />}
 					/>
 					<Route
 						path="/:spaceName/collect"

@@ -96,24 +96,24 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
                         {/* Login button */}
                         <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign In</Button>
                         {/* Forgot password Link */}
-                        <div className="mt-2">
+                        {/* <div className="mt-2">
                             <a href="/reset-password" className="text-sm text-blue-500 hover:underline">
                                 Forgot Password?
                             </a>
-                        </div>
+                        </div> */}
                         {/* Separator with text */}
-                        <div className="flex items-center my-4">
+                        {/* <div className="flex items-center my-4">
                             <hr className="flex-grow border-gray-300" />
                             <span className="mx-4 text-gray-500"> Or, Sign In with</span>
                             <hr className="flex-grow border-gray-300"/>
-                        </div>
+                        </div> */}
                         {/* Login with google div */}
-                        <GoogleLogin
+                        {/* <GoogleLogin
                             onSuccess={handleGoogleSuccess}
                             onError={handleGoogleError}
                             text="signin_with"
                             containerProps={{ className: "w-full bg-white text-gray-500 text-lg mt-4" }}
-                        />
+                        /> */}
                         <div className="mt-4 text-center">
                             <p className="text-sm text-gray-500">
                                 Don't have an account?
