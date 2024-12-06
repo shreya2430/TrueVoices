@@ -5,36 +5,37 @@ import Footer from "../LandingPage/Footer";
 const PricingPage = () => {
   const navigate = useNavigate();
 
-  // Mock function to check user authentication and get user details
   const getUserDetails = () => {
-    // Replace with actual authentication logic
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    return user && user.userId ? user : null;
+    try {
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      return user && user.id ? user : null;
+    } catch (error) {
+      console.error("Error parsing user details from localStorage:", error);
+      return null;
+    }
   };
 
   const handlePaymentNavigation = (price: number, planName: string) => {
     const user = getUserDetails();
 
     if (!user) {
-      // Redirect to the sign-up page if the user is not authenticated
       navigate("/register");
       return;
     }
 
-    // Navigate to the payment page with the amount, plan, and userId
     navigate(
       `/payment?amount=${price}&plan=${encodeURIComponent(
         planName
-      )}&userId=${user.userId}`
+      )}&userId=${user.id}`
     );
   };
 
   const pricingPlans = [
     {
       name: "Starter",
-      priceMonthly: "$0/month",
+      priceMonthly: "$0",
       price: 0,
-      description: "For hobbies \uD83E\uDDD1\u200D\uD83C\uDFA8", // 🧑‍🎨
+      description: "For hobbies 🧑‍🎨",
       features: [
         "2 video testimonials",
         "12 text testimonials",
@@ -45,9 +46,9 @@ const PricingPage = () => {
     },
     {
       name: "Starter Plus",
-      priceMonthly: "$10/month",
+      priceMonthly: "$10",
       price: 10,
-      description: "For small teams \uD83C\uDFE1", // 🏡
+      description: "For small teams 🏡",
       features: [
         "4 video testimonials",
         "40 text testimonials",
@@ -59,9 +60,9 @@ const PricingPage = () => {
     },
     {
       name: "Premium",
-      priceMonthly: "$30/month",
+      priceMonthly: "$30",
       price: 30,
-      description: "For growing businesses \uD83D\uDCB2", // 📈
+      description: "For growing businesses 📈",
       features: [
         "10 video testimonials",
         "100 text testimonials",
@@ -73,9 +74,9 @@ const PricingPage = () => {
     },
     {
       name: "Ultimate",
-      priceMonthly: "$45/month",
+      priceMonthly: "$45",
       price: 45,
-      description: "For large businesses \uD83D\uDE80", // 🚀
+      description: "For large businesses 🚀",
       features: [
         "Unlimited text testimonials",
         "Unlimited video testimonials",
@@ -93,7 +94,6 @@ const PricingPage = () => {
     <>
       <Header />
       <div className="pricing-page bg-[hsl(var(--background))] text-[hsl(var(--foreground))] py-24">
-        {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4">
             The easiest way to drive more sales for your business
@@ -104,18 +104,22 @@ const PricingPage = () => {
           </p>
           <div className="flex justify-center gap-4 mt-6">
             <button
-              className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] font-bold py-2 px-4 rounded"
+              className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] font-bold py-2 px-4 rounded 
+             hover:bg-[hsl(var(--primary)/1.2)] hover:text-[hsl(var(--foreground))] 
+             active:bg-[hsl(var(--primary)/1.4)] active:text-[hsl(var(--background))] 
+             transition shadow-md focus:outline-none focus:ring focus:ring-[hsl(var(--ring))]"
               onClick={() => handlePaymentNavigation(0, "Free Trial")}
             >
               7 days free trial
             </button>
-            <button className="bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] font-bold py-2 px-4 rounded">
+            <button
+              className="bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] font-bold py-2 px-4 rounded hover:bg-[hsl(var(--secondary)/1.2)] hover:text-[hsl(var(--foreground))] active:bg-[hsl(var(--secondary)/1.4)] active:text-[hsl(var(--background))] transition"
+            >
               Cancel anytime!
             </button>
           </div>
         </div>
 
-        {/* Pricing Cards */}
         <div className="pricing-grid grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto max-w-7xl mb-4">
           {pricingPlans.map((plan, index) => (
             <div
@@ -145,10 +149,11 @@ const PricingPage = () => {
                 </ul>
               </div>
               <button
-                className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] py-2 px-4 mt-6 rounded w-full"
-                onClick={() =>
-                  handlePaymentNavigation(plan.price, plan.name)
-                }
+                className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] font-bold py-2 px-4 rounded 
+             hover:bg-[hsl(var(--primary)/1.2)] hover:text-[hsl(var(--foreground))] 
+             active:bg-[hsl(var(--primary)/1.4)] active:text-[hsl(var(--background))] 
+             transition shadow-md focus:outline-none focus:ring focus:ring-[hsl(var(--ring))]"
+                onClick={() => handlePaymentNavigation(plan.price, plan.name)}
               >
                 {plan.mostPopular ? "Get started" : "Start a free trial"}
               </button>
