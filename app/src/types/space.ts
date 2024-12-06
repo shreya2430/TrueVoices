@@ -18,7 +18,7 @@ const InputsSchema = z.object({
 
 export const SpaceSchema = z.object({
   spaceName: z.string().min(1, "Space name is required").max(100, "Space name must be 100 characters or less"),
-  spaceLogoUrl: z.string().optional(),
+  spaceLogoUrl: z.string().url(),
   spaceLogo: z.instanceof(File),
   headerTitle: z.string().min(1, "Header title is required").max(200, "Header title must be 200 characters or less"),
   customMessage: z.string().min(10, "Custom message must be atleast 10 characters").max(500, "Custom message must be 500 characters or less"),
@@ -39,8 +39,7 @@ export type Space = z.infer<typeof SpaceSchema>;
 
 export const SpaceResSchema = z.object({
 	...SpaceSchema.shape,
-  spaceLogo: z.string().url(),  
-	thankYouPage: ThankYouPageSchema.omit({ image: true }),
+  spaceLogo: z.string().url(),
 	listQuestion: z.array(z.string()),
 })
 

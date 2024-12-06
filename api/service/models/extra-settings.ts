@@ -1,21 +1,6 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 
-export interface IExtraSettings extends Document {
-  maxVideoDuration: number;
-  maxTextCharacters: number;
-  videoButtonText: string;
-  textButtonText: string;
-  consentDisplay: string;
-  consentStatement: string;
-  questionLabel: string;
-  affiliateLink: string;
-  thirdPartyReviewLink: string;
-  autoPopulateTestimonials: boolean;
-  disableVideoForiOS: boolean;
-  allowSearchEngines: boolean;
-}
-
-const ExtraSettingsSchema: Schema<IExtraSettings> = new Schema({
+const ExtraSettingsSchema = new Schema({
   maxVideoDuration: { type: Number, default: 60 },
   maxTextCharacters: { type: Number, default: 500 },
   videoButtonText: { type: String, default: 'Record Video' },
@@ -36,11 +21,11 @@ const ExtraSettingsSchema: Schema<IExtraSettings> = new Schema({
   allowSearchEngines: { type: Boolean, default: true },
 });
 
-const ExtraSettings: Model<IExtraSettings> = mongoose.model<IExtraSettings>(
+const ExtraSettings = mongoose.model(
   'ExtraSettings',
   ExtraSettingsSchema
 );
 
-export type ExtraSettingsType = mongoose.InferSchemaType<typeof ExtraSettingsSchema>
+export type ExtraSettingsType = mongoose.InferSchemaType<typeof ExtraSettingsSchema> & Document;
 
 export default ExtraSettings;

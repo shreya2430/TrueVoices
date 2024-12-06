@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 const post = async (req: Request, res: Response) => {
 	try {
 		const data = req.body
-		const space = await spaceService.createSpace({ ...data, userId: req.user })
+		const space = await spaceService.createSpace({ ...data })
 		res.status(201).json(space)
 	} catch (error) {
 		if (
@@ -42,8 +42,37 @@ const get = async (_: Request, res: Response) => {
 	}
 }
 
+const update = async (req: Request, res: Response) => {
+	try {
+		const data = req.body
+		const space = await spaceService.updateSpace({ ...data })
+		res.status(200).json(space)
+	} catch (error) {
+		if (error.message === 'Space not found') {
+			res.status(404).json({ message: error.message })
+		} else {
+			res.status(500).json({ message: error.message })
+		}
+	}
+}
+
+const deleteSpace = async (req: Request, res: Response) => {
+	try {
+		await spaceService.deleteSpace(req.params.spaceName)
+		res.status(204).end()
+	} catch (error) {
+		if (error.message === 'Space not found') {
+			res.status(404).json({ message: error.message })
+		} else {
+			res.status(500).json({ message: error.message })
+		}
+	}
+}
+
 export const spacesController = {
 	post,
 	getById,
 	get,
+	update,
+	deleteSpace,
 }

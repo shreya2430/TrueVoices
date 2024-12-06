@@ -37,7 +37,7 @@ export const CarouselForm = () => {
 			<div className='space-y-1'>
 				<span className="text-sm">customize</span>
 				<Form {...form}>
-					<form className="grid grid-cols-2 gap-8">
+					<form className="grid grid-cols-2 gap-8 text-foreground">
 						<div>
 							<div className='grid grid-cols-2 items-start'>
 								<div>

@@ -3,7 +3,10 @@ import { spacesController } from '../controllers/spaces.js';
 
 const router = express.Router();
 
-router.get('/:spaceName', spacesController.getById)
+router.route('/:spaceName')
+  .get(spacesController.getById)
+  .put(spacesController.update)
+  .delete(spacesController.deleteSpace)
 router.route('/')
   .get(spacesController.get)
   .post(spacesController.post)

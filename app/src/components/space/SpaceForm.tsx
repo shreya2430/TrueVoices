@@ -6,23 +6,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { TestimonialPage } from '../TestimonialPage'
 import { Button } from '../ui/button'
 import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogOverlay,
-  DialogTitle,
-  DialogTrigger,
+	Dialog,
+	DialogContent,
+	DialogFooter,
+	DialogHeader,
+	DialogOverlay,
+	DialogTitle,
+	DialogTrigger,
 } from '../ui/dialog'
-import { Form } from '../ui/form'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-import { EmailsettingForm } from './EmailsettingForm'
-import { ExtrasettingsForm } from './ExtrasettingsForm'
-import { GeneralForm } from './GeneralForm'
-import { ThankyouForm } from './ThankyouForm'
+import { SpaceFormTab } from './SpaceFormTab'
 
 type SpaceFormProps = {
 	// Props definition goes here
@@ -87,81 +81,17 @@ export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 				<DialogHeader>
 					<DialogTitle>Create Space</DialogTitle>
 				</DialogHeader>
-				<Tabs
-					defaultValue="general"
-					className="flex gap-12 w-full"
-				> 
-          <div className='w-[34rem]'>
-            <TabsContent value="general">
-              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
-            </TabsContent>
-            <TabsContent value="thankyou">
-              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
-            </TabsContent>
-            <TabsContent value="extrasetting">
-              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
-            </TabsContent>
-            <TabsContent value="emailsetting">
-              <TestimonialPage className='border rounded-md' preview space={form.watch()}/>
-            </TabsContent>
-          </div>
-					<Form {...form}>
-						<form
-							className="flex flex-col justify-between min-h-max flex-1"
-							onSubmit={form.handleSubmit(handleSumbit)}
+				<SpaceFormTab id='space-form' onSubmit={handleSumbit}>
+					<DialogFooter>
+						<Button
+							type="submit"
+							form='space-form'
+							variant='default'
 						>
-							<div className="space-y-4">
-								<TabsList className="w-full">
-									<TabsTrigger
-										className="w-full"
-										value="general"
-									>
-										General
-									</TabsTrigger>
-									<TabsTrigger
-										className="w-full"
-										value="thankyou"
-									>
-										Thank You
-									</TabsTrigger>
-									<TabsTrigger
-										className="w-full"
-										value="extrasetting"
-									>
-										Extra Setting
-									</TabsTrigger>
-									<TabsTrigger
-										className="w-full"
-										value="emailsetting"
-									>
-										Email Setting
-									</TabsTrigger>
-								</TabsList>
-								<TabsContent value="general">
-									<GeneralForm />
-								</TabsContent>
-								<TabsContent value="thankyou">
-									<ThankyouForm />
-								</TabsContent>
-								<TabsContent value="extrasetting">
-									<ExtrasettingsForm />
-								</TabsContent>
-								<TabsContent value="emailsetting">
-									<EmailsettingForm />
-								</TabsContent>
-							</div>
-							<DialogFooter className="mt-6">
-								<Button
-									variant={'default'}
-									className="w-full"
-									type="submit"
-								>
-									Create Space
-								</Button>
-							</DialogFooter>
-						</form>
-					</Form>
-				</Tabs>
+							Create Space
+						</Button>
+					</DialogFooter>
+				</SpaceFormTab>
 			</DialogContent>
 		</Dialog>
 	)

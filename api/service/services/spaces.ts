@@ -1,7 +1,7 @@
-import EmailSettings from '../models/email-settings.js'
-import ExtraSettings from '../models/extra-settings.js'
+import EmailSettings, { EmailSettingsType } from '../models/email-settings.js'
+import ExtraSettings, { ExtraSettingsType } from '../models/extra-settings.js'
 import SpaceModel, { Space } from '../models/spaces'
-import ThankYouPage from '../models/thank-you-page.js'
+import ThankYouPage, { ThankYouPageType } from '../models/thank-you-page.js'
 
 /**
  *
@@ -11,9 +11,9 @@ export const getSpaces = async (): Promise<Array<Space>> => {
 	try {
 		const spaces: Space[] = await SpaceModel.find()
 			.select({ _id: 0, __v: 0 })
-			.populate('thankYouPage', { _id: 0, __v: 0 })
-			.populate('extraSettings', { _id: 0, __v: 0 })
-			.populate('emailSettings', { _id: 0, __v: 0 })
+			.populate('thankYouPage', { _id: 0, __v: 0, spaceName: 0 })
+			.populate('extraSettings', { _id: 0, __v: 0, spaceName: 0 })
+			.populate('emailSettings', { _id: 0, __v: 0, spaceName: 0 })
 			.exec()
 		return spaces
 	} catch (error) {
@@ -32,9 +32,9 @@ const getSpaceByName = async (spaceName: string): Promise<Space> => {
 	try {
 		const space: Space = await SpaceModel.findOne({ spaceName })
 			.select({ _id: 0, __v: 0 })
-			.populate('thankYouPage', { _id: 0, __v: 0 })
-			.populate('extraSettings', { _id: 0, __v: 0 })
-			.populate('emailSettings', { _id: 0, __v: 0 })
+			.populate('thankYouPage', { _id: 0, __v: 0, spaceName: 0 })
+			.populate('extraSettings', { _id: 0, __v: 0, spaceName: 0 })
+			.populate('emailSettings', { _id: 0, __v: 0, spaceName: 0 })
 			.exec()
 		if (!space) {
 			throw new Error('Space not found')
@@ -53,7 +53,7 @@ const getSpaceByName = async (spaceName: string): Promise<Space> => {
  */
 const createSpace = async (spaceData: Space): Promise<Space> => {
 	try {
-		let extraSettings, thankYouPage, emailSettings
+		let extraSettings: ExtraSettingsType, thankYouPage: ThankYouPageType, emailSettings: EmailSettingsType
 		const spaceExists = await SpaceModel.findOne({ spaceName: spaceData.spaceName })
 		if (spaceExists) {
 			throw new Error(`space already exists with ${spaceData.spaceName}`)
@@ -74,7 +74,7 @@ const createSpace = async (spaceData: Space): Promise<Space> => {
 			...spaceData,
 			extraSettings: extraSettings ? extraSettings._id : null,
 			thankYouPage: thankYouPage ? thankYouPage._id : null,
-			emailSettings: emailSettings ? emailSettings._id : null,
+			emailSettings: emailSettings ? emailSettings : null,
 		})
 
 		await newSpace.save({ validateBeforeSave: true })
@@ -85,21 +85,28 @@ const createSpace = async (spaceData: Space): Promise<Space> => {
 	}
 }
 
-const updateSpace = async (spaceData: Partial<Space>): Promise<Space> => {
+const updateSpace = async (spaceData: Space): Promise<Space> => {
 	try {
-		const space = await SpaceModel
-			.findOneAndUpdate({ spaceName: spaceData.spaceName }, spaceData, { new: true })
-			.select({ _id: 0, __v: 0 })
-			.populate('thankYouPage', { _id: 0, __v: 0 })
-			.populate('extraSettings', { _id: 0, __v: 0 })
-			.populate('emailSettings', { _id: 0, __v: 0 })
-			.exec()
+		let extraSettings: ExtraSettingsType, thankYouPage: ThankYouPageType, emailSettings: EmailSettingsType
+		const space = await SpaceModel.findOne({ spaceName: spaceData.spaceName })
+		if (spaceData.extraSettings) ExtraSettings.findByIdAndUpdate(space.extraSettings, spaceData.extraSettings)
+		if (spaceData.thankYouPage) ThankYouPage.findByIdAndUpdate(space.thankYouPage, spaceData.thankYouPage)
+		if (spaceData.emailSettings) EmailSettings.findByIdAndUpdate(space.emailSettings, spaceData.emailSettings)
 
-		if (!space) {
+		const updatedSpace = await SpaceModel.findOneAndUpdate({
+			spaceName: spaceData.spaceName,
+		}, {
+			...spaceData,
+			extraSettings: extraSettings ? extraSettings._id : space.extraSettings,
+			thankYouPage: thankYouPage ? thankYouPage._id : space.thankYouPage,
+			emailSettings: emailSettings ? emailSettings : space.emailSettings,
+		}, { new: true })
+
+		if (!updatedSpace) {
 			throw new Error('Space not found')
 		}
 
-		return space
+		return spaceData
 	} catch (error) {
 		console.error('Error updating space:', error)
 		throw new Error('Failed to update space')
@@ -108,13 +115,10 @@ const updateSpace = async (spaceData: Partial<Space>): Promise<Space> => {
 
 const deleteSpace = async (spaceName: string): Promise<void> => {
 	try {
-		const space = await SpaceModel.findOneAndDelete
-			({ spaceName })
-			.select({ _id: 0, __v: 0 })
-			.populate('thankYouPage', { _id: 0, __v: 0 })
-			.populate('extraSettings', { _id: 0, __v: 0 })
-			.populate('emailSettings', { _id: 0, __v: 0 })
-			.exec()
+		await ExtraSettings.findOneAndDelete({ spaceName })
+		await ThankYouPage.findOneAndDelete({ spaceName })
+		await EmailSettings.findOneAndDelete({ spaceName })
+		await SpaceModel.findOneAndDelete({ spaceName })
 		return
 	} catch (error) {
 		console.error('Error deleting space:', error)
@@ -126,4 +130,6 @@ export const spaceService = {
 	getSpaces,
 	getSpaceByName,
 	createSpace,
+	updateSpace,
+	deleteSpace,
 }

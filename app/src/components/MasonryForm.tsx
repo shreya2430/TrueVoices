@@ -32,7 +32,7 @@ export const MasonryForm = () => {
           <script>iFrameResize({  license: "GPLv3", log: false, waitForLoad: true }, '#masonry-embedding')</script>
         `}
 			/>
-			<div className="space-y-1">
+			<div className="space-y-1 text-foreground">
 				<span className="text-sm">customize</span>
 				<Form {...form}>
 					<form className="grid grid-cols-2">

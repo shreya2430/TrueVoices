@@ -18,7 +18,7 @@ export const ThankyouForm = ({ className }: ThankyouFormProps) => {
 				label="Image Upload"
 				type="file"
 				placeholder=""
-				accept="image/*"
+				accept="image/gif, image/jpeg, image/png"
 			/>
 			<FormInput
 				name={'thankYouPage.title'}

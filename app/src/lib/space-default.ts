@@ -28,7 +28,7 @@ export const defaultSpaceData: Space = {
 		},
 	],
 	thankYouPage: {
-		imageUrl: '',
+		imageUrl: 'https://tenor.com/bbqsN.gif',
 		image: new File([], 'defaultThankYouImage'),
 		title: 'Thank You',
 		message: 'Thank you for your feedback!',

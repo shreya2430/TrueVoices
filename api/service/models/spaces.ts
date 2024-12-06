@@ -46,18 +46,18 @@ const spaceSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'EmailSettings',
 		},
-		userId: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User',
-			required: true,
-		}
+		// userId: {
+		// 	type: mongoose.Schema.Types.ObjectId,
+		// 	ref: 'User',
+		// 	required: true,
+		// }
 	},
 	{ timestamps: true },
 )
 
 export type Space = mongoose.InferSchemaType<typeof spaceSchema>;
 
-const SpaceModel = mongoose.model<Space>('Space', spaceSchema);
+const SpaceModel = mongoose.model('Space', spaceSchema);
 
 
 export default SpaceModel;

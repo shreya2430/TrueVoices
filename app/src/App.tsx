@@ -14,64 +14,64 @@ import { SpaceForm } from './components/space/SpaceForm';
 import { TestimonialPage } from './components/TestimonialPage';
 import { WallOfLove } from './components/WallofLove';
 import PricingPage from './components/Pricing/PricingPage'
+import { UpdateSpcaeForm } from './components/space/UpdateSpcaeForm'
 
 function App() {
   return (
-
-	<GoogleOAuthProvider clientId="GOOGLE_CLIENT_ID">
-		<Router>
-			<Routes>
-				<Route
-					path="/"
-					element={<LandingPage />}
-				/>
-				<Route 
-					path="/register" 
-					element={<RegisterPage />} 
-				/>
-				<Route
-					path="/pricing"
-					element={<PricingPage />}
-				/>
-				<Route
-					path="/login"
-					element={<LoginPage />}
-				/>
-				<Route 
-					path='/reset-password'
-					element={<ResetPasswordPage />}
-				/>
-				<Route
-					path="/:spaceName/collect"
-					element={<TestimonialPage />}
-				/>
-				<Route 
-					path='/route'
-					element={<Intermediate />}
-				/>
-				<Route
-					path='/space-form'
-					element={<SpaceForm open />}
-				/>
-				<Route
-					path="/display/carousel/:spaceName"
-					element={<CarouselWall />}
-				/>
-				<Route
-					path="/display/masonry/:spaceName"
-					element={<MasonryWall />}
-				/>
-				<Route
-					path="/dashboard/:space"
-					element={<Dashboard />}
-				>
+		<GoogleOAuthProvider clientId="GOOGLE_CLIENT_ID">
+			<Router>
+				<Routes>
+					<Route
+						path="/"
+						element={<LandingPage />}
+					/>
+					<Route
+						path="/register"
+						element={<RegisterPage />}
+					/>
+					<Route
+						path="/pricing"
+						element={<PricingPage />}
+					/>
+					<Route
+						path="/login"
+						element={<LoginPage />}
+					/>
+					<Route
+						path="/reset-password"
+						element={<ResetPasswordPage />}
+					/>
+					<Route
+						path="/:spaceName/collect"
+						element={<TestimonialPage />}
+					/>
+					<Route
+						path="/route"
+						element={<Intermediate />}
+					/>
+					<Route
+						path="/space-form"
+						element={<SpaceForm open />}
+					/>
+					<Route
+						path="/display/carousel/:spaceName"
+						element={<CarouselWall />}
+					/>
+					<Route
+						path="/display/masonry/:spaceName"
+						element={<MasonryWall />}
+					/>
+					<Route
+						path="/dashboard/:space"
+						element={<Dashboard />}
+					>
 						<Route
 							path=""
 							element={<Display />}
 						/>
 						<Route
 							path="space-form"
-							element={<SpaceForm open/>}
+							element={<SpaceForm open />}
 						/>
 						<Route
 							path="all"
@@ -85,19 +85,18 @@ function App() {
 							path="text"
 							element={<Display />}
 						/>
-						<Route 
+						<Route
 							path="wall-of-love"
 							element={<WallOfLove />}
 						/>
 						<Route
 							path="settings"
-							element={<Display />}
+							element={<UpdateSpcaeForm />}
 						/>
 					</Route>
-			</Routes>
-		</Router>
-	</GoogleOAuthProvider>
-		
+				</Routes>
+			</Router>
+		</GoogleOAuthProvider>
 	)
 }
 

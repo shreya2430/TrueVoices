@@ -50,15 +50,15 @@ export const FormInput = ({
 	max,
 	accept,
 }: FormInputProps) => {
-	const { control, getValues, setValue } = useFormContext()
+	const { control, setValue, watch } = useFormContext()
 	const [fileName, setFileName] = useState<string | null>(null)
-
 	useEffect(() => {
+		const value = watch(name)
 		if (type === 'file') {
-			setFileName(getValues(name)?.name || null)
+			setFileName(value?.name || null)
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [watch(name)])
 
 	return (
 		<FormField
@@ -73,7 +73,7 @@ export const FormInput = ({
 							{type === 'file' ? (
 								<div className="flex items-center space-x-3 px-4 py-3 mt-2 border border-dashed rounded-md">
 									<Avatar className='rounded-lg size-12'>
-										<AvatarImage src={getValues(name+'Url')} className='object-cover'/>
+										<AvatarImage src={watch(name+'Url')} className='object-cover'/>
 										<AvatarFallback className='rounded-lg size-12 bg-neutral-200'/>
 									</Avatar>
 									<div className='flex flex-col gap-2'>

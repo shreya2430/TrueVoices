@@ -26,7 +26,7 @@ export function SpaceSwitcher() {
 	const navigate = useNavigate()
 	const { data: spaceData, isSuccess } = useGetAllSpaceQuery()
 	const spaceSwitcher = React.useMemo(() => {
-		if (!spaceData) return {}
+		if (!isSuccess) return {}
 		return Object.fromEntries(
 			spaceData.map((space) => [
 				space.spaceName,
@@ -36,7 +36,7 @@ export function SpaceSwitcher() {
 				},
 			])
 		)
-	}, [spaceData])
+	}, [isSuccess, spaceData])
 
 	const activeTeam = space
 		? spaceSwitcher[space]

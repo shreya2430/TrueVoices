@@ -31,12 +31,12 @@ export const TestimonialPage = ({
 				space
 			)
 		}
-		console.log('space', space)
 	}, [space])
 	return (
 		<div
 			className={cn(
-				'flex flex-col space-y-8 text-base max-w-xl mx-auto p-10',
+				'flex flex-col space-y-8 text-base max-w-xl mx-auto p-10 bg-background text-foreground',
+				`${preview ? testimonialSpace.themes : data?.themes}`,
 				className,
 			)}
 		>

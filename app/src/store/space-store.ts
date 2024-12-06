@@ -33,6 +33,13 @@ export const spaceApi = createApi({
 					{ type: 'Space', id: sapce.spaceName },
 				],
 			}),
+			deleteSpace: builder.mutation<void, string>({
+				query: (spaceName) => ({
+					url: `/spaces/${spaceName}`,
+					method: 'DELETE',
+				}),
+				invalidatesTags: ['Space'],
+			}),
 		}
 	},
 })
