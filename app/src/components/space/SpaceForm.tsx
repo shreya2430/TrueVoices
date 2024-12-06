@@ -9,13 +9,14 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
 import {
 	Dialog,
-	DialogContent,
+	DialogContentModified,
 	DialogFooter,
 	DialogHeader,
-	DialogOverlay,
+	DialogOverlayModified,
 	DialogTitle,
 	DialogTrigger,
 } from '../ui/dialog'
+import { Form } from '../ui/form'
 import { SpaceFormTab } from './SpaceFormTab'
 
 type SpaceFormProps = {
@@ -32,67 +33,84 @@ export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 	})
 	const navigate = useNavigate()
 	const [isOpen, setIsOpen] = useState(open)
-  const [createSpace, { isError, isSuccess }] = useCreateSpaceMutation()
-  const [uploadFile, state] = useUploadFileMutation()
+	const [createSpace, { isError, isSuccess }] = useCreateSpaceMutation()
+	const [uploadFile, state] = useUploadFileMutation()
 	const onOpenChange = (open: boolean, url?: string) => {
 		setIsOpen(open)
-    if (!url) navigate(-1)
+		if (!url) navigate(-1)
 		else navigate(url)
 	}
 
-  const handleSumbit = async (data: Space) => {
-    const formData = new FormData()
-    formData.append('file', data.spaceLogo)
-    const profilePic = await uploadFile({data: formData, type: 'image', spaceName: data.spaceName});
-    formData.delete('file')
-    formData.append('file', data.thankYouPage.image)
-    const thankYouPageImage = await uploadFile({data: formData, type: 'gif', spaceName: data.spaceName});
-    const spacePayload: SpaceResType = SpaceResSchema.parse({
-      ...data,
-      spaceLogo: profilePic.data?.url,
-      thankYouPage: {
-        ...data.thankYouPage,
-        image: thankYouPageImage.data?.url
-      },
-      listQuestion: data.listQuestion.map((que) => que.question),
-    })
+	const handleSumbit = async (data: Space) => {
+		const formData = new FormData()
+		formData.append('file', data.spaceLogo)
+		const profilePic = await uploadFile({
+			data: formData,
+			type: 'image',
+			spaceName: data.spaceName,
+		})
+		formData.delete('file')
+		formData.append('file', data.thankYouPage.image)
+		const thankYouPageImage = await uploadFile({
+			data: formData,
+			type: 'gif',
+			spaceName: data.spaceName,
+		})
+		formData.delete('file')
+		const spacePayload: SpaceResType = SpaceResSchema.parse({
+			...data,
+			spaceLogo: profilePic.data?.url,
+			thankYouPage: {
+				...data.thankYouPage,
+				imageUrl: thankYouPageImage.data?.url,
+			},
+			listQuestion: data.listQuestion.map((que) => que.question),
+		})
 
-    await createSpace(spacePayload)
-  }
+		await createSpace(spacePayload)
+	}
 
-  useEffect(() => {
-    if (isSuccess) {
-      onOpenChange(false, `/dashboard/${form.getValues().spaceName}`)
-      form.reset()
-    }
-    if (isError) {
-      console.log(state.error)
-    }
-  }, [isSuccess, isError])
+	useEffect(() => {
+		if (isSuccess) {
+			setTimeout(() => {
+				onOpenChange(false, `/dashboard/${form.getValues().spaceName}`)
+				form.reset()
+			}, 1000)
+		}
+		if (isError) {
+			console.log(state.error)
+		}
+	}, [isSuccess, isError])
 
 	return (
 		<Dialog
 			open={isOpen}
 			onOpenChange={onOpenChange}
 		>
-			<DialogOverlay className="backdrop-blur-sm bg-black/70" />
+			<DialogOverlayModified className="backdrop-blur-sm bg-foreground/70" />
 			<DialogTrigger asChild>{children}</DialogTrigger>
-			<DialogContent className="max-w-screen-xl mx-auto m-8">
+			<DialogContentModified className="max-w-screen-xl mx-auto m-8">
 				<DialogHeader>
 					<DialogTitle>Create Space</DialogTitle>
 				</DialogHeader>
-				<SpaceFormTab id='space-form' onSubmit={handleSumbit}>
-					<DialogFooter>
-						<Button
-							type="submit"
-							form='space-form'
-							variant='default'
-						>
-							Create Space
-						</Button>
-					</DialogFooter>
-				</SpaceFormTab>
-			</DialogContent>
+				<Form {...form}>
+					<SpaceFormTab
+						id="space-form"
+						onSubmit={handleSumbit}
+					>
+						<DialogFooter>
+							<Button
+								type="submit"
+								className="w-full mt-6"
+								form="space-form"
+								variant="default"
+							>
+								Create Space
+							</Button>
+						</DialogFooter>
+					</SpaceFormTab>
+				</Form>
+			</DialogContentModified>
 		</Dialog>
 	)
 }

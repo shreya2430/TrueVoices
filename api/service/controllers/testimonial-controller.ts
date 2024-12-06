@@ -44,6 +44,7 @@ export const updateTestimonial = async (req: Request, res: Response): Promise<vo
     const { id } = req.params;
     const { body } = req;
     const updatedTestomonial: ITestimonial = await testimonialService.updateTestimonial(id, body);
+    res.status(200).json(updatedTestomonial);
   } catch (error: any) {
     setError(error, res);
   }

@@ -2,10 +2,10 @@ import { z } from "zod";
 
 export const TestimonialFormSchema = z.object({
   name: z.string().default("Anonymous"),
-  companyAndTitle: z.string().optional().default(""),
+  companyAndTitle: z.string().optional(),
   liked: z.boolean().optional(),
-  socialLinks: z.string().optional().default(""),
-  address: z.string().optional().default(""),
+  socialLinks: z.string().optional(),
+  address: z.string().optional(),
   rating: z.number().int().min(1).max(5),
   testimonialType: z.enum(["text", "video"]),
   profilePic: z.string().url().optional(),

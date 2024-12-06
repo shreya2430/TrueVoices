@@ -15,15 +15,15 @@ export const Dashboard = () => {
 		<SidebarProvider>
 			<AppSidebar />
 			<SidebarInset className='grid grid-flow-row auto-rows-[min-content_1fr] auto-cols-fr'>
-				<header className="flex h-16 shrink-0 z-30 sticky top-0 bg-inherit rounded-lg items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+				<header className="flex h-16 shrink-0 z-30 mx-1 sticky top-0 bg-inherit rounded-lg items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
 					<div className="flex items-center gap-2 px-4 w-full">
 						<SidebarTrigger className="-ml-1" />
 						<Separator
 							orientation="vertical"
-							className="mr-2 h-5"
+							className="mr-2 h-8"
 						/>
 						<div className="flex justify-between items-center w-full">
-							<h1 className="text-lg font-semibold">{'Dashboard'}</h1>
+							<h1 className="text-3xl font-semibold">{'Dashboard'}</h1>
 							<div className="flex gap-3 items-center">
 								<Badge
 									variant={'default'}

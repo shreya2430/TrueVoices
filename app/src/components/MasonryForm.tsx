@@ -65,7 +65,7 @@ export const MasonryForm = () => {
 				</Form>
 				<div className='space-y-1'>
 					<span className="text-sm">Preview</span>
-					<ScrollArea className="h-[450px] border rounded-md p-8">
+					<ScrollArea className="h-[556px] border rounded-md p-8">
 						<MasonryWall
 							preview
 							formSettings={form.watch()}

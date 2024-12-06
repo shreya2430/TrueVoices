@@ -115,9 +115,13 @@ const updateSpace = async (spaceData: Space): Promise<Space> => {
 
 const deleteSpace = async (spaceName: string): Promise<void> => {
 	try {
-		await ExtraSettings.findOneAndDelete({ spaceName })
-		await ThankYouPage.findOneAndDelete({ spaceName })
-		await EmailSettings.findOneAndDelete({ spaceName })
+		const space = await SpaceModel.findOne({ spaceName })
+		if (!space) {
+			throw new Error('Space not found')
+		}
+		await ExtraSettings.findByIdAndDelete(space.extraSettings)
+		await ThankYouPage.findByIdAndDelete(space.thankYouPage)
+		await EmailSettings.findByIdAndDelete(space.emailSettings)
 		await SpaceModel.findOneAndDelete({ spaceName })
 		return
 	} catch (error) {

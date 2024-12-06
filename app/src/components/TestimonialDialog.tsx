@@ -1,27 +1,37 @@
-import React from 'react'
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
+import { cn } from '@/lib/utils'
+import { TestimonialRes } from '@/types/testimonial'
+import { DialogOverlay } from '@radix-ui/react-dialog'
 import { TestimonialCard } from './TestimonialCard'
-import { Testimonial } from '@/types/testimonial'
 import { TestimonialDialogTrigger } from './TestimonialDialogTrigger'
+import { Button } from './ui/button'
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from './ui/dialog'
 
 type TestimonialDialogProps = {
-  className?: string
-  testimonial: Testimonial
+	className?: string
+	testimonial: TestimonialRes
 }
 
 export const TestimonialDialog = ({
   className,
   testimonial,
 }: TestimonialDialogProps) => {
-
   return (
-    <Dialog>
-      <DialogTrigger>
-        <TestimonialDialogTrigger />
-      </DialogTrigger>
-      <DialogContent>
-        <TestimonialCard testimonial={testimonial}/>
-      </DialogContent>
-    </Dialog>
-  )
+		<Dialog>
+			<DialogTrigger className={cn('w-full', className)}>
+				<TestimonialDialogTrigger testimonial={testimonial} />
+			</DialogTrigger>
+      <DialogOverlay className='backdrop-blur-sm bg-black/20'/>
+			<DialogContent className='[&>button]:hidden'>
+				<TestimonialCard
+					testimonial={testimonial}
+					className="border-none shadow-none"
+				/>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant={'secondary'} className='w-full tracking-wide'>Close</Button>
+          </DialogClose>
+        </DialogFooter>
+			</DialogContent>
+		</Dialog>
+	)
 }

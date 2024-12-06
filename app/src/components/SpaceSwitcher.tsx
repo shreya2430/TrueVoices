@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { ChevronsUpDown, Plus } from 'lucide-react'
+import * as React from 'react'
 
 import {
 	DropdownMenu,
@@ -7,8 +7,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-	DropdownMenuShortcut,
-	DropdownMenuTrigger,
+	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import {
 	SidebarMenu,
@@ -16,10 +15,9 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from '@/components/ui/sidebar'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useGetAllSpaceQuery } from '@/store/space-store'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-
 export function SpaceSwitcher() {
 	const { isMobile } = useSidebar()
 	const { space } = useParams()
@@ -86,7 +84,7 @@ export function SpaceSwitcher() {
 								<DropdownMenuLabel className="text-xs text-muted-foreground">
 									Spaces
 								</DropdownMenuLabel>
-								{Object.values(spaceSwitcher).map((space, index) => (
+								{Object.values(spaceSwitcher).map((space) => (
 									<DropdownMenuItem
 										key={space.name}
 										onClick={() => navigate(`/dashboard/${toSlug(space.name)}`)}
@@ -99,7 +97,6 @@ export function SpaceSwitcher() {
 										</Avatar>
 										</div>
 										{space.name}
-										<DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
 									</DropdownMenuItem>
 								))}
 								<DropdownMenuSeparator className="bg-sidebar-accent" />

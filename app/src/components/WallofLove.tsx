@@ -5,12 +5,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 export const WallOfLove = () => {
 	return (
 		<Tabs
-			className="mx-4"
+			className='mx-4'
 			defaultValue="carousel"
 		>
-			<TabsList>
-				<TabsTrigger value="carousel">Carousel</TabsTrigger>
-				<TabsTrigger value="masonry">Masonry</TabsTrigger>
+			<TabsList className='w-full'>
+				<TabsTrigger value="carousel" className='w-full'>Carousel</TabsTrigger>
+				<TabsTrigger value="masonry" className='w-full'>Masonry</TabsTrigger>
 			</TabsList>
 			<TabsContent
 				value="carousel"

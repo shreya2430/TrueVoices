@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react'
 import { defaultSpaceData } from '@/lib/space-default'
 import {useGetSpaceQuery} from "@/store/space-store";
 import {useParams} from "react-router-dom";
-import TestimonialsList from "./testimonials/TestimonialsList"; // Import the updated list component
-
 
 type TestimonialPageProps = {
 	// Props definition goes here

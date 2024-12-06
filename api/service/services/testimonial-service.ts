@@ -32,9 +32,14 @@ export const getTestimonialById = async (id: string): Promise<ITestimonial | nul
 // Update a testimonial by ID
 export const updateTestimonial = async (
   id: string,
-  data: Partial<ITestimonial>
+  data: ITestimonial
 ): Promise<ITestimonial | null> => {
-  return await Testimonial.findByIdAndUpdate(id, data, { new: true });
+  try {
+    const testimonial = await Testimonial.findByIdAndUpdate(id, data, { new: true });
+    return testimonial;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 // Delete a testimonial by ID

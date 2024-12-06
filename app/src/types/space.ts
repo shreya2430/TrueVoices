@@ -39,7 +39,8 @@ export type Space = z.infer<typeof SpaceSchema>;
 
 export const SpaceResSchema = z.object({
 	...SpaceSchema.shape,
-  spaceLogo: z.string().url(),
+	spaceLogo: z.string().url(),
+	thankYouPage: ThankYouPageSchema.omit({ image: true }),
 	listQuestion: z.array(z.string()),
 })
 
