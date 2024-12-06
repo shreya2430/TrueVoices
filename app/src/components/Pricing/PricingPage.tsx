@@ -1,134 +1,163 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../LandingPage/Header";
+import Footer from "../LandingPage/Footer";
 
 const PricingPage = () => {
-  const [isYearlyBilling, setIsYearlyBilling] = useState(false);
+  const navigate = useNavigate();
+
+  // Mock function to check user authentication and get user details
+  const getUserDetails = () => {
+    // Replace with actual authentication logic
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    return user && user.userId ? user : null;
+  };
+
+  const handlePaymentNavigation = (price: number, planName: string) => {
+    const user = getUserDetails();
+
+    if (!user) {
+      // Redirect to the sign-up page if the user is not authenticated
+      navigate("/register");
+      return;
+    }
+
+    // Navigate to the payment page with the amount, plan, and userId
+    navigate(
+      `/payment?amount=${price}&plan=${encodeURIComponent(
+        planName
+      )}&userId=${user.userId}`
+    );
+  };
 
   const pricingPlans = [
     {
       name: "Starter",
       priceMonthly: "$0/month",
-      priceYearly: "$0/year",
-      description: "For hobbies 🧑‍🎨",
+      price: 0,
+      description: "For hobbies \uD83E\uDDD1\u200D\uD83C\uDFA8", // 🧑‍🎨
       features: [
-        "1 space",
+        "2 video testimonials",
+        "12 text testimonials",
         "Public Wall of Love page",
-        "Video download",
         "Video auto transcription",
-        
       ],
       mostPopular: false,
     },
     {
       name: "Starter Plus",
       priceMonthly: "$10/month",
-      priceYearly: "$100/year",
-      description: "For small teams 🏡",
+      price: 10,
+      description: "For small teams \uD83C\uDFE1", // 🏡
       features: [
-        "Unlimited text testimonials",
-        "2 video testimonials",
+        "4 video testimonials",
+        "40 text testimonials",
         "Public Wall of Love page",
-        "Video download",  
+        "Video download",
+        "Email support",
       ],
       mostPopular: false,
     },
     {
       name: "Premium",
       priceMonthly: "$30/month",
-      priceYearly: "$200/year",
-      description: "For growing businesses 📈",
+      price: 30,
+      description: "For growing businesses \uD83D\uDCB2", // 📈
       features: [
-        "Unlimited testimonials",
+        "10 video testimonials",
+        "100 text testimonials",
         "Public Wall of Love page",
         "Advanced Analytics",
+        "Email support",
       ],
       mostPopular: true,
     },
     {
       name: "Ultimate",
-      priceMonthly: "$35/month",
-      priceYearly: "$250/year",
-      description: "For large businesses 🚀",
+      priceMonthly: "$45/month",
+      price: 45,
+      description: "For large businesses \uD83D\uDE80", // 🚀
       features: [
-        "Unlimited testimonials",
+        "Unlimited text testimonials",
+        "Unlimited video testimonials",
+        "Public Wall of Love page",
+        "Advanced Analytics",
         "Custom contracts",
         "Enterprise support",
+        "Email support",
       ],
       mostPopular: false,
     },
   ];
 
   return (
-    <div className="pricing-page text-white bg-gray-900 min-h-screen py-10">
-      {/* Header Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold mb-4">
-          The easiest way to drive more sales for your business
-        </h1>
-        <p className="text-lg">
-          Start with 10 text testimonials and 2 video testimonials on us, then
-          upgrade to our paid plan only if you're happy.
-        </p>
-        <button className="bg-yellow-400 text-black font-bold py-2 px-4 mt-6 rounded">
-          7 days free trial, cancel anytime!
-        </button>
-      </div>
-
-      {/* Billing Toggle */}
-      <div className="toggle-billing flex justify-center items-center mb-10">
-        <label className="mr-4 text-lg">Billed Monthly</label>
-        <div
-          className="relative flex items-center justify-center w-16 h-8 bg-gray-700 rounded-full cursor-pointer"
-          onClick={() => setIsYearlyBilling(!isYearlyBilling)}
-        >
-          <span
-            className={`absolute left-1 w-6 h-6 bg-blue-500 rounded-full transition-transform ${
-              isYearlyBilling ? "transform translate-x-8" : ""
-            }`}
-          ></span>
-        </div>
-        <label className="ml-4 text-lg">Billed Yearly</label>
-        <span className="ml-4 bg-blue-500 text-white text-xs px-3 py-1 rounded-full">
-          2 months off 🎁
-        </span>
-      </div>
-
-      {/* Spacing Below Toggle */}
-      <div className="mb-12"></div>
-
-      {/* Pricing Cards */}
-      <div className="pricing-grid grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto max-w-7xl">
-        {pricingPlans.map((plan, index) => (
-          <div
-            key={index}
-            className={`pricing-card p-6 rounded-lg shadow-lg border-2 ${
-              plan.mostPopular ? "border-blue-500" : "border-gray-700"
-            }`}
-          >
-            {plan.mostPopular && (
-              <span className="badge bg-blue-500 text-white text-sm px-2 py-1 rounded">
-                MOST POPULAR
-              </span>
-            )}
-            <h2 className="text-3xl font-bold mb-2">{plan.name}</h2>
-            <p className="text-xl font-medium text-yellow-400 mb-4">
-              {isYearlyBilling ? plan.priceYearly : plan.priceMonthly}
-            </p>
-            <p className="text-gray-300">{plan.description}</p>
-            <ul className="features mt-6 space-y-2">
-              {plan.features.map((feature, i) => (
-                <li key={i} className="flex items-center space-x-2">
-                  <span className="text-green-400">✔</span>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <button className="bg-blue-500 text-white py-2 px-4 mt-6 rounded w-full">
-              {plan.mostPopular ? "Get started" : "Start a free trial"}
+    <>
+      <Header />
+      <div className="pricing-page bg-[hsl(var(--background))] text-[hsl(var(--foreground))] py-24">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-4">
+            The easiest way to drive more sales for your business
+          </h1>
+          <p className="text-lg">
+            Start with 12 text testimonials and 2 video testimonials on us, then
+            upgrade to our paid plan only if you're happy.
+          </p>
+          <div className="flex justify-center gap-4 mt-6">
+            <button
+              className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] font-bold py-2 px-4 rounded"
+              onClick={() => handlePaymentNavigation(0, "Free Trial")}
+            >
+              7 days free trial
+            </button>
+            <button className="bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] font-bold py-2 px-4 rounded">
+              Cancel anytime!
             </button>
           </div>
-        ))}
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="pricing-grid grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto max-w-7xl mb-4">
+          {pricingPlans.map((plan, index) => (
+            <div
+              key={index}
+              className={`pricing-card bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] p-6 rounded-lg shadow-lg border ${
+                plan.mostPopular
+                  ? "border-[hsl(var(--primary))]"
+                  : "border-[hsl(var(--border))]"
+              } flex flex-col justify-between`}
+            >
+              <div>
+                {plan.mostPopular && (
+                  <span className="badge bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] text-sm px-2 py-1 rounded">
+                    MOST POPULAR
+                  </span>
+                )}
+                <h2 className="text-3xl font-bold mb-2">{plan.name}</h2>
+                <p className="text-gray-400">{plan.description}</p>
+                <p className="text-xl font-semibold mb-4">{plan.priceMonthly}</p>
+                <ul className="features mt-6 space-y-2">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-center space-x-2">
+                      <span className="text-green-400">✔</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button
+                className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] py-2 px-4 mt-6 rounded w-full"
+                onClick={() =>
+                  handlePaymentNavigation(plan.price, plan.name)
+                }
+              >
+                {plan.mostPopular ? "Get started" : "Start a free trial"}
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
