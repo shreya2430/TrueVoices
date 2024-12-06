@@ -1,6 +1,8 @@
 import * as userService from '../services/user-authentication-service'; 
 import { setSuccess, setError } from '../response-handler.js';
 import { Request, Response } from 'express'; //Importing types from Express
+import jwt from 'jsonwebtoken'; //Importing JWT for token generation
+import bycrpt from 'bcrypt'; //Importing bcrypt for password hashing
 
 //Registering a new user 
 export const registerUser = async(req: Request, res: Response): Promise<void> => {
@@ -95,21 +97,18 @@ export const checkUsernameExists = async (req: Request, res: Response): Promise<
 
 //Reset the password 
 export const resetPassword = async (req: Request, res: Response): Promise<void> => {
-    try { 
-        const { email, newPassword } = req.body;
+    const { email, newPassword } = req.body;
 
-        //Checking if the user exists
-        const user = await userService.findUserByEmail(email);
-        if (!user) {
+    try {
+        const {new:updatedUser, resetToken } = await userService.updatePassword(email, newPassword);
+        if (!updatedUser) {
             res.status(404).json({ message: 'User not found!'});
             return;
         }
+        res.status(200).json({ message: 'Password updated successfully!', user: updatedUser, resetToken});
 
-        //Updating the user's password
-        const updatedUser = await userService.updatePassword(email, newPassword);
-        res.status(200).json({ message: 'Password reset successfully!', user: updatedUser});
-    } catch(error){
-        console.error("Error resetting the password: ", error);
+    } catch (error) {
+        console.error("Error updating password: ", error);
         res.status(500).json({ message: "Internal Server Error!"});
     }
 };

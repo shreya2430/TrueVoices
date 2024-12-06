@@ -1,0 +1,26 @@
+meta {
+  name: Update a user-s profile information
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/v1/users/:userId/update-profile
+  body: json
+  auth: none
+}
+
+params:path {
+  userId: 
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@gmail.com",
+    "username": "johndoe123",
+    "password": "newPassword123!",
+    "confirmPassword": "newPassword123!"
+  }
+}

@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
 //Secret key for JWT
 const secretKey = process.env.JWT_SECRET;
 
@@ -107,15 +106,26 @@ export const findUserByEmail = async (email: string): Promise<IUser | null> => {
  * @param newPassword - The new plain text password.
  * @returns Promise<IUser | null> - The updated user object, or null if the update fails.
  */
-export const updatePassword = async (email: string, newPassword: string): Promise<IUser | null> => {
+export const updatePassword = async (email: string, newPassword: string): Promise<{new: IUser | null, resetToken: string | null }> => {
     try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        //Generate a reset token
+        const resetToken = jwt.sign({ id: user._id }, secretKey, { expiresIn: '1h' });
+
+        //hash the new password 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
-        const user = await User.findOneAndUpdate(
+
+        //Update the user's password
+        const updatedUser = await User.findOneAndUpdate(
             { email },
             { password: hashedPassword },
-            { new: true } // Return the updated document
-        );
-        return user;
+            { new: true } 
+        )
+
+        return { new: updatedUser, resetToken };
     } catch (error) {
         console.error('Error updating password:', error);
         throw error;

@@ -1,0 +1,11 @@
+meta {
+  name: Log out the current user
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/auth/logout
+  body: json
+  auth: none
+}
