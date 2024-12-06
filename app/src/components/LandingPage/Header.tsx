@@ -103,25 +103,25 @@ const Header = () => {
                     onClick={() => navigate('/route')}
                     className="block w-full px-4 py-2 text-sm text-left hover:bg-[hsl(var(--muted))]"
                   >
-                    Dashboard
+                    {t('header.dropdown.dashboard')}
                   </button>
                   <button
                     onClick={() => navigate('/profile')}
                     className="block w-full px-4 py-2 text-sm text-left hover:bg-[hsl(var(--muted))]"
                   >
-                    Profile
+                     {t('header.dropdown.profile')}
                   </button>
                   <button
                     onClick={() => navigate('/pricing')}
                     className="block w-full px-4 py-2 text-sm text-left hover:bg-[hsl(var(--muted))]"
                   >
-                    Upgrade
+                     {t('header.dropdown.upgrade')}
                   </button>
                   <button
                     onClick={handleLogout}
                     className="block w-full px-4 py-2 text-sm text-left hover:bg-[hsl(var(--muted))]"
                   >
-                    Logout
+                    {t('header.dropdown.logout')}
                   </button>
                 </div>
               )}
