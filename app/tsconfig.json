@@ -9,7 +9,8 @@
     "forceConsistentCasingInFileNames": true, // Enforce consistent file naming
     "baseUrl": ".", // Base directory for resolving paths
     "paths": {
-      "@/*": ["./src/*"] // Path alias for your source directory
+      "@/*": ["./src/*"], // Path alias for your source directory
+      "@/ui/*": ["./src/ui/*"]
     }
   },
   "include": ["src"], // Include all files in the src folder
