@@ -1,0 +1,160 @@
+{
+  "features": [
+    {
+      "title": "Collectez et affichez des témoignages",
+      "subtitle": "Tout en une seule solution",
+      "description": "Créez une page dédiée pour votre entreprise. Partagez le lien facilement par email, sur les réseaux sociaux ou par SMS. La configuration se fait en deux minutes."
+    },
+    {
+      "title": "Facile à gérer",
+      "subtitle": "Un tableau de bord pour gérer tous les témoignages",
+      "description": "Vous disposerez d'un tableau de bord simple et épuré pour gérer tous vos témoignages en un seul endroit. C'est comme votre boîte de réception email, mais conçue pour votre preuve sociale !"
+    },
+    {
+      "title": "Suivez les métriques",
+      "subtitle": "Comprenez les performances des témoignages vidéo",
+      "description": "Suivez les métriques de toutes les vidéos intégrées, aidez votre équipe marketing à comprendre les performances et mettez en avant les vidéos les plus performantes.",
+      "note": "* Disponible dans le plan Ultimate"
+    },
+    {
+      "title": "Plus de preuves sociales",
+      "subtitle": "Pas seulement des témoignages texte et vidéo",
+      "description": "Gérez les témoignages des réseaux sociaux, des plateformes vidéo et des sites d'avis en un seul endroit !"
+    },
+    {
+      "title": "Intégrez le mur d'amour",
+      "subtitle": "Les meilleurs témoignages au même endroit",
+      "description": "Mettez en avant tous vos témoignages favoris. Intégrez-les sur votre site web en moins d'une minute, sans connaissances en codage requises !"
+    }
+  ],
+  "ourFeatures": "Nos fonctionnalités",
+  "tryForFree": "Essayez gratuitement",
+  "footer": {
+    "links": [
+      {
+        "text": "À propos",
+        "href": "#",
+        "ariaLabel": "Page À propos"
+      },
+      {
+        "text": "Politique de confidentialité",
+        "href": "#",
+        "ariaLabel": "Page Politique de confidentialité"
+      },
+      {
+        "text": "Contactez-nous",
+        "href": "#",
+        "ariaLabel": "Page Contactez-nous"
+      }
+    ],
+    "copyright": "© {{year}} TrueVoices. Tous droits réservés."
+  },
+  "header": {
+    "title": "TrueVoices",
+    "home": "Accueil",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "signIn": "Se connecter",
+    "dropdown": {
+      "dashboard": "Tableau de bord",
+      "profile": "Profil",
+      "upgrade": "Mettre à niveau",
+      "logout": "Se déconnecter"
+    }
+  },
+  "hero": {
+    "title": "Bienvenue sur TrueVoices",
+    "subtitle": "Collectez et mettez en valeur des témoignages authentiques de vos clients avec facilité.",
+    "paragraph1": "Les voix de vos clients sont votre outil marketing le plus puissant. Avec TrueVoices, vous pouvez collecter, gérer et intégrer des témoignages sans effort — aucun codage requis.",
+    "paragraph2": "Renforcez la confiance et la crédibilité grâce à des retours authentiques de clients satisfaits. Configurez votre page de témoignages en quelques minutes et voyez votre marque prospérer !",
+    "buttonSignUp": "S'inscrire",
+    "buttonLearnMore": "En savoir plus"
+  },
+  "team": {
+    "title": "Rencontrez notre équipe",
+    "members": [
+      {
+        "name": "Shreya Wanisha",
+        "image": "/TeamImages/ShreyaWanisha.jpeg",
+        "linkedin": "https://www.linkedin.com/in/shreya-wanisha/",
+        "bio": "Développeuse full-stack passionnée par la création d'applications web. Expertise en Java, Spring Boot, React et Node.js."
+      },
+      {
+        "name": "Maithili Wade",
+        "image": "/TeamImages/_DSC9226-Enhanced-NR-3.jpg",
+        "linkedin": "https://www.linkedin.com/in/maithili-wade/",
+        "bio": "Architecte devenue ingénieure logicielle. Explore actuellement l'intersection passionnante entre technologie et design."
+      },
+      {
+        "name": "Jay Vekariya",
+        "image": "/TeamImages/jay.jpeg",
+        "linkedin": "https://www.linkedin.com/in/jay-vekariya/",
+        "bio": "Développeur full-stack spécialisé dans React et Node.js."
+      },
+      {
+        "name": "Harshit Kant",
+        "image": "/TeamImages/harshit.jpeg",
+        "linkedin": "https://www.linkedin.com/in/harshit-kant-hk-0a87864b/",
+        "bio": "Ingénieur logiciel MERN Stack passionné, avec un fort intérêt pour le développement front-end, l'automatisation des tests et l'assurance qualité."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "La manière la plus simple de générer plus de ventes pour votre entreprise",
+    "subtitle": "Commencez avec 12 témoignages texte et 2 témoignages vidéo offerts, puis passez à notre plan payant seulement si vous êtes satisfait.",
+    "freeTrial": "Essai gratuit de 7 jours",
+    "cancelAnytime": "Annulez à tout moment !",
+    "mostPopular": "LE PLUS POPULAIRE",
+    "plans": [
+      {
+        "name": "Starter",
+        "priceMonthly": "0€",
+        "description": "Pour les loisirs 🧑‍🎨",
+        "features": [
+          "2 témoignages vidéo",
+          "12 témoignages texte",
+          "Page publique Wall of Love",
+          "Transcription automatique des vidéos"
+        ]
+      },
+      {
+        "name": "Starter Plus",
+        "priceMonthly": "10€",
+        "description": "Pour les petites équipes 🏡",
+        "features": [
+          "4 témoignages vidéo",
+          "40 témoignages texte",
+          "Page publique Wall of Love",
+          "Téléchargement de vidéos",
+          "Support par email"
+        ]
+      },
+      {
+        "name": "Premium",
+        "priceMonthly": "30€",
+        "description": "Pour les entreprises en croissance 📈",
+        "features": [
+          "10 témoignages vidéo",
+          "100 témoignages texte",
+          "Page publique Wall of Love",
+          "Analyses avancées",
+          "Support par email"
+        ]
+      },
+      {
+        "name": "Ultimate",
+        "priceMonthly": "45€",
+        "description": "Pour les grandes entreprises 🚀",
+        "features": [
+          "Témoignages texte illimités",
+          "Témoignages vidéo illimités",
+          "Page publique Wall of Love",
+          "Analyses avancées",
+          "Contrats personnalisés",
+          "Support entreprise",
+          "Support par email"
+        ]
+      }
+    ]
+  }
+}

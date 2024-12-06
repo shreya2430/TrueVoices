@@ -54,7 +54,13 @@
     "home": "Home",
     "features": "Features",
     "pricing": "Pricing",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "dropdown": {
+      "dashboard": "Dashboard",
+      "profile": "Profile",
+      "upgrade": "Upgrade",
+      "logout": "Logout"
+    }
   },
 "hero": {
     "title": "Welcome to TrueVoices",
@@ -90,6 +96,64 @@
         "image": "/TeamImages/harshit.jpeg",
         "linkedin": "https://www.linkedin.com/in/harshit-kant-hk-0a87864b/",
         "bio": "Passionate MERN Stack Software Engineer, with strong interest in Front-End Engineering, Test Automation, and Quality Assurance (QA)."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "The easiest way to drive more sales for your business",
+    "subtitle": "Start with 12 text testimonials and 2 video testimonials on us, then upgrade to our paid plan only if you're happy.",
+    "freeTrial": "7 days free trial",
+    "cancelAnytime": "Cancel anytime!",
+    "mostPopular": "MOST POPULAR",
+    "plans": [
+      {
+        "name": "Starter",
+        "priceMonthly": "$0",
+        "description": "For hobbies 🧑‍🎨",
+        "features": [
+          "2 video testimonials",
+          "12 text testimonials",
+          "Public Wall of Love page",
+          "Video auto transcription"
+        ]
+      },
+      {
+        "name": "Starter Plus",
+        "priceMonthly": "$10",
+        "description": "For small teams 🏡",
+        "features": [
+          "4 video testimonials",
+          "40 text testimonials",
+          "Public Wall of Love page",
+          "Video download",
+          "Email support"
+        ]
+      },
+      {
+        "name": "Premium",
+        "priceMonthly": "$30",
+        "description": "For growing businesses 📈",
+        "features": [
+          "10 video testimonials",
+          "100 text testimonials",
+          "Public Wall of Love page",
+          "Advanced Analytics",
+          "Email support"
+        ]
+      },
+      {
+        "name": "Ultimate",
+        "priceMonthly": "$45",
+        "description": "For large businesses 🚀",
+        "features": [
+          "Unlimited text testimonials",
+          "Unlimited video testimonials",
+          "Public Wall of Love page",
+          "Advanced Analytics",
+          "Custom contracts",
+          "Enterprise support",
+          "Email support"
+        ]
       }
     ]
   }

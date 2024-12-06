@@ -13,12 +13,14 @@ export const LanguageSwitcher: React.FC = () => {
       <select
         onChange={handleLanguageChange}
         value={i18n.language}
-        className="bg-gray-100 border border-gray-300 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 px-3 py-1 ml-29"
+        className="bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] border border-[hsl(var(--border))] text-sm rounded-md focus:ring-[hsl(var(--ring))] focus:border-[hsl(var(--ring))] px-3 py-1"
       >
         <option value="en">English</option>
         <option value="hi">हिन्दी</option>
+        <option value="fr">Français</option>
       </select>
     </div>
   );
 };
+
 export default LanguageSwitcher;

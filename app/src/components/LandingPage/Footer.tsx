@@ -18,7 +18,7 @@ const Footer = () => {
   });
 
   return (
-    <footer className="border-t py-4 mt-16">
+    <footer className="border-t bg-background py-4 ">
       <div className="container mx-auto text-center">
         <div className="mb-4">
           {links.map((link, index) => (
