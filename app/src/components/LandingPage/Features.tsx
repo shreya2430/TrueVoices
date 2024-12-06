@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '../ui/button';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +16,19 @@ const Features = () => {
 
   // Fetch features with type assertion
   const features: Feature[] = t('features', { returnObjects: true }) as Feature[];
-  
+
+  // Function to handle navigation based on login status
+  const handleNavigation = () => {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user && user.token) {
+      // User is signed in, navigate to the route page
+      navigate('/route');
+    } else {
+      // User is not signed in, navigate to the register page
+      navigate('/register');
+    }
+  };
+
   return (
     <section className="py-10 bg-gray-50 dark:bg-gray-900" id="features">
       <div className="container mx-auto px-4 text-center">
@@ -57,7 +68,7 @@ const Features = () => {
                 <Button
                   color="primary"
                   className="w-full bg-blue-500 text-white hover:bg-blue-600 rounded-md py-2"
-                  onClick={() => navigate('/register')}
+                  onClick={handleNavigation}
                 >
                   {t('tryForFree')} {/* Add a key for "Try it for Free" */}
                 </Button>

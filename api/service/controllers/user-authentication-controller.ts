@@ -25,7 +25,18 @@ export const registerUser = async(req: Request, res: Response): Promise<void> =>
         //GEnerate JWT token
         const token = userService.generateToken(newUser)
 
-        res.status(201).json({ message: "User registered successfully!", token, user: newUser});
+        // res.status(201).json({ message: "User registered successfully!", token, user: newUser });
+        
+                // Send user details and token to the frontend
+        res.status(200).json({
+            userId: newUser._id,
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            email: newUser.email,
+            textCredits: newUser.textCredits, 
+            videoCredits: newUser.videoCredits,
+            token,
+        });
     } catch (error) {
         console.error('Error registering user: ', error);
         res.status(500).json({ message: 'Internal Server Error!'});
@@ -38,7 +49,8 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         const { email, password } = req.body;
 
         //Authenticate the user
-        const user  = await userService.authenticateUser(email, password);
+        const user = await userService.authenticateUser(email, password);
+        console.log(user);
         if (!user) {
             res.status(401).json({ message: 'Invalid email or password!'});
             return;
@@ -46,7 +58,16 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
 
         //Generating JWT token
         const token = userService.generateToken(user);
-        res.status(200).json({ message: "Login Successful!", token, user});
+         res.status(200).json({
+            userId: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            textCredits: user.textCredits, 
+            videoCredits: user.videoCredits,
+            token,
+        });
+        // res.status(200).json({ message: "Login Successful!", token, user});
     } catch (error) {
         console.error("Error logging in user: ", error);
         res.status(500).json({ message: "Internal Server Error!"});
