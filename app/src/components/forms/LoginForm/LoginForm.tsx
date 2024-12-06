@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FormField } from '@/components/forms/FormField/FormField';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 
 type FieldType ={ 
@@ -57,14 +56,6 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
         }
     };
 
-    const handleGoogleSuccess = (credentialResponse: any) => {
-        console.log('Google Login Success: ', credentialResponse);
-    };
-
-    const handleGoogleError = () => {
-        setError('Google Sign-In Failed. Please try again.')
-    }
-
     return (
         <div className="flex items-center justify-center bg-gray-100 mt-10">
             <Card className="mx-auto max-w-md">
@@ -114,6 +105,7 @@ export function LoginForm({ fields, onSubmit }: LoginFormProps) {
                             text="signin_with"
                             containerProps={{ className: "w-full bg-white text-gray-500 text-lg mt-4" }}
                         /> */}
+                        {/* </div> */}
                         <div className="mt-4 text-center">
                             <p className="text-sm text-gray-500">
                                 Don't have an account?

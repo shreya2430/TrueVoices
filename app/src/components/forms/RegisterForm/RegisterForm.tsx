@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormField } from '../FormField/FormField';
-import { GoogleLogin } from '@react-oauth/google';
+
 
 type FieldType ={
     id: string;
@@ -61,14 +61,6 @@ export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
             setError('Server error, please try again later');
           }
     };
-
-    const handleGoogleSuccess = (credentialResponse: any) => {
-        console.log('Google Login Success: ', credentialResponse);
-    };
-
-    const handleGoogleError = () => {
-        setError('Google Sign-In failed. Please try again');
-    }
     
 
     return (

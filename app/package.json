@@ -36,7 +36,7 @@
 		"boring-avatars": "^1.11.2",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"dotenv": "^16.4.5",
+		"dotenv": "^16.4.7",
 		"embla-carousel-autoplay": "^8.5.1",
 		"embla-carousel-react": "^8.5.1",
 		"i18next": "^24.0.5",

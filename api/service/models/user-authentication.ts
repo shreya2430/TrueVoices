@@ -8,7 +8,10 @@ export interface IUser extends Document {
     username: string;
     email: string;
     password: string;
+    videoCredits: number;
+    textCredits: number;
     comparePassword(userpassword: string): Promise<boolean>;
+    
 }
 
 //Defining the User Schema
@@ -29,6 +32,8 @@ const UserSchema: Schema<IUser> = new mongoose.Schema(
             },
         },
         password: { type: String, required: true, minlength: 8 },
+        videoCredits: { type: Number, required: true, default: 2 }, // New field for video credits
+        textCredits: { type: Number, required: true, default: 12 },  // New field for text credits
     },
     { timestamps: true }
 );

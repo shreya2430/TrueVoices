@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import * as userController from "../controllers/user-authentication-controller";
 import { authenticateToken } from "../middlewares/jwt-middleware";
+const userService = require('../services/user-authentication-service');
 
 const router: Router = express.Router();
 

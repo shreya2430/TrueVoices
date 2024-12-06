@@ -5,6 +5,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 const Header = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  
 
   return (
     <header className="border-b bg-card text-card-foreground shadow-sm">

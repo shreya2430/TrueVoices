@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../ui/button';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 // Define the type for each feature
 type Feature = {
@@ -12,6 +13,7 @@ type Feature = {
 
 const Features = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   // Fetch features with type assertion
   const features: Feature[] = t('features', { returnObjects: true }) as Feature[];
@@ -55,6 +57,7 @@ const Features = () => {
                 <Button
                   color="primary"
                   className="w-full bg-blue-500 text-white hover:bg-blue-600 rounded-md py-2"
+                  onClick={() => navigate('/register')}
                 >
                   {t('tryForFree')} {/* Add a key for "Try it for Free" */}
                 </Button>
