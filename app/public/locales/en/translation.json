@@ -210,5 +210,10 @@
     "title": "Payment Failed",
     "message": "Unfortunately, your payment could not be processed. Please try again.",
     "retryButton": "Retry Payment"
+  },
+    "profile": {
+    "defaultAvatar": "U",
+    "textCredits": "Text Credits:",
+    "videoCredits": "Video Credits:"
   }
 }

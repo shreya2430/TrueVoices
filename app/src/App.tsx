@@ -16,6 +16,7 @@ import { TestimonialPage } from './components/TestimonialPage';
 import { TestimonialsList } from './components/testimonials/TestimonialsList';
 import { WallOfLove } from './components/WallofLove';
 import { ProtectedRoute } from './route/ProtectedRoute'
+import  Profile  from './components/profile';
 
 function App() {
 	const isAuthenticated = () => {
@@ -106,6 +107,10 @@ function App() {
 					<Route
 						path="/payment"
 						element={<PaymentPage />}
+				  />
+				  <Route
+						path="/profile"
+						element={<Profile />}
 					/>
 				</Route>
 			</Routes>
