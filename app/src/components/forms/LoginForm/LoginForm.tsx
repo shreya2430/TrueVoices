@@ -98,7 +98,7 @@ export function LoginForm({ fields }: LoginFormProps) {
             <Card className="mx-auto max-w-md">
                 <CardHeader>
                     {/* Login heading and the description below it */}
-                    <CardTitle className="text-2xl text-blue-500">{t('loginForm.signIn')}</CardTitle>
+                    <CardTitle className="text-2xl text-blue-500">{t('loginForm.signUp')}</CardTitle>
                     <CardDescription>{t('loginForm.enterDetails')}</CardDescription>
                 </CardHeader>
                 <CardContent>
