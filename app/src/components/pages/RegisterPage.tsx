@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';  // Import useTranslation hook
 
 
 export function RegisterPage() {
-    const handleFormSubmit = (formData: { [key: string]: string }) => {
-        console.log(formData);
-    };
+    // const handleFormSubmit = (formData: { [key: string]: string }) => {
+    //     console.log(formData);
+    // };
 
     const { t } = useTranslation(); // Initialize translation hook
 
