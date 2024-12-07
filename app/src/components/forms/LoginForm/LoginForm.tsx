@@ -4,6 +4,8 @@ import { FormField } from '@/components/forms/FormField/FormField';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from "react-i18next"; // Import translation hook
+
 
 type FieldType = { 
     id: string;
@@ -23,6 +25,7 @@ export function LoginForm({ fields }: LoginFormProps) {
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const navigate = useNavigate();
     const location = useLocation();
+    const { t } = useTranslation();  // Initialize translation hook
 
     // Extract the redirect path from the query parameters
     const searchParams = new URLSearchParams(location.search);
@@ -73,17 +76,17 @@ export function LoginForm({ fields }: LoginFormProps) {
                     })
                 );                
 
-                setSuccessMessage('Login successful!');
+                setSuccessMessage(t('loginForm.successMessage')); // Translated success message
                 setFormData({}); // Clear the form
 
                 // Redirect to the original page or fallback to the dashboard
                 navigate(redirectPath);
             } else {
-                setError('Invalid response from server. Missing user details.');
+                setError(t('loginForm.errorMessage'));  // Translated error message
             }
         } else {
             const errorData = await response.json();
-            setError(errorData.message || 'Login failed!');
+            setError(errorData.message || t('loginForm.errorMessage'));
         }
     } catch (err) {
         setError('An error occurred. Please try again later.');
@@ -95,8 +98,8 @@ export function LoginForm({ fields }: LoginFormProps) {
             <Card className="mx-auto max-w-md">
                 <CardHeader>
                     {/* Login heading and the description below it */}
-                    <CardTitle className="text-2xl text-blue-500">Sign In</CardTitle>
-                    <CardDescription>Enter your details to sign in to your account</CardDescription>
+                    <CardTitle className="text-2xl text-blue-500">{t('loginForm.signIn')}</CardTitle>
+                    <CardDescription>{t('loginForm.enterDetails')}</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
@@ -106,9 +109,9 @@ export function LoginForm({ fields }: LoginFormProps) {
                                 <li key={field.id}>
                                     <FormField 
                                         id={field.id}
-                                        label={field.label}
+                                        label={t(field.label)}
                                         type={field.type}
-                                        placeholder={field.placeholder}
+                                        placeholder={t(field.placeholder)}
                                         value={formData[field.id] || ''}
                                         required={field.required}
                                         onChange={handleChange}
@@ -119,7 +122,7 @@ export function LoginForm({ fields }: LoginFormProps) {
                         {error && <div className="text-red-500 mt-2">{error}</div>}
                         {successMessage && <div className="text-green-500 mt-2">{successMessage}</div>}
                         {/* Login button */}
-                        <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign In</Button>
+                        <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">{t('loginForm.signInButton')}</Button>
                         {/* Forgot password Link */}
                         {/* <div className="mt-2">
                             <a href="/reset-password" className="text-sm text-blue-500 hover:underline">
@@ -142,9 +145,9 @@ export function LoginForm({ fields }: LoginFormProps) {
                         {/* </div> */}
                         <div className="mt-4 text-center">
                             <p className="text-sm text-gray-500">
-                                Don't have an account?
+                                {t('loginForm.noAccount')}
                                 <a href={`/register?redirect=${encodeURIComponent(redirectPath)}`} className="text-blue-500 hover:underline ml-1">
-                                Sign Up
+                                {t('loginForm.signUp')}
                                 </a>
                             </p>
                         </div>

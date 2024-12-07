@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"; //for password hashing
 
 //Define an interface for the User document
 export interface IUser extends Document {
+    userId: string;
     firstName: string;
     lastName: string;
     username: string;
@@ -26,7 +27,7 @@ interface UpdateData {
 }
 
 const UserSchema = new Schema<IUser>({
-    
+    userId: { type: String, required: true, trim: true },
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true },
     username: { type: String, required: true, unique: true, trim: true, minlength: 3 },
