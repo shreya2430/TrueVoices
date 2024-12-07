@@ -7,6 +7,7 @@ import userManagementRouter from './user-management.router.js';
 import { filesRouter } from './files.js'
 import { Request, Response, Express } from 'express'
 import { authenticateToken } from '../middlewares/jwt-middleware.js';
+import paymentRouter from './payment-route';
 
 const intializeRoutes = (app: Express) => {
 	app.get('/', (req: Request, res: Response) => {
@@ -17,6 +18,7 @@ const intializeRoutes = (app: Express) => {
 	app.use('/v1/testimonials', testimonialRoutes) // Testimonial routes
 	app.use('/v1/auth', userAuthRouter) //user-authentication router
 	app.use('/v1/users', userManagementRouter) //user-management router
+	app.use('/v1/payments', paymentRouter) //payment router
 
 	// Catch-all middleware for undefined routes
 	app.use((req, res) => {
