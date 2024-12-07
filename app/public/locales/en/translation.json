@@ -204,5 +204,44 @@
     "title": "Payment Failed",
     "message": "Unfortunately, your payment could not be processed. Please try again.",
     "retryButton": "Retry Payment"
+  },
+  "registerForm": {
+    "signUp": "Sign Up",
+    "enterDetails": "Enter your details to create an account",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Jane",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Doe",
+    "username": "Username",
+    "usernamePlaceholder": "janedoe",
+    "email": "Email",
+    "emailPlaceholder": "jane@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "********",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "********",
+    "signUpButton": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "signUpForFree": "Sign up for free 🤗",
+    "freeCredits": "You will receive 2 video credits and 12 text testimonial credits for FREE!",
+    "successMessage": "User registered successfully!",
+    "errorMessage": "Failed to register user. Please try again."
+  },
+  "loginForm": {
+    "enterDetails": "Enter your details to log in to your account",
+    "errorMessage": "Login failed! Please try again.",
+    "successMessage": "Login successful!",
+    "signInButton": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+  "loginPage": {
+    "welcomeBack": "Welcome back 👋",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Password",
+    "signInButton": "Sign In"
   }
 }

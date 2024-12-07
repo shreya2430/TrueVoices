@@ -204,5 +204,44 @@
     "title": "Paiement échoué",
     "message": "Malheureusement, votre paiement n'a pas pu être traité. Veuillez réessayer.",
     "retryButton": "Réessayer le paiement"
+  },
+  "registerForm": {
+    "signUp": "S'inscrire",
+    "enterDetails": "Entrez vos informations pour créer un compte",
+    "firstName": "Prénom",
+    "firstNamePlaceholder": "Jane",
+    "lastName": "Nom de famille",
+    "lastNamePlaceholder": "Doe",
+    "username": "Nom d'utilisateur",
+    "usernamePlaceholder": "janedoe",
+    "email": "Email",
+    "emailPlaceholder": "jane@example.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "********",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "********",
+    "signUpButton": "S'inscrire",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "signIn": "Se connecter",
+    "signUpForFree": "Inscrivez-vous gratuitement 🤗",
+    "freeCredits": "Vous recevrez 2 crédits vidéo et 12 crédits de témoignages texte GRATUITS !",
+    "successMessage": "Utilisateur enregistré avec succès !",
+    "errorMessage": "Échec de l'enregistrement de l'utilisateur. Veuillez réessayer."
+  },
+  "loginForm": {
+    "enterDetails": "Entrez vos informations pour vous connecter à votre compte",
+    "errorMessage": "Échec de la connexion! Veuillez réessayer.",
+    "successMessage": "Connexion réussie!",
+    "signInButton": "Se connecter",
+    "noAccount": "Vous n'avez pas de compte?",
+    "signUp": "S'inscrire"
+  },
+  "loginPage": {
+    "welcomeBack": "Bon retour 👋",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "emailPlaceholder": "Entrez votre e-mail",
+    "passwordPlaceholder": "Mot de passe",
+    "signInButton": "Se connecter"
   }
 }
