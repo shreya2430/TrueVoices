@@ -199,5 +199,10 @@
     "textCredits": "Crédits texte",
     "videoCredits": "Crédits vidéo",
     "startJourney": "Commencez votre voyage!"
+  },
+    "failureDialog": {
+    "title": "Paiement échoué",
+    "message": "Malheureusement, votre paiement n'a pas pu être traité. Veuillez réessayer.",
+    "retryButton": "Réessayer le paiement"
   }
 }

@@ -199,5 +199,10 @@
     "textCredits": "Text Credits",
     "videoCredits": "Video Credits",
     "startJourney": "Start your journey!"
+  },
+    "failureDialog": {
+    "title": "Payment Failed",
+    "message": "Unfortunately, your payment could not be processed. Please try again.",
+    "retryButton": "Retry Payment"
   }
 }
