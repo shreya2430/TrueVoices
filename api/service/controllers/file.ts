@@ -1,4 +1,4 @@
-import { uploadFile } from "../services/file";
+import { fileService } from "../services/file";
 import { Request, Response } from "express";
 
 export const upload = async (req: Request, res: Response) => {
@@ -10,7 +10,7 @@ export const upload = async (req: Request, res: Response) => {
     }
     const path = req.url.split("/").slice(1).join("/");
     console.log(path);
-    const sasUrl = await uploadFile(file, path);
+    const sasUrl = await fileService.uploadFile(file, path);
     res.status(200).json({ url: sasUrl });
   } catch (error) {
     console.error(error);

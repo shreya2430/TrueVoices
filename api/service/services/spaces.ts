@@ -58,23 +58,14 @@ const createSpace = async (spaceData: Space): Promise<Space> => {
 		if (spaceExists) {
 			throw new Error(`space already exists with ${spaceData.spaceName}`)
 		}
-		if (spaceData.extraSettings) {
-			extraSettings = new ExtraSettings(spaceData.extraSettings)
-			await extraSettings.save()
-		}
-		if (spaceData.thankYouPage) {
-			thankYouPage = new ThankYouPage(spaceData.thankYouPage)
-			await thankYouPage.save()
-		}
-		if (spaceData.emailSettings) {
-			emailSettings = new EmailSettings(spaceData.emailSettings)
-			await emailSettings.save()
-		}
+		extraSettings = await ExtraSettings.create({ ...spaceData.extraSettings, spaceName: spaceData.spaceName })
+		thankYouPage = await ThankYouPage.create({ ...spaceData.thankYouPage, spaceName: spaceData.spaceName })
+		emailSettings = await EmailSettings.create({ ...spaceData.emailSettings, spaceName: spaceData.spaceName })
 		const newSpace = new SpaceModel({
 			...spaceData,
-			extraSettings: extraSettings ? extraSettings._id : null,
-			thankYouPage: thankYouPage ? thankYouPage._id : null,
-			emailSettings: emailSettings ? emailSettings : null,
+			extraSettings: extraSettings._id,
+			thankYouPage: thankYouPage._id,
+			emailSettings: emailSettings._id,
 		})
 
 		await newSpace.save({ validateBeforeSave: true })
@@ -89,9 +80,9 @@ const updateSpace = async (spaceData: Space): Promise<Space> => {
 	try {
 		let extraSettings: ExtraSettingsType, thankYouPage: ThankYouPageType, emailSettings: EmailSettingsType
 		const space = await SpaceModel.findOne({ spaceName: spaceData.spaceName })
-		if (spaceData.extraSettings) ExtraSettings.findByIdAndUpdate(space.extraSettings, spaceData.extraSettings)
-		if (spaceData.thankYouPage) ThankYouPage.findByIdAndUpdate(space.thankYouPage, spaceData.thankYouPage)
-		if (spaceData.emailSettings) EmailSettings.findByIdAndUpdate(space.emailSettings, spaceData.emailSettings)
+		extraSettings = await ExtraSettings.findByIdAndUpdate(space.extraSettings._id, {...spaceData.extraSettings}, { new: true })
+		thankYouPage = await ThankYouPage.findByIdAndUpdate(space.thankYouPage._id, {...spaceData.thankYouPage}, { new: true })
+		emailSettings = await EmailSettings.findByIdAndUpdate(space.emailSettings._id, {...spaceData.emailSettings}, { new: true })
 
 		const updatedSpace = await SpaceModel.findOneAndUpdate({
 			spaceName: spaceData.spaceName,

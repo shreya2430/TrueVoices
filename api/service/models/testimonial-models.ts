@@ -1,24 +1,8 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
-// Define an interface for the testimonial document
-export interface ITestimonial extends Document {
-  name: string;
-  email: string;
-  liked: boolean;
-  rating: number;
-  companyAndTitle: string;
-  socialLinks: string[];
-  address: string;
-  testimonialType: string;
-  content: string;
-  profilePic: string;
-  spaceName: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
 
 // Define the schema for the testimonial model
-const testimonialSchema: Schema<ITestimonial> = new mongoose.Schema(
+const testimonialSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -38,7 +22,7 @@ const testimonialSchema: Schema<ITestimonial> = new mongoose.Schema(
     },
     liked: {
       type: Boolean,
-      required: [false, "Loved status is required"],
+      required: false,
     },
     rating: {
       type: Number,
@@ -53,20 +37,19 @@ const testimonialSchema: Schema<ITestimonial> = new mongoose.Schema(
     },
     socialLinks: {
       type: [String],
-      validate: {
-        validator: function (links: string[]): boolean {
-          return links.every((link) =>
-            /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(link)
-          );
-        },
-        message: "One or more social links are not valid URLs",
-      },
+      // validate: {
+      //   validator: function (links: string[]): boolean {
+      //     return links.every((link) =>
+      //       /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(link)
+      //     );
+      //   },
+      //   message: "One or more social links are not valid URLs",
+      // },
       default: [],
     },
     address: {
       type: String,
-      required: [false, "Address is required"],
-      minlength: [5, "Address must be at least 5 characters long"],
+      required: false,
     },
     testimonialType: {
       type: String,
@@ -77,6 +60,10 @@ const testimonialSchema: Schema<ITestimonial> = new mongoose.Schema(
       required: [true, "Testimonial content is required"],
       minlength: [10, "Content must be at least 10 characters long"],
       maxlength: [500, "Content cannot exceed 500 characters"],
+    },
+    consent: {
+      type: Boolean,
+      required: [true, "Consent is required"],
     },
     profilePic: {
       type: String,
@@ -101,9 +88,11 @@ const testimonialSchema: Schema<ITestimonial> = new mongoose.Schema(
 );
 
 // Create the Testimonial model
-const Testimonial: Model<ITestimonial> = mongoose.model<ITestimonial>(
+const Testimonial = mongoose.model(
   "Testimonial",
   testimonialSchema
 );
+
+export type TestimonialType = mongoose.InferSchemaType<typeof testimonialSchema> & Document;
 
 export default Testimonial;

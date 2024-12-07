@@ -8,6 +8,7 @@ const ThankYouPageSchema = new Schema({
     default: 'Thank you for your time for giving valuable feedback' 
   },
   allowShareOnSocialMedia: { type: Boolean, default: false },
+  spaceName: { type: String, required: true },
 });
 
 const ThankYouPage = mongoose.model(
