@@ -28,7 +28,7 @@ This project was created and developed by a team of four contributors:
     - [User Authentication](#user-authentication)
     - [Object Model Diagram](#object-model-diagram)
     - [Explanation of Relationships and Attributes](#explanation-of-relationships-and-attributes)
-
+    - [API EndPoints](#explaination-of-API's-connected)
 ## Features
 
 - **Customizable Collection Forms** - Gather specific information with tailored forms.
