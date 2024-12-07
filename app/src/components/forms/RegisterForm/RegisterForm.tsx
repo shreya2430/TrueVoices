@@ -110,4 +110,6 @@ export const RegisterForm = () => {
             </Card>
         </div>
     )
+
 }
+

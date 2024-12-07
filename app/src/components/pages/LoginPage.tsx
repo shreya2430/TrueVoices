@@ -1,23 +1,24 @@
 import React from "react";
 import { LoginForm } from "@/components/forms/LoginForm/LoginForm";
-import Header from "../LandingPage/Header";
 import { useTranslation } from "react-i18next";
+import Header from '@/components/LandingPage/Header';
+
 
 const fields = [
     {
-        id: 'email', 
-        label: 'loginPage.email', 
-        type: 'email', 
-        placeholder: 'loginPage.emailPlaceholder', 
+        id: 'email',
+        label: 'loginPage.email',  // Correctly reference the label
+        type: 'email',
+        placeholder: 'loginPage.emailPlaceholder',  // Correctly reference the placeholder
         required: true
-    }, 
+    },
     {
         id: 'password',
         label: 'loginPage.password',
         type: 'password',
         placeholder: 'loginPage.passwordPlaceholder',
         required: true
-    },
+    }
 ];
 
 export function LoginPage() {
