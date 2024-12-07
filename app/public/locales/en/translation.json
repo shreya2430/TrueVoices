@@ -168,5 +168,26 @@
       ]
     }
   ]
-}
+},
+  "payment": {
+    "title": "Complete Your Order",
+    "orderDetails": "Order Details",
+    "plan": "Plan",
+    "textCredits": "Text Credits",
+    "videoCredits": "Video Credits",
+    "amount": "Amount",
+    "enterCardDetails": "Enter Your Card Details",
+    "processing": "Processing...",
+    "payNow": "Pay Now",
+    "receipt": {
+      "title": "Payment Successful",
+      "message": "Thank you for your payment! Your subscription is now active.",
+      "button": "Go to Dashboard"
+    },
+    "failure": {
+      "title": "Payment Failed",
+      "message": "Unfortunately, your payment could not be processed. Please try again.",
+      "button": "Retry Payment"
+    }
+  }
 }

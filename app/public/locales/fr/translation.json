@@ -168,5 +168,26 @@
       ]
     }
   ]
-}
+},
+"payment": {
+    "title": "Terminez votre commande",
+    "orderDetails": "Détails de la commande",
+    "plan": "Plan",
+    "textCredits": "Crédits texte",
+    "videoCredits": "Crédits vidéo",
+    "amount": "Montant",
+    "enterCardDetails": "Entrez les détails de votre carte",
+    "processing": "Traitement...",
+    "payNow": "Payer maintenant",
+    "receipt": {
+      "title": "Paiement réussi",
+      "message": "Merci pour votre paiement ! Votre abonnement est maintenant actif.",
+      "button": "Aller au tableau de bord"
+    },
+    "failure": {
+      "title": "Paiement échoué",
+      "message": "Malheureusement, votre paiement n'a pas pu être traité. Veuillez réessayer.",
+      "button": "Réessayer le paiement"
+    }
+  }
 }

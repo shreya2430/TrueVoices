@@ -12,6 +12,8 @@ import Receipt from './receipt';
 import FailureDialog from './FailureDialog'; // Import FailureDialog component
 import Footer from './LandingPage/Footer';
 import Header from './LandingPage/Header';
+import { useTranslation } from 'react-i18next';
+
 
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 if (!stripePublicKey) {
@@ -20,6 +22,7 @@ if (!stripePublicKey) {
 const stripePromise = loadStripe(stripePublicKey);
 
 const PaymentForm: React.FC = () => {
+  const { t } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
   const location = useLocation();
@@ -116,25 +119,25 @@ const PaymentForm: React.FC = () => {
         onSubmit={handlePayment}
         className="max-w-3xl w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-10 shadow-2xl rounded-lg transform hover:scale-105 transition-all duration-300"
       >
-        <h1 className="text-3xl font-extrabold text-center mb-8">Complete Your Order</h1>
+        <h1 className="text-3xl font-extrabold text-center mb-8">{t('payment.title')}</h1>
         <div className="mb-8 p-6 bg-gray-100 dark:bg-gray-700 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Order Details</h2>
+          <h2 className="text-2xl font-semibold mb-4">{t('payment.orderDetails')}</h2>
           <p className="text-lg">
-            <strong>Plan:</strong> Premium Subscription
+            <strong>{t('payment.plan')}:</strong> Premium Subscription
           </p>
           <p className="text-lg">
-            <strong>Text Credits:</strong> {textCredits}
+            <strong>{t('payment.textCredits')}:</strong> {textCredits}
           </p>
           <p className="text-lg">
-            <strong>Video Credits:</strong> {videoCredits}
+            <strong>{t('payment.videoCredits')}:</strong> {videoCredits}
           </p>
           <p className="text-lg">
-            <strong>Amount:</strong> ${amount}
+            <strong>{t('payment.amount')}:</strong> ${amount}
           </p>
         </div>
         <div className="mb-6">
           <label htmlFor="card-element" className="block text-sm font-medium mb-2">
-            Enter Your Card Details
+            {t('payment.enterCardDetails')}
           </label>
           <CardElement
             id="card-element"
@@ -147,7 +150,7 @@ const PaymentForm: React.FC = () => {
           disabled={!stripe || intentLoading || updateLoading}
           className="w-full py-4 px-6 bg-indigo-600 text-white font-bold rounded-lg shadow-md hover:bg-indigo-700 disabled:opacity-50"
         >
-          {intentLoading || updateLoading ? 'Processing...' : 'Pay Now'}
+          {intentLoading || updateLoading ? t('payment.processing') : t('payment.payNow')}
         </button>
       </form>
       <Receipt isOpen={showReceipt} onClose={handleReceiptClose} userDetails={userDetails} />
