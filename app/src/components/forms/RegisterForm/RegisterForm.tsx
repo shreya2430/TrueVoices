@@ -1,119 +1,113 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FormField } from '../FormField/FormField';
+import { FormInput } from "@/components/FormInput";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form } from '@/components/ui/form';
+import { useRegisterMutation } from "@/store/user-store";
+import  { User, UserSchema } from "@/types/user";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
+export const RegisterForm = () => {
 
-type FieldType ={
-    id: string;
-    label: string;
-    type: string;
-    placeholder: string;
-    required: boolean;
-};
+    const { t } = useTranslation(); //initializing the translation hook 
 
-type RegisterFormProps = {
-    fields: FieldType[];
-    onSubmit: (formData: { [key: string]: string }) => void;
-}
-
-export function RegisterForm({ fields, onSubmit }: RegisterFormProps) {
-    const [formData, setFormData] = useState<{ [key: string]: string }>({});
-    const [error, setError] = useState<string | null>(null);
-    const [successMessage, setSuccessMessage] = useState<string | null>(null);
-    const navigate = useNavigate();
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = e.target;
-        setFormData((prev) => ({ ...prev, [id]: value }));
-        setError(null); // Clear any errors when user starts typing
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (formData.password !== formData.confirmPassword) {
-            setError('Passwords do not match');
-            return;
+    const form = useForm<User>({
+        resolver: zodResolver(UserSchema),
+        defaultValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+        },
+    })
+    const navigate = useNavigate()
+    const [registerUser, state] = useRegisterMutation()
+    const onSubmit = (data: User) => {
+        console.log(data)
+        registerUser(data)
+    }
+    useEffect(() =>{
+        if (state.isSuccess) {
+            console.log(t("registerForm.successMessage"))
+            navigate('/route')
         }
-        try {
-            const response = await fetch('http://localhost:3000/v1/auth/register', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData),
-            });
-      
-            const result = await response.json();
-            if (response.ok) {
-              setSuccessMessage(result.message);
-              setFormData({}); // Clear form on success
-              localStorage.setItem('token', result.token);
-              //Redirecting to the user's dashboard after successful registration
-              navigate('/route');
-            } else {
-              setError(result.message || 'Registration failed');
-            }
-          } catch (err) {
-            console.error('Error:', err);
-            setError('Server error, please try again later');
-          }
-    };
-    
+        if (state.isError) {
+            console.log(t("registerForm.errorMessage"))
+        }
+    }, [state.isSuccess, state.isError])
 
     return (
-        <div className="flex items-center justify-center bg-gray-100">
-            <Card className="mx-auto max-w-md">
-            <CardHeader>
-                <CardTitle className="text-2xl text-blue-500">Sign Up</CardTitle>
-                <CardDescription>Enter your details to create an account</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <form onSubmit={handleSubmit}>
-                    <ul className="grid grid-cols-2 gap-6">
-                        {fields.map((field) => (
-                            <li key={field.id}>
-                                <FormField
-                                    id={field.id}
-                                    label={field.label}
-                                    type={field.type}
-                                    placeholder={field.placeholder}
-                                    value={formData[field.id] || ''} 
-                                    required={field.required}
-                                    onChange={handleChange}   
-                                />
-                            </li>
-                        ))}
-                    </ul>
-                    {error && <div className="text-red-500">{error}</div>}
-                    {successMessage && <div className="text-green-500">{successMessage}</div>}
-                    <Button type="submit" className="w-full bg-blue-500 text-lg mt-4">Sign Up</Button>
-                    {/* <div className="flex items-center my-4">
-                        <hr className="flex-grow border-gray-300" />
-                        <span className="mx-4 text-gray-500"> Or, Register with your Email</span>
-                        <hr className="flex-grow border-gray-300" />
-                    </div> */}
-                    {/* <GoogleLogin
-                        onSuccess={handleGoogleSuccess}
-                        onError={handleGoogleError}
-                        text="signup_with"
-                        containerProps={{ className: "w-full bg-white text-gray-500 text-lg mt-4" }}
-                    /> */}
-                    <div className="text-center mt-4">
-                        <span className="text-gray-600">
-                            Already have an Account?
-                        </span>
-                        <a href='/login' className='text-blue-500 ml-2 hover:underline'>
-                            Sign In
-                        </a>
-                    </div>
-                </form>
-            </CardContent>
-        </Card>                
+        <div className = "flex items-center justify-center bg-gray-100 ">
+            <Card className = "mx-auto max-w-md">
+                <CardHeader>
+                    <CardTitle className="text-2xl text-blue-500">{t('registerForm.signUp')}</CardTitle> {/* Translated Text */}
+                    <CardDescription>{t('registerForm.enterDetails')}</CardDescription> {/* Translated Text */}
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form 
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="grid grid-cols-2 gap-4" >
+                            <FormInput 
+                                label={t('registerForm.firstName')}  // Translated label
+                                type="text"
+                                name="firstName"
+                                placeholder={t('registerForm.firstNamePlaceholder')} // Translated placeholder
+                            />
+                            <FormInput 
+                                label={t('registerForm.lastName')}
+                                type="text"
+                                name="lastName"
+                                placeholder={t('registerForm.lastNamePlaceholder')}  // Translated placeholder
+                            />
+                            <FormInput 
+                                label={t('registerForm.username')}// Translated label
+                                type="text"
+                                name="username"
+                                placeholder={t('usernamePlaceholder')} // Translated placeholder
+                            />
+                            <FormInput 
+                                label={t('registerForm.email')}  // Translated label
+                                type="email"
+                                name="email"
+                                placeholder={t('registerForm.emailPlaceholder')} // Translated placeholder
+                            />
+                            <FormInput 
+                                label={t('registerForm.password')} // Translated label
+                                type="password"
+                                name="password"
+                                placeholder={t('registerForm.passwordPlaceholder')}  // Translated placeholder
+                            />
+                            <FormInput 
+                                label={t('registerForm.confirmPassword')}  // Translated label
+                                type="password"
+                                name="confirmPassword"
+                                placeholder={t('registerForm.confirmPasswordPlaceholder')} // Translated placeholder
+                            />
+                            <div className="col-span-2">
+                                <Button 
+                                    variant={'default'}
+                                    type="submit"
+                                    className="w-full mt-4"
+                                >
+                                    {t('registerForm.signUpButton')}  {/* Translated Button Text */}
+                                </Button>
+                                {/* Sign-in link */}
+                                <p className="mt-4 text-sm text-center">
+                                    {t('registerForm.alreadyHaveAccount')}  {/* Translated Text */}
+                                    <Link to="/login" className="text-blue-500 hover:underline">
+                                        {t('registerForm.signIn')}  {/* Translated Link Text */}
+                                    </Link>
+                                </p>
+                            </div>         
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
         </div>
-        
-    );
-    
-};
+    )
+}

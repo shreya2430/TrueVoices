@@ -1,34 +1,35 @@
 import React from "react";
 import { LoginForm } from "@/components/forms/LoginForm/LoginForm";
+import Header from "../LandingPage/Header";
+import { useTranslation } from "react-i18next";
 
-
-const fields =[
+const fields = [
     {
-        id:'email', 
-        label:'Email', 
+        id: 'email', 
+        label: 'loginPage.email', 
         type: 'email', 
-        placeholder: 'Your email', 
+        placeholder: 'loginPage.emailPlaceholder', 
         required: true
     }, 
     {
         id: 'password',
-        label: 'Password',
+        label: 'loginPage.password',
         type: 'password',
-        placeholder: 'Password',
+        placeholder: 'loginPage.passwordPlaceholder',
         required: true
     },
 ];
 
 export function LoginPage() {
-    
-    const handleLoginSubmit = (formData: { [key: string]: string}) => {
-        console.log(formData);
-    };
+    const { t } = useTranslation();
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <h2 className="text-3xl font-semibold mb-4">Welcome back 👋</h2>
-            <LoginForm fields={fields} onSubmit={handleLoginSubmit} />
-        </div>
-    ) 
-};
+        <>
+            <Header />
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+                <h2 className="text-3xl font-semibold mb-4">{t('loginPage.welcomeBack')}</h2>
+                <LoginForm fields={fields} />
+            </div>
+        </>
+    );
+}
