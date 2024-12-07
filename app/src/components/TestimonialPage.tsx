@@ -47,7 +47,7 @@ export const TestimonialPage = ({
 						className,
 					)}
 				>
-					<div className="flex flex-col text-center space-y-6">
+					<div className="flex flex-col items-center text-center space-y-6">
 						<ShadcnAvatar className='size-20 rounded-lg'>
 							<AvatarImage src={testimonialSpace.spaceLogoUrl} />
 							<AvatarFallback>
@@ -86,7 +86,7 @@ export const TestimonialPage = ({
 					</div>
 				</div>
 			)}
-			{isSuccess && (
+			{!preview && isSuccess && (
 				<div
 					className={cn(
 						'flex flex-col space-y-8 text-base max-w-xl mx-auto p-10 bg-background text-foreground',

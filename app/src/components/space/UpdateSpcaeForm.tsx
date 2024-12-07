@@ -13,9 +13,9 @@ import { Loader } from '../ui/loader'
 import { SpaceFormTab } from './SpaceFormTab'
 
 export const UpdateSpcaeForm = () => {
-	const { spaceName } = useParams() as { space: string }
+	const { spaceName } = useParams()
 	const { data: currentSpace, isSuccess: spaceGetSuccess, isFetching: spaceFetching } =
-		useGetSpaceQuery(space)
+		useGetSpaceQuery(spaceName || '', { skip: !spaceName })
 	const form = useForm<Space>({
 		resolver: zodResolver(SpaceSchema),
 		defaultValues: defaultSpaceData,

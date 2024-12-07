@@ -51,7 +51,7 @@ export const Thankyou = ({
           </CardContent>
         </Card>
       )}
-      {isSuccess && (
+      {!preview && isSuccess && (
         <Card className={cn('w-fit text-foreground bg-background text-center', className)}>
           <CardHeader className='space-y-6'>
             {spaceData.thankYouPage.imageUrl && (

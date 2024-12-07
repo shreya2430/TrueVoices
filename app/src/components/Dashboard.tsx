@@ -15,7 +15,7 @@ export const Dashboard = () => {
 		<SidebarProvider>
 			<AppSidebar />
 			<SidebarInset className='grid grid-flow-row auto-rows-[min-content_1fr] auto-cols-fr'>
-				<header className="flex h-16 shrink-0 z-30 mx-1 sticky top-0 bg-inherit rounded-lg items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+				<header className="flex h-16 shrink-0 z-30 mx-1 sticky top-0 bg-background rounded-lg items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
 					<div className="flex items-center gap-2 px-4 w-full">
 						<SidebarTrigger className="-ml-1" />
 						<Separator
