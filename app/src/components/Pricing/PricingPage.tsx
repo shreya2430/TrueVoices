@@ -7,9 +7,11 @@ import Footer from "../LandingPage/Footer";
 type PricingPlan = {
   name: string;
   priceMonthly: string;
-  price: number;
+  price: number; // Ensure this is defined in the translation.json
   description: string;
   features: string[];
+  textCredits: number; // Ensure this is added in translation.json
+  videoCredits: number; // Ensure this is added in translation.json
   mostPopular: boolean;
 };
 
@@ -22,7 +24,12 @@ const PricingPage = () => {
     returnObjects: true,
   }) as PricingPlan[];
 
-  const handlePaymentNavigation = (price: number, planName: string) => {
+  const handlePaymentNavigation = (
+    price: number,
+    planName: string,
+    textCredits: number,
+    videoCredits: number
+  ) => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     if (!user || !user.id) {
       // Redirect to the register page if the user is not logged in
@@ -34,8 +41,19 @@ const PricingPage = () => {
     navigate(
       `/payment?amount=${price}&plan=${encodeURIComponent(
         planName
-      )}&userId=${user.id}`
+      )}&userId=${user.id}&textCredits=${textCredits}&videoCredits=${videoCredits}`
     );
+  };
+
+  const handleGetStarted = () => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    if (!user || !user.id) {
+      // Redirect to the register page if the user is not logged in
+      navigate("/register");
+    } else {
+      // Navigate to the route page if the user is logged in
+      navigate("/route");
+    }
   };
 
   return (
@@ -48,14 +66,9 @@ const PricingPage = () => {
           <div className="flex justify-center gap-4 mt-6">
             <button
               className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] font-bold py-2 px-4 rounded hover:bg-[hsl(var(--primary)/1.2)] transition"
-              onClick={() => handlePaymentNavigation(0, "Free Trial")}
+              onClick={handleGetStarted}
             >
-              {t("pricing.freeTrial")}
-            </button>
-            <button
-              className="bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] font-bold py-2 px-4 rounded hover:bg-[hsl(var(--secondary)/1.2)] transition"
-            >
-              {t("pricing.cancelAnytime")}
+              {t("pricing.getStarted")}
             </button>
           </div>
         </div>
@@ -88,12 +101,28 @@ const PricingPage = () => {
                   ))}
                 </ul>
               </div>
-              <button
-                className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] py-2 px-4 mt-6 rounded w-full hover:bg-[hsl(var(--primary)/1.2)] transition"
-                onClick={() => handlePaymentNavigation(plan.price, plan.name)}
-              >
-                {t("pricing.freeTrial")}
-              </button>
+              {plan.name === "Starter" ? (
+                <button
+                  className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] py-2 px-4 mt-6 rounded w-full hover:bg-[hsl(var(--primary)/1.2)] transition"
+                  onClick={handleGetStarted}
+                >
+                  {t("pricing.getStarted")}
+                </button>
+              ) : (
+                <button
+                  className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] py-2 px-4 mt-6 rounded w-full hover:bg-[hsl(var(--primary)/1.2)] transition"
+                  onClick={() =>
+                    handlePaymentNavigation(
+                      plan.price,
+                      plan.name,
+                      plan.textCredits,
+                      plan.videoCredits
+                    )
+                  }
+                >
+                  {t("pricing.buyNow")}
+                </button>
+              )}
             </div>
           ))}
         </div>
