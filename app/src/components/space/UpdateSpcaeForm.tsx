@@ -9,18 +9,19 @@ import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { Form } from '../ui/form'
+import { Loader } from '../ui/loader'
 import { SpaceFormTab } from './SpaceFormTab'
 
 export const UpdateSpcaeForm = () => {
-	const { space } = useParams() as { space: string }
-	const { data: currentSpace, isSuccess: spaceGetSuccess } =
+	const { spaceName } = useParams() as { space: string }
+	const { data: currentSpace, isSuccess: spaceGetSuccess, isFetching: spaceFetching } =
 		useGetSpaceQuery(space)
 	const form = useForm<Space>({
 		resolver: zodResolver(SpaceSchema),
 		defaultValues: defaultSpaceData,
 	})
 	const [uploadFile] = useUploadFileMutation()
-	const [updateSpace, { isError, isSuccess }] = useUpdateSpaceMutation()
+	const [updateSpace, { isError, isSuccess, isLoading }] = useUpdateSpaceMutation()
 
 	const handleSumbit = async (data: Space) => {
 		const formData = new FormData()
@@ -56,9 +57,9 @@ export const UpdateSpcaeForm = () => {
 			form.reset()
 		}
 		if (isError) {
-			alert('Failed to update space')
+			console.log('Error')
 		}
-	}, [isSuccess, isError])
+	}, [isSuccess, isError, form])
 
 	useEffect(() => {
 		const convertData = async () => {
@@ -82,11 +83,17 @@ export const UpdateSpcaeForm = () => {
 			}
 		}
 		convertData()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [spaceGetSuccess])
 
 	return (
 		<Form {...form}>
-			{spaceGetSuccess && (
+			{spaceFetching && 
+				<div className='grid col-span-1 h-full place-items-center'>
+					<Loader />
+				</div>
+			}
+			{spaceGetSuccess && !spaceFetching && (
         <>
           <SpaceFormTab
             onSubmit={handleSumbit}
@@ -97,8 +104,10 @@ export const UpdateSpcaeForm = () => {
               variant={'default'}
               type='submit'
               form="update-form"
-              className='mt-4'
+              className='mt-4 space-x-2'
+							disabled={isLoading}
             >
+							{isLoading && <Loader />}
               Update
             </Button>
           </SpaceFormTab>

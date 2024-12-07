@@ -1,4 +1,5 @@
 import { defaultSpaceData } from '@/lib/space-default'
+import { urlToFile } from '@/lib/utils'
 import { useUploadFileMutation } from '@/store/file-upload-api'
 import { useCreateSpaceMutation } from '@/store/space-store'
 import { Space, SpaceResSchema, SpaceResType, SpaceSchema } from '@/types/space'
@@ -10,6 +11,7 @@ import { Button } from '../ui/button'
 import {
 	Dialog,
 	DialogContentModified,
+	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogOverlayModified,
@@ -18,6 +20,7 @@ import {
 } from '../ui/dialog'
 import { Form } from '../ui/form'
 import { SpaceFormTab } from './SpaceFormTab'
+import { Loader } from '../ui/loader'
 
 type SpaceFormProps = {
 	// Props definition goes here
@@ -80,19 +83,31 @@ export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 		if (isError) {
 			console.log(state.error)
 		}
-	}, [isSuccess, isError])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSuccess, isError, form, state.error])
+
+	useEffect(() => {
+		urlToFile(defaultSpaceData.spaceLogoUrl).then((file) => {
+			form.setValue('spaceLogo', file)
+		})
+		urlToFile(defaultSpaceData.thankYouPage.imageUrl).then((file) => {
+			form.setValue('thankYouPage.image', file)
+		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<Dialog
 			open={isOpen}
 			onOpenChange={onOpenChange}
 		>
-			<DialogOverlayModified className="backdrop-blur-sm bg-foreground/70" />
+			<DialogOverlayModified className="backdrop-blur-sm" />
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContentModified className="max-w-screen-xl mx-auto m-8">
 				<DialogHeader>
 					<DialogTitle>Create Space</DialogTitle>
 				</DialogHeader>
+				<DialogDescription className='sr-only'>Fill out the form to create a new space</DialogDescription>
 				<Form {...form}>
 					<SpaceFormTab
 						id="space-form"
@@ -101,10 +116,13 @@ export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 						<DialogFooter>
 							<Button
 								type="submit"
-								className="w-full mt-6"
+								className="w-full mt-6 space-x-2"
 								form="space-form"
 								variant="default"
-							>
+								disabled={state.isLoading}
+
+							>	
+								{state.isLoading && <Loader />}
 								Create Space
 							</Button>
 						</DialogFooter>

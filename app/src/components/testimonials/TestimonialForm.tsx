@@ -56,7 +56,11 @@ export const TestimonialForm = ({ className }: TestimonialFormProps) => {
 
       setMessage("Testimonial created successfully!");
     } catch (error) {
-      setMessage("Error: Failed to create testimonial");
+      if (error instanceof Error) {
+        setMessage(`Error: ${error.message}`);
+      } else {
+        setMessage("An unknown error occurred");
+      }
     } finally {
       setLoading(false); // Reset loading state
     }

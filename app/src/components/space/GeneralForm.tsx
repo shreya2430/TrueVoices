@@ -5,12 +5,18 @@ import { FormInput } from '../FormInput'
 import { FormRadio } from '../FormRadio'
 import { FormSwitch } from '../FormSwitch'
 import { FormTextarea } from '../FormTextarea'
+import { useEffect } from 'react'
 
 type GeneralFormProps = {
 	// Props definition goes here
 	className?: string
 }
 
+/**
+ * 
+ * @param className
+ * @returns JSX.Element
+ */
 export const GeneralForm = ({ className }: GeneralFormProps) => {
 	const form = useFormContext()
 
@@ -35,6 +41,14 @@ export const GeneralForm = ({ className }: GeneralFormProps) => {
 		control: form.control,
 		name: 'inputs.address_enabled',
 	})
+
+	useEffect(() => {
+		if (nameEnabled === false) form.setValue('inputs.name_required', nameEnabled)
+		if (emailEnabled === false) form.setValue('inputs.email_required', emailEnabled)
+		if (companyAndTitleEnabled === false) form.setValue('inputs.companyAndTitle_required', companyAndTitleEnabled)
+		if (socialLinksEnabled === false) form.setValue('inputs.socialLinks_required', socialLinksEnabled)
+		if (addressEnabled === false) form.setValue('inputs.address_required', addressEnabled)
+	}, [nameEnabled, emailEnabled, companyAndTitleEnabled, socialLinksEnabled, addressEnabled, form])
 
 	return (
 		<div className={cn('flex flex-col space-y-4', className)}>

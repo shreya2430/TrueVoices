@@ -20,7 +20,7 @@ export const TestimonialDialog = ({
 			<DialogTrigger className={cn('w-full', className)}>
 				<TestimonialDialogTrigger testimonial={testimonial} />
 			</DialogTrigger>
-      <DialogOverlay className='backdrop-blur-sm bg-black/20'/>
+      <DialogOverlay />
 			<DialogContent className='[&>button]:hidden'>
 				<TestimonialCard
 					testimonial={testimonial}

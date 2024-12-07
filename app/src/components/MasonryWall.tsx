@@ -26,8 +26,8 @@ export const MasonryWall = ({
 	formSettings,
 }: MasonryWallProps) => {
 	const [searchParam] = useSearchParams()
-	const { space } = useParams()
-	const { data: testimonials, isSuccess } = useGetAllTestimonialsQuery(space)
+	const { spaceName } = useParams()
+	const { data: testimonials, isSuccess } = useGetAllTestimonialsQuery(spaceName || '', { skip: !spaceName })
 	const showDate = preview
 	? formSettings?.showDate || false
 	: searchParam.get('showDate') === 'true'

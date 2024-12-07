@@ -2,21 +2,19 @@ import { Dashboard } from '@/components/Dashboard';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import { CarouselWall } from './components/CarouselWall';
-import { Display } from './components/Display';
 import { Intermediate } from './components/Intermediate';
 import LandingPage from './components/LandingPage/LandingPage';
 import { MasonryWall } from './components/MasonryWall';
 import { LoginPage } from './components/pages/LoginPage';
 import { RegisterPage } from './components/pages/RegisterPage';
-import { SpaceForm } from './components/space/SpaceForm';
-import { TestimonialPage } from './components/TestimonialPage';
-import { WallOfLove } from './components/WallofLove';
-import PricingPage from './components/Pricing/PricingPage'
-import { UpdateSpcaeForm } from './components/space/UpdateSpcaeForm'
 import { ResetPassword } from './components/pages/ResetPassword';
 import PaymentPage from './components/payment';
-
-
+import PricingPage from './components/Pricing/PricingPage';
+import { SpaceForm } from './components/space/SpaceForm';
+import { UpdateSpcaeForm } from './components/space/UpdateSpcaeForm';
+import { TestimonialPage } from './components/TestimonialPage';
+import { TestimonialsList } from './components/testimonials/TestimonialsList';
+import { WallOfLove } from './components/WallofLove';
 
 function App() {
   return (
@@ -63,12 +61,12 @@ function App() {
 				element={<MasonryWall />}
 			/>
 			<Route
-				path="/dashboard/:space"
+				path="/dashboard/:spaceName"
 				element={<Dashboard />}
 			>
 				<Route
 					path=""
-					element={<Display />}
+					element={<TestimonialsList />}
 				/>
 				<Route
 					path="space-form"
@@ -76,15 +74,15 @@ function App() {
 				/>
 				<Route
 					path="all"
-					element={<Display />}
+					element={<TestimonialsList />}
 				/>
 				<Route
 					path="video"
-					element={<Display />}
+					element={<TestimonialsList />}
 				/>
 				<Route
 					path="text"
-					element={<Display />}
+					element={<TestimonialsList />}
 				/>
 				<Route
 					path="wall-of-love"

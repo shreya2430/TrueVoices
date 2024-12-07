@@ -10,7 +10,7 @@ import { CarouselWall } from './CarouselWall'
 import { FormInput } from './FormInput'
 
 export const CarouselForm = () => {
-	const { space } = useParams() as { space: string }
+	const { spaceName } = useParams()
 	const form = useForm<CarouselFormType>({
 		resolver: zodResolver(CarouselFormSchema),
 		defaultValues: {
@@ -30,7 +30,7 @@ export const CarouselForm = () => {
 			<Code
 				code={`
           <script src="https://cdn.jsdelivr.net/npm/@iframe-resizer/parent@5.3.2"></script>
-          <iframe id="carousel-embedding" src="${location}/display/carousel/${space}?darkMode=${darkMode}&showDate=${showDate}&autoPlay=${autoPlay}&cardSize=${cardSize}&autoPlaySpeed=${autoPlaySpeed}&showControls=${showControls}" width="100%" frameBorder="0"></iframe>
+          <iframe id="carousel-embedding" src="${location}/display/carousel/${spaceName}?darkMode=${darkMode}&showDate=${showDate}&autoPlay=${autoPlay}&cardSize=${cardSize}&autoPlaySpeed=${autoPlaySpeed}&showControls=${showControls}" width="100%" frameBorder="0"></iframe>
           <script>iFrameResize({  license: "GPLv3", log: false, waitForLoad: true }, '#carousel-embedding')</script>
         `}
 			/>
@@ -84,7 +84,7 @@ export const CarouselForm = () => {
 			</div>
 			<div className="space-y-1">
 				<span className="text-sm">Preview</span>
-				<div className={`border rounded-md p-8 overflow-x-auto flex bg-background ${darkMode ? 'dark' : 'light'}`}>
+				<div className={`border rounded-md p-16 lg:p-8 overflow-x-auto flex bg-background ${darkMode ? 'dark' : 'light'}`}>
 					<CarouselWall formSettings={form.watch()} preview />
 				</div>
 			</div>

@@ -9,6 +9,7 @@ import { ExtrasettingsForm } from './ExtrasettingsForm'
 import { GeneralForm } from './GeneralForm'
 import { ThankyouForm } from './ThankyouForm'
 import { cn } from '@/lib/utils'
+import { Thankyou } from '../Thankyou'
 
 type SpaceFormTabProps = {
 	className?: string
@@ -39,7 +40,7 @@ export const SpaceFormTab = ({
 					/>
 				</TabsContent>
 				<TabsContent value="thankyou">
-					<TestimonialPage
+					<Thankyou
 						className="border rounded-md"
 						preview
 						space={form.watch()}

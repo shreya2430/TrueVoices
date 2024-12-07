@@ -20,7 +20,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 export function SpaceSwitcher() {
 	const { isMobile } = useSidebar()
-	const { space } = useParams()
+	const { spaceName } = useParams()
 	const navigate = useNavigate()
 	const { data: spaceData, isSuccess } = useGetAllSpaceQuery()
 	const spaceSwitcher = React.useMemo(() => {
@@ -36,8 +36,8 @@ export function SpaceSwitcher() {
 		)
 	}, [isSuccess, spaceData])
 
-	const activeTeam = space
-		? spaceSwitcher[space]
+	const activeTeam = spaceName
+		? spaceSwitcher[spaceName]
 		: Object.values(spaceSwitcher)[0]
 
 	const toSlug = (str: string) =>

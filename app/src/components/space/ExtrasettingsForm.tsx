@@ -47,27 +47,9 @@ export const ExtrasettingsForm = ({ className }: ExtraSettingsFormProps) => {
 				label="Question Label"
 				placeholder="Enter question label"
 			/>
-			<FormInput
-				name={'extraSettings.affiliateLink'}
-				label="Affiliate Link"
-				placeholder="Enter affiliate link"
-			/>
-			<FormInput
-				name={'extraSettings.thirdPartyReviewLink'}
-				label="Third Party Review Link"
-				placeholder="Enter third party review link"
-			/>
 			<FormSwitch
 				name={'extraSettings.autoPopulateTestimonials'}
 				label="Auto Populate Testimonials"
-			/>
-			<FormSwitch
-				name={'extraSettings.disableVideoForiOS'}
-				label="Disable Video for iOS"
-			/>
-			<FormSwitch
-				name={'extraSettings.allowSearchEngines'}
-				label="Allow Search Engines"
 			/>
 		</div>
 	)

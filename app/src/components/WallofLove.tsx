@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 export const WallOfLove = () => {
 	return (
 		<Tabs
-			className='mx-4'
+			className='m-4'
 			defaultValue="carousel"
 		>
 			<TabsList className='w-full'>
