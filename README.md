@@ -80,8 +80,7 @@ This project was created and developed by a team of four contributors:
 ### User Authentication
 
 1. **Account Creation and Login** - As a user, I want to create an account and log in securely.
-2. **Password Reset** - As a user, I want to reset my password if forgotten.
-3. **Update Profile** - As a user, I want to update my account information.
+2. **Update Profile** - As a user, I want to update my account information.
 
 ### Object Model Diagram
 
