@@ -189,5 +189,15 @@
       "message": "Malheureusement, votre paiement n'a pas pu être traité. Veuillez réessayer.",
       "button": "Réessayer le paiement"
     }
+  },
+     "receipt": {
+    "successTitle": "🎉 Hourra! Merci, votre paiement a été effectué avec succès!",
+    "premiumUser": "Vous êtes maintenant un utilisateur Premium!",
+    "paymentDetails": "Détails du paiement",
+    "name": "Nom",
+    "amountPaid": "Montant payé",
+    "textCredits": "Crédits texte",
+    "videoCredits": "Crédits vidéo",
+    "startJourney": "Commencez votre voyage!"
   }
 }

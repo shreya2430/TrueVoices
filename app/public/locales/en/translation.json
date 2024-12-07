@@ -189,5 +189,15 @@
       "message": "Unfortunately, your payment could not be processed. Please try again.",
       "button": "Retry Payment"
     }
+  },
+    "receipt": {
+    "successTitle": "🎉 Hooray! Thank you, your payment is successful!",
+    "premiumUser": "You're now a Premium User!",
+    "paymentDetails": "Payment Details",
+    "name": "Name",
+    "amountPaid": "Amount Paid",
+    "textCredits": "Text Credits",
+    "videoCredits": "Video Credits",
+    "startJourney": "Start your journey!"
   }
 }
