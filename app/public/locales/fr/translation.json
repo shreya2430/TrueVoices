@@ -100,61 +100,109 @@
     ]
   },
   "pricing": {
-    "title": "La manière la plus simple de générer plus de ventes pour votre entreprise",
-    "subtitle": "Commencez avec 12 témoignages texte et 2 témoignages vidéo offerts, puis passez à notre plan payant seulement si vous êtes satisfait.",
-    "freeTrial": "Essai gratuit de 7 jours",
-    "cancelAnytime": "Annulez à tout moment !",
-    "mostPopular": "LE PLUS POPULAIRE",
-    "plans": [
-      {
-        "name": "Starter",
-        "priceMonthly": "0€",
-        "description": "Pour les loisirs 🧑‍🎨",
-        "features": [
-          "2 témoignages vidéo",
-          "12 témoignages texte",
-          "Page publique Wall of Love",
-          "Transcription automatique des vidéos"
-        ]
-      },
-      {
-        "name": "Starter Plus",
-        "priceMonthly": "10€",
-        "description": "Pour les petites équipes 🏡",
-        "features": [
-          "4 témoignages vidéo",
-          "40 témoignages texte",
-          "Page publique Wall of Love",
-          "Téléchargement de vidéos",
-          "Support par email"
-        ]
-      },
-      {
-        "name": "Premium",
-        "priceMonthly": "30€",
-        "description": "Pour les entreprises en croissance 📈",
-        "features": [
-          "10 témoignages vidéo",
-          "100 témoignages texte",
-          "Page publique Wall of Love",
-          "Analyses avancées",
-          "Support par email"
-        ]
-      },
-      {
-        "name": "Ultimate",
-        "priceMonthly": "45€",
-        "description": "Pour les grandes entreprises 🚀",
-        "features": [
-          "Témoignages texte illimités",
-          "Témoignages vidéo illimités",
-          "Page publique Wall of Love",
-          "Analyses avancées",
-          "Contrats personnalisés",
-          "Support entreprise",
-          "Support par email"
-        ]
-      }
-    ]
+  "title": "La manière la plus simple d'augmenter vos ventes",
+  "subtitle": "Commencez avec 12 témoignages texte et 2 témoignages vidéo offerts. Passez à la version supérieure seulement si vous êtes satisfait !",
+  "getStarted": "Commencer",
+  "buyNow": "Acheter maintenant",
+  "mostPopular": "LE PLUS POPULAIRE",
+  "plans": [
+    {
+      "name": "Débutant",
+      "priceMonthly": "$0",
+      "price": 0,
+      "textCredits": 12,
+      "videoCredits": 2,
+      "description": "Pour les loisirs 🧑‍🎨",
+      "features": [
+        "12 témoignages texte",
+        "2 témoignages vidéo",
+        "Page publique Wall of Love",
+        "Transcription automatique des vidéos"
+      ]
+    },
+    {
+      "name": "Débutant Plus",
+      "priceMonthly": "$10",
+      "price": 10,
+      "textCredits": 40,
+      "videoCredits": 4,
+      "description": "Pour les petites équipes 🏡",
+      "features": [
+        "40 témoignages texte",
+        "4 témoignages vidéo",
+        "Page publique Wall of Love",
+        "Téléchargement des vidéos",
+        "Assistance par email"
+      ]
+    },
+    {
+      "name": "Premium",
+      "priceMonthly": "$30",
+      "price": 30,
+      "textCredits": 100,
+      "videoCredits": 10,
+      "description": "Pour les entreprises en croissance 📈",
+      "features": [
+        "100 témoignages texte",
+        "10 témoignages vidéo",
+        "Page publique Wall of Love",
+        "Analyses avancées",
+        "Assistance par email"
+      ]
+    },
+    {
+      "name": "Ultime",
+      "priceMonthly": "$45",
+      "price": 45,
+      "textCredits": 2000,
+      "videoCredits": 1000,
+      "description": "Pour les grandes entreprises 🚀",
+      "features": [
+        "2000 témoignages texte",
+        "1000 témoignages vidéo",
+        "Page publique Wall of Love",
+        "Analyses avancées",
+        "Contrats personnalisés",
+        "Assistance entreprise",
+        "Assistance par email"
+      ]
+    }
+  ]
+},
+"payment": {
+    "title": "Terminez votre commande",
+    "orderDetails": "Détails de la commande",
+    "plan": "Plan",
+    "textCredits": "Crédits texte",
+    "videoCredits": "Crédits vidéo",
+    "amount": "Montant",
+    "enterCardDetails": "Entrez les détails de votre carte",
+    "processing": "Traitement...",
+    "payNow": "Payer maintenant",
+    "receipt": {
+      "title": "Paiement réussi",
+      "message": "Merci pour votre paiement ! Votre abonnement est maintenant actif.",
+      "button": "Aller au tableau de bord"
+    },
+    "failure": {
+      "title": "Paiement échoué",
+      "message": "Malheureusement, votre paiement n'a pas pu être traité. Veuillez réessayer.",
+      "button": "Réessayer le paiement"
+    }
+  },
+     "receipt": {
+    "successTitle": "🎉 Hourra! Merci, votre paiement a été effectué avec succès!",
+    "premiumUser": "Vous êtes maintenant un utilisateur Premium!",
+    "paymentDetails": "Détails du paiement",
+    "name": "Nom",
+    "amountPaid": "Montant payé",
+    "textCredits": "Crédits texte",
+    "videoCredits": "Crédits vidéo",
+    "startJourney": "Commencez votre voyage!"
+  },
+    "failureDialog": {
+    "title": "Paiement échoué",
+    "message": "Malheureusement, votre paiement n'a pas pu être traité. Veuillez réessayer.",
+    "retryButton": "Réessayer le paiement"
   }
 }

@@ -99,62 +99,110 @@
       }
     ]
   },
-  "pricing": {
-    "title": "The easiest way to drive more sales for your business",
-    "subtitle": "Start with 12 text testimonials and 2 video testimonials on us, then upgrade to our paid plan only if you're happy.",
-    "freeTrial": "7 days free trial",
-    "cancelAnytime": "Cancel anytime!",
-    "mostPopular": "MOST POPULAR",
-    "plans": [
-      {
-        "name": "Starter",
-        "priceMonthly": "$0",
-        "description": "For hobbies 🧑‍🎨",
-        "features": [
-          "2 video testimonials",
-          "12 text testimonials",
-          "Public Wall of Love page",
-          "Video auto transcription"
-        ]
-      },
-      {
-        "name": "Starter Plus",
-        "priceMonthly": "$10",
-        "description": "For small teams 🏡",
-        "features": [
-          "4 video testimonials",
-          "40 text testimonials",
-          "Public Wall of Love page",
-          "Video download",
-          "Email support"
-        ]
-      },
-      {
-        "name": "Premium",
-        "priceMonthly": "$30",
-        "description": "For growing businesses 📈",
-        "features": [
-          "10 video testimonials",
-          "100 text testimonials",
-          "Public Wall of Love page",
-          "Advanced Analytics",
-          "Email support"
-        ]
-      },
-      {
-        "name": "Ultimate",
-        "priceMonthly": "$45",
-        "description": "For large businesses 🚀",
-        "features": [
-          "Unlimited text testimonials",
-          "Unlimited video testimonials",
-          "Public Wall of Love page",
-          "Advanced Analytics",
-          "Custom contracts",
-          "Enterprise support",
-          "Email support"
-        ]
-      }
-    ]
+ "pricing": {
+  "title": "The easiest way to drive more sales for your business",
+  "subtitle": "Start with 12 text testimonials and 2 video testimonials on us. Upgrade only if you're satisfied!",
+  "getStarted": "Get Started",
+  "buyNow": "Buy Now",
+  "mostPopular": "MOST POPULAR",
+  "plans": [
+    {
+      "name": "Starter",
+      "priceMonthly": "$0",
+      "price": 0,
+      "textCredits": 12,
+      "videoCredits": 2,
+      "description": "For hobbies 🧑‍🎨",
+      "features": [
+        "12 text testimonials",
+        "2 video testimonials",
+        "Public Wall of Love page",
+        "Video auto transcription"
+      ]
+    },
+    {
+      "name": "Starter Plus",
+      "priceMonthly": "$10",
+      "price": 10,
+      "textCredits": 40,
+      "videoCredits": 4,
+      "description": "For small teams 🏡",
+      "features": [
+        "40 text testimonials",
+        "4 video testimonials",
+        "Public Wall of Love page",
+        "Video download",
+        "Email support"
+      ]
+    },
+    {
+      "name": "Premium",
+      "priceMonthly": "$30",
+      "price": 30,
+      "textCredits": 100,
+      "videoCredits": 10,
+      "description": "For growing businesses 📈",
+      "features": [
+        "100 text testimonials",
+        "10 video testimonials",
+        "Public Wall of Love page",
+        "Advanced Analytics",
+        "Email support"
+      ]
+    },
+    {
+      "name": "Ultimate",
+      "priceMonthly": "$45",
+      "price": 45,
+      "textCredits": 2000,
+      "videoCredits": 1000,
+      "description": "For large businesses 🚀",
+      "features": [
+        "2000 text testimonials",
+        "1000 video testimonials",
+        "Public Wall of Love page",
+        "Advanced Analytics",
+        "Custom contracts",
+        "Enterprise support",
+        "Email support"
+      ]
+    }
+  ]
+},
+  "payment": {
+    "title": "Complete Your Order",
+    "orderDetails": "Order Details",
+    "plan": "Plan",
+    "textCredits": "Text Credits",
+    "videoCredits": "Video Credits",
+    "amount": "Amount",
+    "enterCardDetails": "Enter Your Card Details",
+    "processing": "Processing...",
+    "payNow": "Pay Now",
+    "receipt": {
+      "title": "Payment Successful",
+      "message": "Thank you for your payment! Your subscription is now active.",
+      "button": "Go to Dashboard"
+    },
+    "failure": {
+      "title": "Payment Failed",
+      "message": "Unfortunately, your payment could not be processed. Please try again.",
+      "button": "Retry Payment"
+    }
+  },
+    "receipt": {
+    "successTitle": "🎉 Hooray! Thank you, your payment is successful!",
+    "premiumUser": "You're now a Premium User!",
+    "paymentDetails": "Payment Details",
+    "name": "Name",
+    "amountPaid": "Amount Paid",
+    "textCredits": "Text Credits",
+    "videoCredits": "Video Credits",
+    "startJourney": "Start your journey!"
+  },
+    "failureDialog": {
+    "title": "Payment Failed",
+    "message": "Unfortunately, your payment could not be processed. Please try again.",
+    "retryButton": "Retry Payment"
   }
 }
