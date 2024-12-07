@@ -1,34 +1,39 @@
 {
-  "features": [
+ "features": [
     {
       "title": "Collectez et affichez des témoignages",
       "subtitle": "Tout en une seule solution",
-      "description": "Créez une page dédiée pour votre entreprise. Partagez le lien facilement par email, sur les réseaux sociaux ou par SMS. La configuration se fait en deux minutes."
+      "description": "Créez une page de destination dédiée pour votre entreprise. Partagez facilement le lien de la page par e-mail, réseaux sociaux ou SMS. La configuration peut être effectuée en deux minutes.",
+      "isComingSoon": false
     },
     {
       "title": "Facile à gérer",
       "subtitle": "Un tableau de bord pour gérer tous les témoignages",
-      "description": "Vous disposerez d'un tableau de bord simple et épuré pour gérer tous vos témoignages en un seul endroit. C'est comme votre boîte de réception email, mais conçue pour votre preuve sociale !"
-    },
-    {
-      "title": "Suivez les métriques",
-      "subtitle": "Comprenez les performances des témoignages vidéo",
-      "description": "Suivez les métriques de toutes les vidéos intégrées, aidez votre équipe marketing à comprendre les performances et mettez en avant les vidéos les plus performantes.",
-      "note": "* Disponible dans le plan Ultimate"
+      "description": "Vous disposerez d'un tableau de bord simple et épuré pour gérer tous vos témoignages en un seul endroit. C'est comme votre boîte de réception e-mail, mais conçue pour vos preuves sociales !",
+      "isComingSoon": false
     },
     {
       "title": "Plus de preuves sociales",
-      "subtitle": "Pas seulement des témoignages texte et vidéo",
-      "description": "Gérez les témoignages des réseaux sociaux, des plateformes vidéo et des sites d'avis en un seul endroit !"
+      "subtitle": "Pas seulement des témoignages textuels et vidéo",
+      "description": "Gérez les témoignages des réseaux sociaux, des plateformes vidéo et des sites d'avis en un seul endroit !",
+      "isComingSoon": false
     },
     {
-      "title": "Intégrez le mur d'amour",
-      "subtitle": "Les meilleurs témoignages au même endroit",
-      "description": "Mettez en avant tous vos témoignages favoris. Intégrez-les sur votre site web en moins d'une minute, sans connaissances en codage requises !"
+      "title": "Intégrer le Wall of Love",
+      "subtitle": "Les meilleurs témoignages réunis en un seul endroit",
+      "description": "Mettez en avant tous vos témoignages préférés. Intégrez-le à votre site Web en moins d'une minute sans nécessiter de compétences en codage !",
+      "isComingSoon": false
+    },
+    {
+      "title": "Suivre les métriques",
+      "subtitle": "Comprendre les performances des témoignages vidéo",
+      "description": "Suivez les métriques de toutes les vidéos intégrées, aidez votre équipe marketing à comprendre les performances et à promouvoir les vidéos les plus performantes.",
+      "isComingSoon": true
     }
   ],
   "ourFeatures": "Nos fonctionnalités",
   "tryForFree": "Essayez gratuitement",
+  "comingSoon": "Bientôt disponible...",
   "footer": {
     "links": [
       {
@@ -243,5 +248,10 @@
     "emailPlaceholder": "Entrez votre e-mail",
     "passwordPlaceholder": "Mot de passe",
     "signInButton": "Se connecter"
+  },
+  "profile": {
+    "defaultAvatar": "U",
+    "textCredits": "Crédits de texte :",
+    "videoCredits": "Crédits vidéo :"
   }
 }

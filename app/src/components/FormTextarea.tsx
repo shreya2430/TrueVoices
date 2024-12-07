@@ -33,6 +33,7 @@ export const FormTextarea = ({
 		<FormField
 			control={control}
 			name={name}
+			rules={{ required }}
 			render={({ field }) => (
 				<FormItem className="space-y-1">
 					<FormLabel>

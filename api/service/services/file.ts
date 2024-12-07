@@ -18,7 +18,7 @@ if (connectionString.length === 0) {
 const blobService = BlobServiceClient.fromConnectionString(connectionString)
 const containerClient = blobService.getContainerClient('true-voice')
 
-export const uploadFile = async (file: Express.Multer.File, path: string) => {
+const uploadFile = async (file: Express.Multer.File, path: string) => {
 	try {
 		const blobName = `${path}/${file.originalname}`
 		const blockBlobClient = containerClient.getBlockBlobClient(blobName)
@@ -50,4 +50,8 @@ const generateSasUrl = (blobClient: BlobClient) => {
 		blobClient.credential as StorageSharedKeyCredential,
 	).toString()
 	return `${blobClient.url}?${sasToken}`
+}
+
+export const fileService = {
+	uploadFile,
 }

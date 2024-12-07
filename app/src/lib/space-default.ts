@@ -1,9 +1,10 @@
 import { Space } from "@/types/space";
+import thankyYouImage from '../assets/thankYou.gif'
 
 export const defaultSpaceData: Space = {
 	spaceName: '',
   spaceLogoUrl: 'https://live.staticflickr.com/65535/53405989488_c12c5b2532.jpg',
-	spaceLogo: new File([], 'defaultSpaceLogo'),
+	spaceLogo: new File([], 'this is just a placeholder'),
 	headerTitle: 'Testimonials',
 	customMessage: 'We would love to hear your thoughts, suggestions, and feedback!',
 	inputs: {
@@ -28,25 +29,19 @@ export const defaultSpaceData: Space = {
 		},
 	],
 	thankYouPage: {
-		imageUrl: 'https://tenor.com/bbqsN.gif',
-		image: new File([], 'defaultThankYouImage'),
-		title: 'Thank You',
-		message: 'Thank you for your feedback!',
+		imageUrl: thankyYouImage,
+		image: new File([], 'this is just a placeholder'),
+		title: 'Thank You!! 😊🥳',
+		message: 'Thank you so much for your shoutout! It means a ton for us. ☺️',
 		allowShareOnSocialMedia: false,
 	},
 	extraSettings: {
-		maxVideoDuration: 60,
-		maxTextCharacters: 500,
 		videoButtonText: 'Record Video',
 		textButtonText: 'Write Text',
 		consentDisplay: true,
 		consentStatement: 'I agree to the terms and conditions',
 		questionLabel: 'Question',
-		affiliateLink: '',
-		thirdPartyReviewLink: '',
 		autoPopulateTestimonials: false,
-		disableVideoForiOS: false,
-		allowSearchEngines: false,
 	},
 	emailSettings: {
 		emailFrom: 'donot-reply@truevoice.com',

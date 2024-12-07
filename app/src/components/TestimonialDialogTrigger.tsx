@@ -47,6 +47,7 @@ export const TestimonialDialogTrigger = ({
 		if (state.isSuccess) {
 			setLiked(!liked)
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state.isSuccess])
 
 	return (
@@ -74,11 +75,11 @@ export const TestimonialDialogTrigger = ({
 				{testimonial.testimonialType === 'text' ? (
 					<p className="w-full">{testimonial.content}</p>
 				) : (
-					<div className="rounded-md overflow-hidden w-max">
+					<div className="rounded-md overflow-hidden max-w-fit">
 						<video
 							src={testimonial.content}
 							controls
-							className="h-full aspect-video"
+							className="w-fit"
 						/>
 					</div>
 				)}
@@ -98,6 +99,7 @@ export const TestimonialDialogTrigger = ({
 								variant={'ghost'}
 								size={'icon'}
 								onClick={(e) => handleLike(e)}
+								disabled={testimonial.consent? false : true}
 								className="[&_svg]:size-5"
 							>
 								<Heart

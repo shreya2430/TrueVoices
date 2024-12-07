@@ -7,7 +7,7 @@ type Feature = {
   title: string;
   subtitle: string;
   description: string;
-  note?: string | null;
+   isComingSoon: boolean;
 };
 
 const Features = () => {
@@ -29,7 +29,7 @@ const Features = () => {
     }
   };
 
-  return (
+ return (
     <section className="py-10 bg-background" id="features">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">
@@ -56,22 +56,26 @@ const Features = () => {
                 <p className="text-gray-700 dark:text-gray-300">
                   {feature.description}
                 </p>
-                {feature.note && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                    {feature.note}
-                  </p>
-                )}
               </div>
 
               {/* Call to Action */}
               <div className="mt-auto">
-                <Button
-                  color="primary"
-                  className="w-full bg-blue-500 text-white hover:bg-blue-600 rounded-md py-2"
-                  onClick={handleNavigation}
-                >
-                  {t('tryForFree')} {/* Add a key for "Try it for Free" */}
-                </Button>
+                {feature.isComingSoon ? (
+                  <Button
+                    disabled
+                    className="w-full bg-gray-300 text-gray-980 cursor-not-allowed rounded-md py-2"
+                  >
+                    {t('comingSoon')} {/* Add a key for "Coming Soon" */}
+                  </Button>
+                ) : (
+                  <Button
+                    color="primary"
+                    className="w-full bg-blue-500 text-white hover:bg-blue-600 rounded-md py-2"
+                    onClick={handleNavigation}
+                  >
+                    {t('tryForFree')} {/* Add a key for "Try it for Free" */}
+                  </Button>
+                )}
               </div>
             </div>
           ))}

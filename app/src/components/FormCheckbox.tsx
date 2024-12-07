@@ -31,6 +31,7 @@ export const FormCheckbox = ({
 		<FormField
 			control={control}
 			name={name}
+			rules={{ required }}
 			render={({ field }) => (
 				<FormItem className="flex items-center gap-2 text-center space-y-0">
 					<FormControl>

@@ -1,11 +1,21 @@
-import Testimonial, { ITestimonial } from '../models/testimonial-models'
+import ExtraSettings from '../models/extra-settings';
+import SpaceModel, { Space } from '../models/spaces';
+import Testimonial, { TestimonialType } from '../models/testimonial-models'
 import { generateRandomPfp } from '../utils/generate-random-pfp';
 
 // Create a new testimonial
-export const createTestimonial = async (data: ITestimonial): Promise<ITestimonial> => {
+export const createTestimonial = async (data: TestimonialType): Promise<TestimonialType> => {
   try {
+    const space: Space = await SpaceModel.findOne({ spaceName: data.spaceName });
+    const extraSettings = await ExtraSettings.findById(space.extraSettings).select('autoPopulateTestimonials');
+    if (!space) {
+      throw new Error('Space not found');
+    }
     if (!data.profilePic) {
       data.profilePic = await generateRandomPfp(data.name);
+    }
+    if (extraSettings.autoPopulateTestimonials && data.consent) {
+      data.set('liked', true);
     }
     const testimonial = new Testimonial(data);
     return await testimonial.save();
@@ -15,7 +25,7 @@ export const createTestimonial = async (data: ITestimonial): Promise<ITestimonia
 };
 
 // Get all testimonials
-export const getAllTestimonials = async (spaceName: string): Promise<ITestimonial[]> => {
+export const getAllTestimonials = async (spaceName: string): Promise<TestimonialType[]> => {
   try {
     const testimonials = await Testimonial.find({ spaceName });
     return testimonials;
@@ -25,15 +35,15 @@ export const getAllTestimonials = async (spaceName: string): Promise<ITestimonia
 };
 
 // Get a single testimonial by ID
-export const getTestimonialById = async (id: string): Promise<ITestimonial | null> => {
+export const getTestimonialById = async (id: string): Promise<TestimonialType | null> => {
   return await Testimonial.findById(id);
 };
 
 // Update a testimonial by ID
 export const updateTestimonial = async (
   id: string,
-  data: ITestimonial
-): Promise<ITestimonial | null> => {
+  data: TestimonialType
+): Promise<TestimonialType | null> => {
   try {
     const testimonial = await Testimonial.findByIdAndUpdate(id, data, { new: true });
     return testimonial;
@@ -43,6 +53,6 @@ export const updateTestimonial = async (
 };
 
 // Delete a testimonial by ID
-export const deleteTestimonial = async (id: string): Promise<ITestimonial | null> => {
+export const deleteTestimonial = async (id: string): Promise<TestimonialType | null> => {
   return await Testimonial.findByIdAndDelete(id);
 };

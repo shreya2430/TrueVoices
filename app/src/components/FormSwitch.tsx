@@ -25,6 +25,7 @@ export const FormSwitch = ({
 		<FormField
 			control={control}
 			name={name}
+			rules={{ required }}
 			disabled={disabled}
 			render={({ field }) => (
 				<FormItem

@@ -64,6 +64,7 @@ export const FormInput = ({
 		<FormField
 			control={control}
 			name={name}
+			rules={{ required }}
 			render={({ field }) => (
 				<FormItem className="space-y-1 w-full">
 					{label &&

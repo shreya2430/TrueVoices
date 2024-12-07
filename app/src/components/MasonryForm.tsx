@@ -10,7 +10,7 @@ import { ScrollArea } from './ui/scroll-area'
 import { MasonryWall } from './MasonryWall'
 
 export const MasonryForm = () => {
-	const { space } = useParams() as { space: string }
+	const { spaceName } = useParams()
 	const form = useForm<MasonryFormType>({
 		resolver: zodResolver(MasonryFormSchema),
 		defaultValues: {
@@ -28,7 +28,7 @@ export const MasonryForm = () => {
 			<Code
 				code={`
           <script src="https://cdn.jsdelivr.net/npm/@iframe-resizer/parent@5.3.2"></script>
-          <iframe id="masonry-embedding" src="${location}/display/masonry/${space}?darkMode=${darkMode}&showDate=${showDate}&cardSize=${cardSize}&randomize=${randomize}" width="100%" frameBorder="0"></iframe>
+          <iframe id="masonry-embedding" src="${location}/display/masonry/${spaceName}?darkMode=${darkMode}&showDate=${showDate}&cardSize=${cardSize}&randomize=${randomize}" width="100%" frameBorder="0"></iframe>
           <script>iFrameResize({  license: "GPLv3", log: false, waitForLoad: true }, '#masonry-embedding')</script>
         `}
 			/>

@@ -1,4 +1,4 @@
-import { Testimonial, TestimonialRes } from "@/types/testimonial";
+import { TestimonialReq, TestimonialRes } from "@/types/testimonial";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const testimonialApi = createApi({
@@ -7,8 +7,8 @@ export const testimonialApi = createApi({
   tagTypes: ["Testimonial"],
   endpoints: (builder) => ({
     createTestimonial: builder.mutation({
-      query: ({ body, spaceName }: {body: Testimonial, spaceName: string | undefined }) => ({
-        url: `/testimonial/${spaceName}`,
+      query: ({ body, spaceName }: {body: TestimonialReq, spaceName: string | undefined }) => ({
+        url: `/testimonials/${spaceName}`,
         method: "POST",
         body,
       }),
@@ -23,7 +23,7 @@ export const testimonialApi = createApi({
       providesTags: (result, error, { id }) => [{ type: "Testimonial", id }],
     }),
     updateTestimonial: builder.mutation({
-      query: ({ id, body, spaceName }: {id: string, body: Testimonial, spaceName: string | undefined }) => ({
+      query: ({ id, body, spaceName }: {id: string, body: TestimonialReq, spaceName: string | undefined }) => ({
         url: `/testimonials/${spaceName}/${id}`,
         method: "PUT",
         body,

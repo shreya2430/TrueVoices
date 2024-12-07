@@ -32,6 +32,7 @@ export const FormSelect = ({
 		<FormField
 			control={control}
 			name={name}
+			rules={{ required }}
 			disabled={disabled}
 			render={({ field }) => (
 				<FormItem className={cn('space-y-2', className)}>

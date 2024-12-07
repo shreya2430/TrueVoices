@@ -63,8 +63,8 @@ export const CarouselWall = ({ preview=false, formSettings }: CarouselWallProps)
 	// 		socialLinks: 'https://twitter.com/johndoe',
 	// 	},
 	// ]
-	const { space } = useParams()
-	const { data: testimonials, isSuccess, isFetching } = useGetAllTestimonialsQuery(space);
+	const { spaceName } = useParams()
+	const { data: testimonials, isSuccess, isFetching } = useGetAllTestimonialsQuery(spaceName || '', { skip: !spaceName });
 	const [searchParam] = useSearchParams()
 	const showDate = preview ? formSettings?.showDate : searchParam.get('showDate') === 'true'
 	const { setTheme } = useTheme()

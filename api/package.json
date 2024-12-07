@@ -21,10 +21,8 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.2",
-    "mongoose-findorcreate": "^4.0.0",
     "multer": "^1.4.5-lts.1",
-    "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+    "stripe": "^17.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
