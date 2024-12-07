@@ -10,6 +10,8 @@ import axios from 'axios';
 import { AppDispatch } from '../store/store';
 import Receipt from './receipt';
 import FailureDialog from './FailureDialog'; // Import FailureDialog component
+import Footer from './LandingPage/Footer';
+import Header from './LandingPage/Header';
 
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 if (!stripePublicKey) {
@@ -157,7 +159,9 @@ const PaymentForm: React.FC = () => {
 const PaymentPage: React.FC = () => {
   return (
     <Elements stripe={stripePromise}>
+      <Header/>
       <PaymentForm />
+      <Footer/>
     </Elements>
   );
 };
