@@ -15,7 +15,7 @@ import Header from './LandingPage/Header';
 import { useTranslation } from 'react-i18next';
 
 
-const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY as string;
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 if (!stripePublicKey) {
   throw new Error('VITE_STRIPE_PUBLIC_KEY is not defined in the environment variables');
 }
