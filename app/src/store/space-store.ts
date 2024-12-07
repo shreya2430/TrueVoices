@@ -11,8 +11,13 @@ export const spaceApi = createApi({
 				query: () => '/spaces',
 				providesTags: ['Space'],
 			}),
-			getSpace: builder.query<SpaceResType, string>({
-				query: (id: string) => `/spaces/${id}`,
+			getSpace: builder.query<SpaceResType, string | undefined>({
+				query: (id: string | undefined) => {
+					if (id) {
+						return `/spaces/${id}`
+					}
+					throw new Error('Space ID is required')
+				},
 				providesTags: (result, error, id) => [{ type: 'Space', id }],
 			}),
 			createSpace: builder.mutation<SpaceResType, SpaceResType>({

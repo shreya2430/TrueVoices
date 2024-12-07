@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaUserCircle } from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
