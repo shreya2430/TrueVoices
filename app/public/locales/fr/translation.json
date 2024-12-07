@@ -13,12 +13,6 @@
       "isComingSoon": false
     },
     {
-      "title": "Suivre les métriques",
-      "subtitle": "Comprendre les performances des témoignages vidéo",
-      "description": "Suivez les métriques de toutes les vidéos intégrées, aidez votre équipe marketing à comprendre les performances et à promouvoir les vidéos les plus performantes.",
-      "isComingSoon": true
-    },
-    {
       "title": "Plus de preuves sociales",
       "subtitle": "Pas seulement des témoignages textuels et vidéo",
       "description": "Gérez les témoignages des réseaux sociaux, des plateformes vidéo et des sites d'avis en un seul endroit !",
@@ -28,6 +22,12 @@
       "title": "Intégrer le Wall of Love",
       "subtitle": "Les meilleurs témoignages réunis en un seul endroit",
       "description": "Mettez en avant tous vos témoignages préférés. Intégrez-le à votre site Web en moins d'une minute sans nécessiter de compétences en codage !",
+      "isComingSoon": false
+    },
+    {
+      "title": "Suivre les métriques",
+      "subtitle": "Comprendre les performances des témoignages vidéo",
+      "description": "Suivez les métriques de toutes les vidéos intégrées, aidez votre équipe marketing à comprendre les performances et à promouvoir les vidéos les plus performantes.",
       "isComingSoon": true
     }
   ],
