@@ -1,5 +1,4 @@
 import { Dashboard } from '@/components/Dashboard';
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import { CarouselWall } from './components/CarouselWall';
@@ -15,6 +14,7 @@ import { WallOfLove } from './components/WallofLove';
 import PricingPage from './components/Pricing/PricingPage'
 import { UpdateSpcaeForm } from './components/space/UpdateSpcaeForm'
 import { ResetPassword } from './components/pages/ResetPassword';
+import PaymentPage from './components/payment';
 
 
 
@@ -94,7 +94,8 @@ function App() {
 					path="settings"
 					element={<UpdateSpcaeForm />}
 				/>
-			</Route>
+			  </Route>
+			  <Route path="/payment" element={<PaymentPage />} /> 
 		</Routes>
 	</Router>
 	)
