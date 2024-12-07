@@ -1,34 +1,40 @@
 {
-  "features": [
-    {
-      "title": "Collect and Display Testimonials",
-      "subtitle": "All in one solution",
-      "description": "Create a dedicated landing page for your business. Share the page link easily via email, social media, or SMS. Setup can be done in two minutes."
-    },
-    {
-      "title": "Easy to Manage",
-      "subtitle": "A dashboard to manage all testimonials",
-      "description": "You will have a simple & clean dashboard to manage all testimonials in one place. It's like your email inbox, but designed for your social proof!"
-    },
-    {
-      "title": "Track the Metrics",
-      "subtitle": "Understand how video testimonials are performing",
-      "description": "Track metrics from all embedded videos, help your marketing team understand performance, and promote the best-performing videos.",
-      "note": "* Available in the Ultimate plan"
-    },
-    {
-      "title": "More Social Proof",
-      "subtitle": "Not only text and video testimonials",
-      "description": "Manage testimonials from social media, video platforms, and review sites in a single place!"
-    },
-    {
-      "title": "Embed the Wall of Love",
-      "subtitle": "The best testimonials all in one place",
-      "description": "Showcase all your favorite testimonials. Embed it on your website in under a minute with no coding knowledge required!"
-    }
-  ],
-  "ourFeatures": "Our Features",
-  "tryForFree": "Try it for Free",
+ "features": [
+  {
+    "title": "Collect and Display Testimonials",
+    "subtitle": "All in one solution",
+    "description": "Create a dedicated landing page for your business. Share the page link easily via email, social media, or SMS. Setup can be done in two minutes.",
+    "isComingSoon": false
+  },
+  {
+    "title": "Easy to Manage",
+    "subtitle": "A dashboard to manage all testimonials",
+    "description": "You will have a simple & clean dashboard to manage all testimonials in one place. It's like your email inbox, but designed for your social proof!",
+    "isComingSoon": false
+  },
+  {
+    "title": "More Social Proof",
+    "subtitle": "Not only text and video testimonials",
+    "description": "Manage testimonials from social media, video platforms, and review sites in a single place!",
+    "isComingSoon": false
+  },
+  {
+    "title": "Embed the Wall of Love",
+    "subtitle": "The best testimonials all in one place",
+    "description": "Showcase all your favorite testimonials. Embed it on your website in under a minute with no coding knowledge required!",
+    "isComingSoon": false
+  },
+  {
+    "title": "Track the Metrics",
+    "subtitle": "Understand how video testimonials are performing",
+    "description": "Track metrics from all embedded videos, help your marketing team understand performance, and promote the best-performing videos.",
+    "isComingSoon": true
+  }
+],
+"ourFeatures": "Our Features",
+"tryForFree": "Try it for Free",
+"comingSoon": "Coming Soon...",
+
   "footer": {
     "links": [
       {

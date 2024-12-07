@@ -77,7 +77,7 @@ const PricingPage = () => {
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`pricing-card bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] p-6 rounded-lg shadow-lg border ${
+              className={`pricing-card bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] p-7 rounded-lg shadow-lg border ${
                 plan.mostPopular
                   ? "border-[hsl(var(--primary))]"
                   : "border-[hsl(var(--border))]"
@@ -103,15 +103,17 @@ const PricingPage = () => {
               </div>
               {plan.name === "Starter" ? (
                 <button
-                  className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] py-2 px-4 mt-6 rounded w-full hover:bg-[hsl(var(--primary)/1.2)] transition"
+                  color="primary"
+                  className="w-full bg-blue-500 text-white hover:bg-blue-600 rounded-md py-2 mt-5"
                   onClick={handleGetStarted}
                 >
                   {t("pricing.getStarted")}
                 </button>
               ) : (
                 <button
-                  className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] py-2 px-4 mt-6 rounded w-full hover:bg-[hsl(var(--primary)/1.2)] transition"
-                  onClick={() =>
+                    color="primary"
+                    className="w-full bg-blue-500 text-white hover:bg-blue-600 rounded-md py-2 mt-5"
+                    onClick={() =>
                     handlePaymentNavigation(
                       plan.price,
                       plan.name,
