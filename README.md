@@ -399,7 +399,7 @@ npm install @stripe/react-stripe-js @stripe/stripe-js
 ```
 
 ### presentation link :
-https://www.microsoft365.com/launch/stream
+https://northeastern-my.sharepoint.com/:p:/r/personal/wade_mai_northeastern_edu/Documents/TrueVoices%20INFO6150.pptx?d=w02dbef208c764cdc85f7ba8ea1db9b91&csf=1&web=1&e=JpZ8OU
 
 If you have any questions or encounter other issues, please feel free to contact any one of us.
 
