@@ -11,17 +11,18 @@ import { Button } from '../ui/button'
 import { Form } from '../ui/form'
 import { Loader } from '../ui/loader'
 import { SpaceFormTab } from './SpaceFormTab'
+import { toast } from 'sonner'
 
 export const UpdateSpcaeForm = () => {
 	const { spaceName } = useParams()
 	const { data: currentSpace, isSuccess: spaceGetSuccess, isFetching: spaceFetching } =
-		useGetSpaceQuery(spaceName || '', { skip: !spaceName })
+		useGetSpaceQuery(spaceName || '', { skip: !spaceName, refetchOnReconnect: true, refetchOnFocus: true })
 	const form = useForm<Space>({
 		resolver: zodResolver(SpaceSchema),
 		defaultValues: defaultSpaceData,
 	})
 	const [uploadFile] = useUploadFileMutation()
-	const [updateSpace, { isError, isSuccess, isLoading }] = useUpdateSpaceMutation()
+	const [updateSpace, { isError, isSuccess, isLoading, error }] = useUpdateSpaceMutation()
 
 	const handleSumbit = async (data: Space) => {
 		const formData = new FormData()
@@ -55,11 +56,14 @@ export const UpdateSpcaeForm = () => {
 		if (isSuccess) {
       console.log('Success')
 			form.reset()
+			toast.success('Space updated successfully')
 		}
 		if (isError) {
 			console.log('Error')
+			const errorMessage = 'status' in error ? error.status : 'Unknown error'
+			toast.error('Failed to update space: ' + errorMessage)
 		}
-	}, [isSuccess, isError, form])
+	}, [isSuccess, isError, form, error])
 
 	useEffect(() => {
 		const convertData = async () => {

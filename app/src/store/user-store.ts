@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { User, UserResponse } from '@/types/user';
+import { getUserRes, User, UserResponse } from '@/types/user';
 
 export const userApi = createApi({
 	reducerPath: 'userApi',
 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/v1' }),
-	tagTypes: ['User'],
+	tagTypes: ['User', 'getUser'],
 	endpoints: (builder) => {
 		return {
 			register: builder.mutation<UserResponse, User>({
@@ -23,16 +23,16 @@ export const userApi = createApi({
 				}),
 				invalidatesTags: ['User'],
 			}),
-			getUser: builder.query<User, string>({
+			getUser: builder.query<getUserRes, string>({
 				query: (id: string) => `/users/${id}`,
-				providesTags: (result, error, id) => [{ type: 'User', id }],
+				providesTags: ['getUser'],
 			}),
 			deleteUser: builder.mutation<void, string>({
 				query: (id: string) => ({
 					url: `/users/${id}`,
 					method: 'DELETE',
 				}),
-				invalidatesTags: (result, error, id) => [{ type: 'User', id }],
+				invalidatesTags: ['User'],
 			}),
 		}
 	},

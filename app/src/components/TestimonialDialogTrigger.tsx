@@ -1,7 +1,10 @@
-import { useUpdateTestimonialMutation } from '@/store/testimonial-api'
+import {
+	useDeleteTestimonialMutation,
+	useUpdateTestimonialMutation,
+} from '@/store/testimonial-api'
 import { TestimonialRes } from '@/types/testimonial'
 import Avatar from 'boring-avatars'
-import { EllipsisVertical, Heart } from 'lucide-react'
+import { Heart, Trash2 } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import {
 	AvatarFallback,
@@ -9,12 +12,6 @@ import {
 	Avatar as ShadcnAvatar,
 } from './ui/avatar'
 import { Button } from './ui/button'
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from './ui/dropdown-menu'
 import { Rating } from './ui/rating'
 import {
 	Tooltip,
@@ -32,6 +29,7 @@ export const TestimonialDialogTrigger = ({
 }: TestimonialDialogTriggerProps) => {
 	const [liked, setLiked] = useState(testimonial.liked ? true : false)
 	const [updateTestimonial, state] = useUpdateTestimonialMutation()
+	const [deleteTestimonial, deleteState] = useDeleteTestimonialMutation()
 	const handleLike = async (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
@@ -43,12 +41,30 @@ export const TestimonialDialogTrigger = ({
 		})
 	}
 
+	const handleDelete = async (
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+	) => {
+		e.stopPropagation()
+		await deleteTestimonial({
+			id: testimonial._id,
+			spaceName: testimonial.spaceName,
+		})
+	}
+
 	useEffect(() => {
 		if (state.isSuccess) {
 			setLiked(!liked)
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [state.isSuccess])
+
+		if (deleteState.isSuccess) {
+			console.log('Deleted')
+		}
+
+		if (deleteState.isError) {
+			console.log('Error')
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [state.isSuccess, deleteState])
 
 	return (
 		<div className="grid grid-cols-6 w-full min-h-44 gap-10 rounded-xl hover:bg-accent/60 p-10">
@@ -99,7 +115,7 @@ export const TestimonialDialogTrigger = ({
 								variant={'ghost'}
 								size={'icon'}
 								onClick={(e) => handleLike(e)}
-								disabled={testimonial.consent? false : true}
+								disabled={testimonial.consent ? false : true}
 								className="[&_svg]:size-5"
 							>
 								<Heart
@@ -112,26 +128,13 @@ export const TestimonialDialogTrigger = ({
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button
-							variant={'ghost'}
-							size={'icon'}
-							onClick={(e) => e.preventDefault()}
-							className="[&_svg]:size-5"
-						>
-							<EllipsisVertical />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent>
-						<DropdownMenuItem onClick={() => console.log('Edit')}>
-							Edit
-						</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => console.log('Delete')}>
-							Delete
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
+				<Button
+					variant={'ghost'}
+					size={'icon'}
+					onClick={(e) => handleDelete(e)}
+				>
+					<Trash2 />
+				</Button>
 			</div>
 		</div>
 	)

@@ -1,7 +1,6 @@
 import { z } from 'zod';
-import { ThankYouPageSchema } from './thankyoupage';
 import { ExtraSettingsSchema } from './extrasetting';
-import { EmailSettingsSchema } from './emailsetting';
+import { ThankYouPageSchema } from './thankyoupage';
 
 const InputsSchema = z.object({
   name_required: z.boolean().optional(),
@@ -32,7 +31,6 @@ export const SpaceSchema = z.object({
   inputs: InputsSchema,
   thankYouPage: ThankYouPageSchema,
   extraSettings: ExtraSettingsSchema,
-  emailSettings: EmailSettingsSchema
 });
 
 export type Space = z.infer<typeof SpaceSchema>;

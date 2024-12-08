@@ -52,7 +52,7 @@ const PricingPage = () => {
       navigate("/register");
     } else {
       // Navigate to the route page if the user is logged in
-      navigate("/route");
+      navigate('/dashboard')
     }
   };
 

@@ -19,7 +19,6 @@ const spaceSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			unique: true,
-			index: { unique: true },
 		},
 		spaceLogo: { type: String, required: true },
 		headerTitle: { type: String, required: true, default: 'Testimonial' },
@@ -42,15 +41,11 @@ const spaceSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'ExtraSettings',
 		},
-		emailSettings: {
+		userId: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'EmailSettings',
+			ref: 'User',
+			required: true,
 		},
-		// userId: {
-		// 	type: mongoose.Schema.Types.ObjectId,
-		// 	ref: 'User',
-		// 	required: true,
-		// }
 	},
 	{ timestamps: true },
 )

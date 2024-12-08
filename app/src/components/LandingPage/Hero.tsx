@@ -1,6 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -32,7 +31,6 @@ const Hero = () => {
             {t('hero.buttonSignUp')}
           </button>
           <button
-            onClick={() => navigate('/learn-more')}
             className="h-10 px-5 font-semibold rounded-md shadow-md border border-primary text-primary hover:bg-primary/10 transition"
           >
             {t('hero.buttonLearnMore')}

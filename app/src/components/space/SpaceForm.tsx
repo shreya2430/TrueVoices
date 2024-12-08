@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
+import { toast } from 'sonner'
 import {
 	Dialog,
 	DialogContentModified,
@@ -79,9 +80,10 @@ export const SpaceForm = ({ children, open }: SpaceFormProps) => {
 				onOpenChange(false, `/dashboard/${form.getValues().spaceName}`)
 				form.reset()
 			}, 1000)
+			toast.success('Space created successfully')
 		}
 		if (isError) {
-			console.log(state.error)
+			toast.error('Error creating space')
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isSuccess, isError, form, state.error])

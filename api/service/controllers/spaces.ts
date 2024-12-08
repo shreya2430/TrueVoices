@@ -4,6 +4,7 @@ import { Request, Response } from 'express'
 const post = async (req: Request, res: Response) => {
 	try {
 		const data = req.body
+		console.log(req.user)
 		const space = await spaceService.createSpace({ ...data })
 		res.status(201).json(space)
 	} catch (error) {
@@ -33,9 +34,11 @@ const getById = async (req: Request, res: Response) => {
 	}
 }
 
-const get = async (_: Request, res: Response) => {
+const get = async (req: Request, res: Response) => {
 	try {
-		const spaces = await spaceService.getSpaces()
+		const { userId } = req.query
+		console.log(userId)
+		const spaces = await spaceService.getSpaces(userId || '')
 		res.status(200).json(spaces)
 	} catch (error) {
 		res.status(500).json({ message: error.message })

@@ -47,7 +47,7 @@ export const TestimonialsList = () => {
 							</p>
 						</div>
 					)}
-					{filteredTestimonials?.length && <Separator className="my-3" />}
+					{filteredTestimonials ? filteredTestimonials.length > 0 && <Separator className="my-3" /> : ""}
 				</>
 			)}
 		</div>

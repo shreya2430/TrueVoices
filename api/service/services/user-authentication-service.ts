@@ -1,9 +1,9 @@
 import User, {IUser} from '../models/user-authentication';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 //Secret key for JWT
 const secretKey = process.env.JWT_SECRET;
 
@@ -13,7 +13,7 @@ const jwt_expiresIn = process.env.JWT_EXPIRES_IN;
 //Generating JWT Token 
 export const generateToken = (user: IUser): string => {
     const payload = { id: user._id, email: user.email, username: user.username };
-    return jwt.sign(payload, secretKey, { expiresIn: jwt_expiresIn });   
+    return jwt.sign(payload, secretKey, { expiresIn: Number(jwt_expiresIn) });   
 };
 
 //Verify JWT token

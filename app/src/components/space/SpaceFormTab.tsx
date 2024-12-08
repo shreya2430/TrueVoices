@@ -1,15 +1,14 @@
+import { cn } from '@/lib/utils'
 import { Space } from '@/types/space'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { TestimonialPage } from '../TestimonialPage'
+import { Thankyou } from '../Thankyou'
 import { Form } from '../ui/form'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-import { EmailsettingForm } from './EmailsettingForm'
 import { ExtrasettingsForm } from './ExtrasettingsForm'
 import { GeneralForm } from './GeneralForm'
 import { ThankyouForm } from './ThankyouForm'
-import { cn } from '@/lib/utils'
-import { Thankyou } from '../Thankyou'
 
 type SpaceFormTabProps = {
 	className?: string
@@ -53,13 +52,6 @@ export const SpaceFormTab = ({
 						space={form.watch()}
 					/>
 				</TabsContent>
-				<TabsContent value="emailsetting">
-					<TestimonialPage
-						className="border rounded-md"
-						preview
-						space={form.watch()}
-					/>
-				</TabsContent>
 			</div>
 			<Form {...form}>
 				<form
@@ -87,12 +79,6 @@ export const SpaceFormTab = ({
 							>
 								Extra Setting
 							</TabsTrigger>
-							<TabsTrigger
-								className="w-full"
-								value="emailsetting"
-							>
-								Email Setting
-							</TabsTrigger>
 						</TabsList>
 						<TabsContent value="general">
 							<GeneralForm />
@@ -102,9 +88,6 @@ export const SpaceFormTab = ({
 						</TabsContent>
 						<TabsContent value="extrasetting">
 							<ExtrasettingsForm />
-						</TabsContent>
-						<TabsContent value="emailsetting">
-							<EmailsettingForm />
 						</TabsContent>
 					</div>
 					{children}

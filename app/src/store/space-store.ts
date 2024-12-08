@@ -8,41 +8,74 @@ export const spaceApi = createApi({
 	endpoints: (builder) => {
 		return {
 			getAllSpace: builder.query<SpaceResType[], void>({
-				query: () => '/spaces',
+				query: () => {
+					const user = JSON.parse(localStorage.getItem('user') || '');
+					return {
+						url: '/spaces?userId=' + user.id,
+						headers: {
+							Authorization: `Bearer ${user.token}`,
+						},
+					};
+				},
 				providesTags: ['Space'],
 			}),
 			getSpace: builder.query<SpaceResType, string | undefined>({
 				query: (id: string | undefined) => {
+					const user = JSON.parse(localStorage.getItem('user') || '');
 					if (id) {
-						return `/spaces/${id}`
+						return {
+							url: `/spaces/${id}?userId=${user.id}`,
+							headers: {
+								Authorization: `Bearer ${user.token}`,
+							},
+						}
 					}
 					throw new Error('Space ID is required')
 				},
-				providesTags: (result, error, id) => [{ type: 'Space', id }],
+				providesTags: ['Space'],
 			}),
 			createSpace: builder.mutation<SpaceResType, SpaceResType>({
-				query: (space) => ({
-					url: '/spaces',
-					method: 'POST',
-					body: space,
-				}),
+				query: (space) => {
+					const user = JSON.parse(localStorage.getItem('user') || '');
+					return {
+						url: '/spaces',
+						method: 'POST',
+						body: {
+							...space,
+							userId: user.id,
+						},
+						headers: {
+							Authorization: `Bearer ${user.token}`,
+						},
+					};
+				},
 				invalidatesTags: ['Space'],
 			}),
 			updateSpace: builder.mutation<SpaceResType, SpaceResType>({
-				query: (space) => ({
-					url: `/spaces/${space.spaceName}`,
-					method: 'PUT',
-					body: space,
-				}),
-				invalidatesTags: (result, error, sapce) => [
-					{ type: 'Space', id: sapce.spaceName },
-				],
+				query: (space) => {
+					const user = JSON.parse(localStorage.getItem('user') || '');
+					return {
+						url: `/spaces/${space.spaceName}?userId=${user.id}`,
+						method: 'PUT',
+						body: space,
+						headers: {
+							Authorization: `Bearer ${user.token}`,
+						},
+					};
+				},
+				invalidatesTags: ['Space'],
 			}),
 			deleteSpace: builder.mutation<void, string>({
-				query: (spaceName) => ({
-					url: `/spaces/${spaceName}`,
-					method: 'DELETE',
-				}),
+				query: (spaceName) => {
+					const user = JSON.parse(localStorage.getItem('user') || '');
+					return {
+						url: `/spaces/${spaceName}`,
+						method: 'DELETE',
+						headers: {
+							Authorization: `Bearer ${user.token}`,
+						},
+					};
+				},
 				invalidatesTags: ['Space'],
 			}),
 		}

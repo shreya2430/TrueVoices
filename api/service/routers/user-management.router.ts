@@ -3,9 +3,9 @@ import * as UserManagementController from '../controllers/user-management-contro
 
 const router: Router = express.Router();
 
-router.get('/users/:userId', UserManagementController.getUserById);
-router.put('/users/:userId', UserManagementController.updateUserProfile);
-router.delete('/users/:userId', UserManagementController.deleteUser);
-router.get('/users', UserManagementController.getAllUsers);
+router.get('/:userId', UserManagementController.getUserById);
+router.put('/:userId', UserManagementController.updateUserProfile);
+router.delete('/:userId', UserManagementController.deleteUser);
+router.get('/', UserManagementController.getAllUsers);
 
 export default router;

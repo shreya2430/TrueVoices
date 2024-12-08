@@ -33,7 +33,7 @@ export const RegisterForm = () => {
     useEffect(() =>{
         if (state.isSuccess) {
             console.log(t("registerForm.successMessage"))
-            navigate('/route')
+            navigate('/login')
         }
         if (state.isError) {
             console.log(t("registerForm.errorMessage"))
@@ -112,4 +112,3 @@ export const RegisterForm = () => {
     )
 
 }
-

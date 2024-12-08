@@ -110,9 +110,9 @@ const PaymentForm: React.FC = () => {
   };
 
   const handleReceiptClose = () => {
-    setShowReceipt(false);
-    navigate('/route'); // Redirect to the desired route
-  };
+		setShowReceipt(false)
+		navigate('/dashboard') // Redirect to the desired route
+	};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-800 dark:to-gray-900 p-6">

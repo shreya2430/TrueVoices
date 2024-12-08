@@ -38,3 +38,13 @@ export const UserResSchema = z.object({
   
   // Infer the TypeScript type
   export type UserResponse = z.infer<typeof UserResSchema>;
+
+export type getUserRes = {
+	_id: string;
+	firstName: string;
+	lastName: string;
+	userName: string;
+	email: string;
+	textCredits: number;
+	videoCredits: number;
+}

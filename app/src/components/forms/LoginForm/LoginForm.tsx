@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from "react-i18next"; // Import translation hook
-
+import { useUser } from '@/hooks/use-user';
+import { toast } from 'sonner';
 
 type FieldType = { 
     id: string;
@@ -36,6 +37,7 @@ export function LoginForm({ fields }: LoginFormProps) {
         setFormData((prev) => ({ ...prev, [id]: value }));
         setError(null); // Clear any errors when the user starts typing
     };
+    const { setUser } = useUser();
 
     const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,18 +79,30 @@ export function LoginForm({ fields }: LoginFormProps) {
                 );                
 
                 setSuccessMessage(t('loginForm.successMessage')); // Translated success message
+                setUser({
+                    id: data.userId,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                    textCredits: data.textCredits,
+                    videoCredits: data.videoCredits,
+                    token: data.token,
+                });
                 setFormData({}); // Clear the form
-
+                toast.success('Login successful!');
                 // Redirect to the original page or fallback to the dashboard
                 navigate(redirectPath);
             } else {
                 setError(t('loginForm.errorMessage'));  // Translated error message
+                toast.error(t('loginForm.errorMessage'));
             }
         } else {
             const errorData = await response.json();
-            setError(errorData.message || t('loginForm.errorMessage'));
+            toast.error(errorData.message || 'Login failed!');
+            setError(errorData.message || 'Login failed!');
         }
     } catch (err) {
+        toast.error(t('loginForm.serverError'));  // Translated server error message
         setError('An error occurred. Please try again later.');
     }
 };

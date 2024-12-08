@@ -1,4 +1,3 @@
-import React from 'react';
 import { RegisterForm } from '@/components/forms/RegisterForm/RegisterForm';
 import Header from '../LandingPage/Header';
 import { useTranslation } from 'react-i18next';  // Import useTranslation hook

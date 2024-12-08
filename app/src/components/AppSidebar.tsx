@@ -17,14 +17,12 @@ import {
 	SidebarHeader,
 	SidebarRail,
 } from '@/components/ui/sidebar'
+import { createAvatar } from '@dicebear/core';
+import { useUser } from '@/hooks/use-user'
+import { micah } from '@dicebear/collection'
 
 // This is sample data.
 const data = {
-	user: {
-		name: 'shadcn',
-		email: 'm@example.com',
-		avatar: '/avatars/shadcn.jpg',
-	},
 	navMain: {
 		Testimonials: [
 			{
@@ -50,6 +48,11 @@ const data = {
 				icon: Heart,
 			},
 			{
+				title: 'Collection Link',
+				url: 'collection-link',
+				icon: Inbox,
+			},
+			{
 				title: 'Settings',
 				url: 'settings',
 				icon: Settings2,
@@ -58,8 +61,17 @@ const data = {
 	},
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+const generateRandomPfp = (name: string) => {
+  const avatar = createAvatar(micah, {
+    randomizeIds: true,
+    seed: name,
+    backgroundColor: ['b6e3f4', 'c0aede', 'd1d4f9', 'ffd5dc', 'ffdfbf', 'f9e0ae', 'f4f4f4']
+  })
+  return avatar.toDataUri()
+}
 
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	const { user } = useUser()
 	return (
 		<Sidebar
 			collapsible="icon"
@@ -79,7 +91,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				))}
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={data.user} />
+				<NavUser user={{ name: `${user?.firstName} ${user?.lastName}`, email: user?.email || '', avatar: generateRandomPfp(`${user?.firstName} ${user?.lastName}`)}} />
 			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>

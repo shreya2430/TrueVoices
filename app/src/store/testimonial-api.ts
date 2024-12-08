@@ -20,7 +20,7 @@ export const testimonialApi = createApi({
     }),
     getTestimonialById: builder.query({
       query: ({ id, spaceName }: { id: string, spaceName: string | undefined }) => `/testimonials/${spaceName}/${id}`,
-      providesTags: (result, error, { id }) => [{ type: "Testimonial", id }],
+      providesTags: ["Testimonial"],
     }),
     updateTestimonial: builder.mutation({
       query: ({ id, body, spaceName }: {id: string, body: TestimonialReq, spaceName: string | undefined }) => ({
@@ -28,14 +28,14 @@ export const testimonialApi = createApi({
         method: "PUT",
         body,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Testimonial", id }],
+      invalidatesTags: ["Testimonial"],
     }),
     deleteTestimonial: builder.mutation({
       query: ({ id, spaceName }: { id: string, spaceName: string | undefined }) => ({
         url: `/testimonials/${spaceName}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Testimonial", id }],
+      invalidatesTags: ["Testimonial"],
     }),
   }),
 })

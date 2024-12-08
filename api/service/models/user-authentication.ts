@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcrypt"; //for password hashing
-import findOrCreate from 'mongoose-findorcreate';
 
 //Defining the User interface to type the document returned from MongoDB
 export interface IUser extends Document {
@@ -57,8 +56,6 @@ UserSchema.methods.comparePassword = async function (userpassword: string): Prom
     return await bcrypt.compare(userpassword, this.password);
 };
 
-// Add the findOrCreate plugin to the schema
-UserSchema.plugin(findOrCreate);
 
 //Create a mongoose model from the Schema
 const User = mongoose.model<IUser>('User', UserSchema);

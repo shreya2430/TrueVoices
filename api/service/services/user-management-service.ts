@@ -1,9 +1,9 @@
-import UserManage, { IUser} from '../models/user-management';
-
+import { UserModel } from '../models';
+import { IUser } from '../models/user-authentication';
 
 //getting user by id
 export const getUserById = async (userId: string): Promise<Omit<IUser, "password"> | null> => {
-    return await UserManage.findById(userId).select('-password');
+    return await UserModel.findById(userId).select('-password');
 }
 
 //updating the user profile
@@ -12,7 +12,12 @@ export const updateUserProfile = async (
     updateData: Partial<IUser>
 ): Promise<IUser> => {
     try {
-        const updatedUser = await UserManage.updateUserProfile(userId, updateData);
+        const updatedUser = await UserModel.findByIdAndUpdate(
+            userId, 
+            { $set: updateData }, 
+            { new: true, runValidators: true }
+        );
+
         return updatedUser;
     } catch (error) {
         console.error('Error updating user profile: ', error);
@@ -23,7 +28,7 @@ export const updateUserProfile = async (
 //deleting a user
 export const deleteUser = async (userId: string): Promise<IUser | null> => {
     try {
-        const deleteUser = await UserManage.findByIdAndDelete(userId);
+        const deleteUser = await UserModel.findById(userId);
         return deleteUser;
     } catch (error) {
         console.error('Error deleting user: ', error);
@@ -33,5 +38,5 @@ export const deleteUser = async (userId: string): Promise<IUser | null> => {
 
 //getting all users
 export const getAllUsers = async (): Promise<Omit<IUser, "password">[]> => {
-    return await UserManage.find().select('-password');
+    return await UserModel.find().select('-password');
 };

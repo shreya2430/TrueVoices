@@ -6,13 +6,13 @@ import { useParams } from 'react-router-dom'
 import { CollectionForm } from '../CollectionForm'
 import { Thankyou } from '../Thankyou'
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogOverlay,
-  DialogTitle,
-  DialogTrigger,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogOverlay,
+	DialogTitle,
+	DialogTrigger,
 } from '../ui/dialog'
 
 type TextTestimonialFormProps = {

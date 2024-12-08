@@ -22,7 +22,7 @@ const Features = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (user && user.token) {
       // User is signed in, navigate to the route page
-      navigate('/route');
+      navigate('/dashboard')
     } else {
       // User is not signed in, navigate to the register page
       navigate('/register');

@@ -1,3 +1,4 @@
+import { UserModel } from '../models';
 import ExtraSettings from '../models/extra-settings';
 import SpaceModel, { Space } from '../models/spaces';
 import Testimonial, { TestimonialType } from '../models/testimonial-models'
@@ -7,6 +8,7 @@ import { generateRandomPfp } from '../utils/generate-random-pfp';
 export const createTestimonial = async (data: TestimonialType): Promise<TestimonialType> => {
   try {
     const space: Space = await SpaceModel.findOne({ spaceName: data.spaceName });
+    const user = await UserModel.findById(space.userId);
     const extraSettings = await ExtraSettings.findById(space.extraSettings).select('autoPopulateTestimonials');
     if (!space) {
       throw new Error('Space not found');
@@ -17,7 +19,12 @@ export const createTestimonial = async (data: TestimonialType): Promise<Testimon
     if (extraSettings.autoPopulateTestimonials && data.consent) {
       data.set('liked', true);
     }
-    const testimonial = new Testimonial(data);
+    if (data.testimonialType === 'video') {
+      await UserModel.findByIdAndUpdate(user._id, { $dec: { videoTestimonials: 1 } });
+    } else {
+      await UserModel.findByIdAndUpdate(user._id, { $dec: { textTestimonials: 1 } });
+    }
+    const testimonial = new Testimonial({ ...data });
     return await testimonial.save();
   } catch (error) {
     throw new Error(error.message);
@@ -27,6 +34,7 @@ export const createTestimonial = async (data: TestimonialType): Promise<Testimon
 // Get all testimonials
 export const getAllTestimonials = async (spaceName: string): Promise<TestimonialType[]> => {
   try {
+    const space = await SpaceModel.findOne({ spaceName });
     const testimonials = await Testimonial.find({ spaceName });
     return testimonials;
   } catch (error) {
