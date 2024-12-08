@@ -12,18 +12,6 @@ export const ExtrasettingsForm = ({ className }: ExtraSettingsFormProps) => {
 	return (
 		<div className={cn('flex flex-col space-y-2', className)}>
 			<FormInput
-				name={'extraSettings.maxVideoDuration'}
-				label="Max Video Duration (seconds)"
-				type="number"
-				placeholder="Enter max video duration"
-			/>
-			<FormInput
-				name={'extraSettings.maxTextCharacters'}
-				label="Max Text Characters"
-				type="number"
-				placeholder="Enter max text characters"
-			/>
-			<FormInput
 				name={'extraSettings.videoButtonText'}
 				label="Video Button Text"
 				placeholder="Enter video button text"
