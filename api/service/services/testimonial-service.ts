@@ -20,9 +20,17 @@ export const createTestimonial = async (data: TestimonialType): Promise<Testimon
       data.set('liked', true);
     }
     if (data.testimonialType === 'video') {
-      await UserModel.findByIdAndUpdate(user._id, { $dec: { videoTestimonials: 1 } });
+      await UserModel.findByIdAndUpdate(
+				user._id,
+				{ ...user, videoCredits: user.textCredits - 1 ? user.textCredits - 1 : 0 },
+				{ new: true },
+			)
     } else {
-      await UserModel.findByIdAndUpdate(user._id, { $dec: { textTestimonials: 1 } });
+      await UserModel.findByIdAndUpdate(
+				user._id,
+				{ ...user, textCredits: user.textCredits - 1 ? user.textCredits - 1 : 0 },
+				{ new: true },
+			)
     }
     const testimonial = new Testimonial({ ...data });
     return await testimonial.save();
