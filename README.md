@@ -29,6 +29,7 @@ This project was created and developed by a team of four contributors:
     - [Object Model Diagram](#object-model-diagram)
     - [Explanation of Relationships and Attributes](#explanation-of-relationships-and-attributes)
     - [API EndPoints](#explaination-of-API's-connected)
+    - [Stripe Payment Integration](#Third-Party-Payment)
 ## Features
 
 - **Customizable Collection Forms** - Gather specific information with tailored forms.
@@ -318,6 +319,21 @@ This section provides an overview of the relationships and attributes of each en
     - Values: `Text`, `Video`, `TextAndVideo`
   - **TestimonialType**: Defines testimonial types.
     - Values: `Text`, `Video`
+
+### Stripe Payment Integration
+1. **Configuration** - Configured Stripe in Test Mode to enable secure payment handling for the app.
+2. **Backend Services** -  Created backend services to handle payment intents and integrated them with the frontend.
+3. **Error Handling** - Implemented error handling to display relevant messages for failed payments (e.g., insufficient funds, card declined).
+4. **Receipt Generation** - Generated receipts for successful payments and displayed detailed error messages for failures.
+5. **Test Card Support** :
+     **Successful Examples**
+    - `Visa: 4242 4242 4242 4242`
+    - `Mastercard: 5555 5555 5555 4444`
+    - `American Express: 3782 822463 10005`
+
+    **Failure Examples**
+   - `Generic Decline: 4000 0000 0000 0002`
+   - `Insufficient Funds: 4000 0000 0000 9995`
 
 This explanation covers each entity’s attributes and relationships, providing context for how the entities interact within the application.
 
