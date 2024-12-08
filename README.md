@@ -365,22 +365,22 @@ npm install
 
 To start the backend server:
 	1.	Navigate to the api folder:
-    ```bash
+    ```
     cd api
       ```
 	2.	Run the following command:
-       ```bash
+       ```
         npm run start
        ```
 4. Run the Frontend
 
 To start the frontend development server:
 	1.	Navigate to the app folder:
-     ```bash
+     ```
     cd app
       ```
 	2.	Run the following command:
-       ```bash
+       ```
         npm run dev
        ```
   5. Access the Application
