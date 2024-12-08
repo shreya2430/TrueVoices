@@ -30,6 +30,7 @@ This project was created and developed by a team of four contributors:
     - [Explanation of Relationships and Attributes](#explanation-of-relationships-and-attributes)
     - [API EndPoints](#explaination-of-API's-connected)
     - [Stripe Payment Integration](#Third-Party-Payment)
+    - [PWA Functionality](#Progressive-Web-App)
 ## Features
 
 - **Customizable Collection Forms** - Gather specific information with tailored forms.
@@ -334,6 +335,19 @@ This section provides an overview of the relationships and attributes of each en
     **Failure Examples**
    - `Generic Decline: 4000 0000 0000 0002`
    - `Insufficient Funds: 4000 0000 0000 9995`
+
+### PWA(Progressive Web App Functionality)
+1. **Configuration** -  Configured the application as a Progressive Web App (PWA) using the Vite PWA plugin.
+2. **App Enabling** - Enabled the app to be installed as a standalone application on devices.
+3. **Cache Implementation** - Implemented caching for static assets like the logo and other resources for faster load times.
+4. **API Calls** - Cached GET API calls to ensure offline access to certain dynamic content.
+5. **Internalization** :
+     - Integrated internationalization using the i18next library to support multiple languages.
+     - Added translation support for English, Hindi, and French.
+
+**Applied translations to key pages such as the landing page,sign up, register page, pricing, profile, payment, payment success, and payment failure pages.**
+
+
 
 This explanation covers each entity’s attributes and relationships, providing context for how the entities interact within the application.
 
