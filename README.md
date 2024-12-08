@@ -347,10 +347,57 @@ This section provides an overview of the relationships and attributes of each en
 
 **Applied translations to key pages such as the landing page,sign up, register page, pricing, profile, payment, payment success, and payment failure pages.**
 
+## How to Run the Application
 
+Follow these steps to set up and run the **TrueVoices** application:
 
-This explanation covers each entity’s attributes and relationships, providing context for how the entities interact within the application.
+### 1. Clone the Repository
+Clone the application repository to your local machine:
+```bash
+git clone https://github.com/info-6150-fall-2024/final-project-digitalvoices.git
+```
+2. Install Dependencies
+Navigate to both the api and app folders and run the following command to install all necessary dependencies:
+```bash
+npm install
+```
+3. Run the Backend
 
+To start the backend server:
+	1.	Navigate to the api folder:
+    ```bash
+    cd api
+      ```
+	2.	Run the following command:
+       ```bash
+        npm run start
+       ```
+4. Run the Frontend
 
+To start the frontend development server:
+	1.	Navigate to the app folder:
+     ```bash
+    cd app
+      ```
+	2.	Run the following command:
+       ```bash
+        npm run dev
+       ```
+  5. Access the Application
+
+Once the frontend is running, navigate to the following URL in your browser:
+```url
+http://localhost:3000
+```
+Now, you are ready to use TrueVoices :)
+
+### NOTE
+If you face an issue where the Stripe package is not found while running the application, please manually install the Stripe React package (as sometimes it doesn't get installed by `npm install`) by running the following command:
+
+```bash
+npm install @stripe/react-stripe-js @stripe/stripe-js
+```
+
+If you have any questions or encounter other issues, please feel free to contact any one of us.
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/DIHvCS29)
