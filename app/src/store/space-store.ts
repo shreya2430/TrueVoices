@@ -24,7 +24,7 @@ export const spaceApi = createApi({
 					const user = JSON.parse(localStorage.getItem('user') || '');
 					if (id) {
 						return {
-							url: `/spaces/${id}?userId=${user.id}`,
+							url: `/spaces/${id}`,
 							headers: {
 								Authorization: `Bearer ${user.token}`,
 							},
