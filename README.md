@@ -399,10 +399,10 @@ npm install @stripe/react-stripe-js @stripe/stripe-js
 ```
 
 ### presentation link :
-https://northeastern-my.sharepoint.com/:p:/r/personal/wade_mai_northeastern_edu/Documents/TrueVoices%20INFO6150.pptx?d=w02dbef208c764cdc85f7ba8ea1db9b91&csf=1&web=1&e=JpZ8OU
+https://drive.google.com/file/d/1lfxAKDLp9o-X2Y6-2Fgms7R3snJ_z_Vp/view?usp=sharing
 
 ### Video presentation :
-[https://northeastern-my.sharepoint.com/:v:/r/personal/vekariya_ja_northeastern_edu/Documents/Microsoft%20Teams%20Chat%20Files/final_video_truevoice.mp4.mov?csf=1&web=1&e=BjSnC7&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D](https://drive.google.com/file/d/1wXrQNZ1Bf4nuDnZw9z79S-WNKbnL7T34/view?usp=sharing)
+https://drive.google.com/file/d/1wXrQNZ1Bf4nuDnZw9z79S-WNKbnL7T34/view?usp=drive_link
 
 
 If you have any questions or encounter other issues, please feel free to contact any one of us.
